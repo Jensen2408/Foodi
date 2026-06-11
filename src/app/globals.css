@@ -4,10 +4,10 @@
 
 @layer base {
   * { box-sizing: border-box; }
-  body { @apply bg-gray-50 text-gray-900 antialiased; }
+  body { @apply antialiased; background: #fdf2f8; color: #1a0a12; }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { @apply bg-gray-200 rounded-full; }
+  ::-webkit-scrollbar-thumb { @apply bg-pink-200 rounded-full; }
 }
 
 @layer utilities {
@@ -17,10 +17,19 @@
   .bg-gradient-story {
     background: linear-gradient(135deg, #f9a8d4 0%, #ec4899 50%, #be185d 100%);
   }
+  .bg-gradient-page {
+    background: linear-gradient(160deg, #fdf2f8 0%, #fce7f3 40%, #fdf2f8 100%);
+  }
   .text-gradient-brand {
     background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+  .card {
+    @apply bg-white/80 backdrop-blur-sm rounded-3xl border border-pink-100 shadow-sm;
+  }
+  .glass {
+    @apply bg-white/60 backdrop-blur-md border border-pink-100/60;
   }
 }

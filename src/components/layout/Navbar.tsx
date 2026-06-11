@@ -31,7 +31,7 @@ export function Navbar() {
   return (
     <>
       {/* Top navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-pink-100">
         <nav className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-xl bg-gradient-brand flex items-center justify-center shadow-md">
@@ -46,7 +46,7 @@ export function Navbar() {
               <Link
                 key={href}
                 href={href}
-                className={`p-2.5 rounded-xl transition-colors ${pathname === href ? "text-orange-500 bg-orange-50" : "text-gray-700 hover:bg-gray-100"}`}
+                className={`p-2.5 rounded-xl transition-colors ${pathname === href ? "text-orange-500 bg-orange-50" : "text-pink-700 hover:bg-pink-50"}`}
               >
                 <Icon className="w-5 h-5" />
               </Link>
@@ -100,14 +100,14 @@ export function Navbar() {
 
       {/* Mobile bottom nav */}
       {user && (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 safe-area-pb">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-t border-pink-100 safe-area-pb">
           <div className="flex items-center justify-around h-16 px-2">
             {navLinks.map(({ href, icon: Icon, label }) => (
               <Link
                 key={href}
                 href={href}
                 className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-colors ${
-                  pathname === href ? "text-orange-500" : "text-gray-400"
+                  pathname === href ? "text-orange-500" : "text-pink-300"
                 }`}
               >
                 <Icon className="w-6 h-6" />

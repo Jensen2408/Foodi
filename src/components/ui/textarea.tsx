@@ -9,12 +9,12 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, error, ...props }, ref) => (
     <div className="w-full">
-      {label && <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>}
+      {label && <label className="block text-sm font-semibold text-pink-800 mb-1.5">{label}</label>}
       <textarea
         className={cn(
-          "flex min-h-[80px] w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm",
-          "transition-all placeholder:text-gray-400 resize-none",
-          "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent focus:bg-white",
+          "flex min-h-[80px] w-full rounded-2xl border border-pink-200 bg-pink-50/60 px-4 py-3 text-sm text-gray-900",
+          "transition-all placeholder:text-pink-300 resize-none",
+          "focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent focus:bg-white",
           error && "border-red-400",
           className
         )}

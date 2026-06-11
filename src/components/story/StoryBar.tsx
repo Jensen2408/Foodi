@@ -25,7 +25,7 @@ export function StoryBar() {
 
   return (
     <>
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 overflow-x-auto">
+      <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-pink-100 shadow-sm shadow-pink-100 p-4 overflow-x-auto">
         <div className="flex gap-4 min-w-max">
           {user && (
             <Link href="/stories/new" className="flex flex-col items-center gap-1.5 group">

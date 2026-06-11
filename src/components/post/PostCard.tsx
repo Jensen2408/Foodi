@@ -72,13 +72,13 @@ export function PostCard({ post: initial }: { post: Post }) {
     : null;
 
   return (
-    <article className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden animate-fade-in">
+    <article className="bg-white/80 backdrop-blur-sm rounded-3xl border border-pink-100 shadow-sm shadow-pink-100 overflow-hidden animate-fade-in">
       {/* Header */}
       <div className="flex items-center justify-between p-4">
         <Link href={`/profile/${post.user.username}`} className="flex items-center gap-3 group">
           <Avatar src={post.user.avatar} alt={post.user.username} size="sm" />
           <div>
-            <p className="text-sm font-semibold text-gray-900 group-hover:text-brand-600 transition-colors">
+            <p className="text-sm font-semibold text-gray-900 group-hover:text-pink-600 transition-colors">
               {post.user.username}
             </p>
             {post.location && (
@@ -144,19 +144,19 @@ export function PostCard({ post: initial }: { post: Post }) {
             >
               <Heart className={`w-5 h-5 ${liked ? "fill-current" : ""}`} />
             </button>
-            <Link href={`/post/${post.id}`} className="p-2 rounded-xl text-gray-500 hover:text-brand-600 transition-colors">
+            <Link href={`/post/${post.id}`} className="p-2 rounded-xl text-gray-500 hover:text-pink-600 transition-colors">
               <MessageCircle className="w-5 h-5" />
             </Link>
             {recipe && (
               <button
                 onClick={() => setShowRecipe(!showRecipe)}
-                className={`p-2 rounded-xl transition-colors ${showRecipe ? "text-brand-600" : "text-gray-500 hover:text-brand-600"}`}
+                className={`p-2 rounded-xl transition-colors ${showRecipe ? "text-pink-600" : "text-gray-500 hover:text-pink-600"}`}
               >
                 <ChefHat className="w-5 h-5" />
               </button>
             )}
           </div>
-          <button className="p-2 rounded-xl text-gray-500 hover:text-brand-600 transition-colors">
+          <button className="p-2 rounded-xl text-gray-500 hover:text-pink-600 transition-colors">
             <Bookmark className="w-5 h-5" />
           </button>
         </div>
@@ -165,7 +165,7 @@ export function PostCard({ post: initial }: { post: Post }) {
 
         {post.caption && (
           <p className="text-sm text-gray-800">
-            <Link href={`/profile/${post.user.username}`} className="font-semibold mr-1 hover:text-brand-600">
+            <Link href={`/profile/${post.user.username}`} className="font-semibold mr-1 hover:text-pink-600">
               {post.user.username}
             </Link>
             {post.caption}
@@ -198,16 +198,16 @@ export function PostCard({ post: initial }: { post: Post }) {
 
         {/* Recipe Card */}
         {showRecipe && recipe && (
-          <div className="mt-2 p-4 bg-gradient-to-br from-orange-50 to-pink-50 rounded-2xl border border-orange-100 space-y-3 animate-slide-up">
+          <div className="mt-2 p-4 bg-gradient-to-br from-pink-50 to-fuchsia-50 rounded-2xl border border-pink-100 space-y-3 animate-slide-up">
             <div className="flex items-center gap-2">
-              <ChefHat className="w-5 h-5 text-brand-500" />
+              <ChefHat className="w-5 h-5 text-pink-500" />
               <h3 className="font-bold text-gray-900">{recipe.title}</h3>
             </div>
 
             <div className="flex flex-wrap gap-3 text-xs">
               {recipe.prepTime && (
                 <span className="flex items-center gap-1 bg-white px-2 py-1 rounded-full shadow-sm">
-                  <Clock className="w-3 h-3 text-brand-500" /> Prep: {recipe.prepTime}m
+                  <Clock className="w-3 h-3 text-pink-500" /> Prep: {recipe.prepTime}m
                 </span>
               )}
               {recipe.cookTime && (
@@ -244,7 +244,7 @@ export function PostCard({ post: initial }: { post: Post }) {
                 <ol className="space-y-1">
                   {(recipe.steps as string[]).map((step: string, i: number) => (
                     <li key={i} className="text-xs text-gray-700 flex gap-2">
-                      <span className="w-4 h-4 bg-brand-500 text-white rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                      <span className="w-4 h-4 bg-pink-500 text-white rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
                         {i + 1}
                       </span>
                       {step}
@@ -266,7 +266,7 @@ export function PostCard({ post: initial }: { post: Post }) {
               className="flex-1 text-sm outline-none text-gray-800 placeholder:text-gray-400 bg-transparent"
             />
             {comment && (
-              <button type="submit" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
+              <button type="submit" className="text-sm font-semibold text-pink-600 hover:text-brand-700">
                 Post
               </button>
             )}

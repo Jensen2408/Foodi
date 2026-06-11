@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gradient-page min-h-screen`}>
         <Navbar />
         <main className="min-h-screen pt-14 pb-20 md:pb-0">{children}</main>
       </body>

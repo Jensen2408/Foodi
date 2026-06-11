@@ -120,7 +120,7 @@ export default function NewPostPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Image Upload */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-pink-100 shadow-sm p-6 space-y-4">
           <h2 className="font-bold text-gray-900">Photos</h2>
 
           {images.length > 0 && (
@@ -145,7 +145,7 @@ export default function NewPostPage() {
               {images.length < 10 && (
                 <div
                   {...getRootProps()}
-                  className="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center cursor-pointer hover:border-brand-400 hover:bg-brand-50 transition-colors"
+                  className="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center cursor-pointer hover:border-pink-400 hover:bg-pink-50 transition-colors"
                 >
                   <input {...getInputProps()} />
                   <Plus className="w-6 h-6 text-gray-400" />
@@ -158,7 +158,7 @@ export default function NewPostPage() {
             <div
               {...getRootProps()}
               className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
-                isDragActive ? "border-brand-500 bg-brand-50" : "border-gray-200 hover:border-brand-400 hover:bg-gray-50"
+                isDragActive ? "border-pink-500 bg-pink-50" : "border-gray-200 hover:border-pink-400 hover:bg-gray-50"
               }`}
             >
               <input {...getInputProps()} />
@@ -170,7 +170,7 @@ export default function NewPostPage() {
         </div>
 
         {/* Post Details */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-pink-100 shadow-sm p-6 space-y-4">
           <h2 className="font-bold text-gray-900">Details</h2>
           <Textarea
             label="Caption"
@@ -189,7 +189,7 @@ export default function NewPostPage() {
         </div>
 
         {/* Recipe Toggle */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-pink-100 shadow-sm p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center">
@@ -220,26 +220,26 @@ export default function NewPostPage() {
                     <Clock className="w-3 h-3" /> Prep time (min)
                   </label>
                   <input type="number" min="0" value={recipe.prepTime} onChange={(e) => setRecipe((r) => ({ ...r, prepTime: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="15" />
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="15" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
                     <Clock className="w-3 h-3" /> Cook time (min)
                   </label>
                   <input type="number" min="0" value={recipe.cookTime} onChange={(e) => setRecipe((r) => ({ ...r, cookTime: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="30" />
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="30" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
                     <Users className="w-3 h-3" /> Servings
                   </label>
                   <input type="number" min="1" value={recipe.servings} onChange={(e) => setRecipe((r) => ({ ...r, servings: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="4" />
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="4" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Difficulty</label>
                   <select value={recipe.difficulty} onChange={(e) => setRecipe((r) => ({ ...r, difficulty: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 capitalize">
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 capitalize">
                     {["easy", "medium", "hard", "expert"].map((d) => <option key={d} value={d} className="capitalize">{d}</option>)}
                   </select>
                 </div>
@@ -251,10 +251,10 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   {recipe.ingredients.map((ing, i) => (
                     <div key={i} className="flex gap-2 items-center">
-                      <span className="w-6 h-6 bg-brand-100 text-brand-700 rounded-full flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</span>
+                      <span className="w-6 h-6 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</span>
                       <input value={ing} onChange={(e) => updateIngredient(i, e.target.value)}
                         placeholder={`e.g. 2 cups flour`}
-                        className="flex-1 h-10 rounded-xl border border-gray-200 bg-gray-50 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+                        className="flex-1 h-10 rounded-xl border border-gray-200 bg-gray-50 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" />
                       {recipe.ingredients.length > 1 && (
                         <button type="button" onClick={() => removeIngredient(i)} className="text-gray-400 hover:text-red-400">
                           <X className="w-4 h-4" />
@@ -262,7 +262,7 @@ export default function NewPostPage() {
                       )}
                     </div>
                   ))}
-                  <button type="button" onClick={addIngredient} className="flex items-center gap-2 text-sm text-brand-600 hover:text-brand-700 font-medium mt-1">
+                  <button type="button" onClick={addIngredient} className="flex items-center gap-2 text-sm text-pink-600 hover:text-pink-700 font-medium mt-1">
                     <Plus className="w-4 h-4" /> Add ingredient
                   </button>
                 </div>
@@ -274,10 +274,10 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   {recipe.steps.map((step, i) => (
                     <div key={i} className="flex gap-2 items-start">
-                      <span className="w-6 h-6 bg-brand-500 text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-2">{i + 1}</span>
+                      <span className="w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-2">{i + 1}</span>
                       <textarea value={step} onChange={(e) => updateStep(i, e.target.value)}
                         placeholder={`Step ${i + 1}...`} rows={2}
-                        className="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none" />
+                        className="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none" />
                       {recipe.steps.length > 1 && (
                         <button type="button" onClick={() => removeStep(i)} className="text-gray-400 hover:text-red-400 mt-2">
                           <X className="w-4 h-4" />
@@ -285,7 +285,7 @@ export default function NewPostPage() {
                       )}
                     </div>
                   ))}
-                  <button type="button" onClick={addStep} className="flex items-center gap-2 text-sm text-brand-600 hover:text-brand-700 font-medium mt-1">
+                  <button type="button" onClick={addStep} className="flex items-center gap-2 text-sm text-pink-600 hover:text-pink-700 font-medium mt-1">
                     <Plus className="w-4 h-4" /> Add step
                   </button>
                 </div>
