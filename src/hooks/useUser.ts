@@ -9,6 +9,7 @@ interface User {
   avatar: string | null;
   bio: string | null;
   website: string | null;
+  isAdmin: boolean;
 }
 
 let cachedUser: User | null | undefined = undefined;

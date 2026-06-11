@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
-import { Home, Search, PlusSquare, BookOpen, User, LogOut, ChefHat } from "lucide-react";
+import { Home, Search, PlusSquare, BookOpen, User, LogOut, ChefHat, Shield } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { useUser } from "@/hooks/useUser";
 
@@ -58,7 +58,13 @@ export function Navbar() {
                 </button>
                 {menuOpen && (
                   <div className="absolute right-0 top-12 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden animate-slide-up">
-                    <hr className="border-gray-100" />
+                  {user.isAdmin && (
+                    <Link href="/admin" className="flex items-center gap-3 px-4 py-3 hover:bg-pink-50 transition-colors" onClick={() => setMenuOpen(false)}>
+                      <Shield className="w-4 h-4 text-pink-500" />
+                      <span className="text-sm font-medium text-pink-600">Admin Console</span>
+                    </Link>
+                  )}
+                    <hr className="border-pink-50" />
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-red-500 transition-colors"
