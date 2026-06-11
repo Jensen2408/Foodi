@@ -37,9 +37,7 @@ export async function GET() {
   const result = Object.values(grouped).map((userStories) => ({
     user: userStories[0].user,
     stories: userStories,
-    hasNew: user
-      ? userStories.some((s) => !s.views?.some?.((v: { viewerId: string }) => v.viewerId === user.id))
-      : true,
+    hasNew: true,
   }));
 
   return NextResponse.json(result);
