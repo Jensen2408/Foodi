@@ -29,6 +29,7 @@ export async function GET(req: NextRequest) {
       user: { select: { id: true, username: true, name: true, avatar: true } },
       images: { orderBy: { order: "asc" } },
       recipe: true,
+      taggedUsers: { include: { user: { select: { id: true, username: true, avatar: true } } } },
       _count: { select: { likes: true, comments: true } },
       likes: user ? { where: { userId: user.id } } : false,
     },

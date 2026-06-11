@@ -7,6 +7,9 @@ import { Upload, X, Plus, ChefHat, MapPin, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { UserTagPicker } from "@/components/ui/UserTagPicker";
+
+interface TaggedUser { id: string; username: string; name: string | null; avatar: string | null; }
 
 interface RecipeForm {
   title: string;
@@ -29,6 +32,7 @@ export default function NewPostPage() {
     title: "", description: "", prepTime: "", cookTime: "", servings: "",
     difficulty: "easy", ingredients: [""], steps: [""],
   });
+  const [taggedUsers, setTaggedUsers] = useState<TaggedUser[]>([]);
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -84,6 +88,7 @@ export default function NewPostPage() {
       caption,
       location,
       images: uploadedUrls,
+      taggedUserIds: taggedUsers.map((u) => u.id),
       recipe: includeRecipe ? {
         ...recipe,
         ingredients: recipe.ingredients.filter(Boolean),
@@ -180,6 +185,7 @@ export default function NewPostPage() {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
+          <UserTagPicker tagged={taggedUsers} onChange={setTaggedUsers} />
         </div>
 
         {/* Recipe Toggle */}

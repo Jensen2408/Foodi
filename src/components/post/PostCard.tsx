@@ -25,6 +25,7 @@ interface Post {
   user: { id: string; username: string; name: string | null; avatar: string | null };
   images: { id: string; url: string; order: number }[];
   recipe: PostRecipe | null;
+  taggedUsers?: { user: { id: string; username: string; avatar: string | null } }[];
   _count: { likes: number; comments: number };
   likes?: { userId: string }[];
 }
@@ -183,6 +184,16 @@ export function PostCard({ post: initial }: { post: Post }) {
           </p>
         ))}
 
+        {post.taggedUsers && post.taggedUsers.length > 0 && (
+          <p className="text-xs text-gray-500 flex flex-wrap gap-1 items-center">
+            <span className="text-gray-400">with</span>
+            {post.taggedUsers.map((t) => (
+              <Link key={t.user.id} href={`/profile/${t.user.username}`} className="text-pink-500 font-semibold hover:text-pink-600">
+                @{t.user.username}
+              </Link>
+            ))}
+          </p>
+        )}
         <p className="text-xs text-gray-400">{formatRelativeTime(post.createdAt)}</p>
 
         {/* Recipe Card */}

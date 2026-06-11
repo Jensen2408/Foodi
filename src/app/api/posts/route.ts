@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { caption, location, images, recipe } = body;
+  const { caption, location, images, recipe, taggedUserIds } = body;
 
   if (!images || images.length === 0) {
     return NextResponse.json({ error: "At least one image required" }, { status: 400 });
@@ -22,6 +22,9 @@ export async function POST(req: NextRequest) {
       images: {
         create: images.map((url: string, i: number) => ({ url, order: i })),
       },
+      ...(taggedUserIds?.length > 0
+        ? { taggedUsers: { create: taggedUserIds.map((uid: string) => ({ userId: uid })) } }
+        : {}),
       ...(recipe
         ? {
             recipe: {
