@@ -29,9 +29,8 @@ const icons = {
   follow: <UserPlus className="w-3.5 h-3.5 text-green-500" />,
 };
 
-const messages = {
+const messages: Record<string, string> = {
   like: "liked your post",
-  comment: (text: string) => `commented: "${text}"`,
   follow: "started following you",
 };
 
@@ -92,7 +91,7 @@ export default function NotificationsPage() {
                   </Link>{" "}
                   <span className="text-gray-600">
                     {item.type === "comment" && item.text
-                      ? messages.comment(item.text)
+                      ? `commented: "${item.text}"`
                       : messages[item.type]}
                   </span>
                 </p>
