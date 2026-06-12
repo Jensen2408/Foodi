@@ -11,17 +11,17 @@
 }
 
 @layer utilities {
-  /* Brand — deep blue */
+  /* Brand */
   .bg-gradient-brand {
-    background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+    background: linear-gradient(135deg, #c6185c 0%, #9b1247 100%);
   }
   .bg-gradient-story {
-    background: linear-gradient(45deg, #f59e0b, #ef4444, #7c3aed);
+    background: linear-gradient(45deg, #f59e0b, #c6185c, #7c3aed);
   }
   .bg-gradient-page { background: #fafafa; }
 
   .text-gradient-brand {
-    background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%);
+    background: linear-gradient(135deg, #c6185c 0%, #9b1247 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

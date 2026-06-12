@@ -133,7 +133,7 @@ export default function NewPostPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Image Upload */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-100 shadow-sm p-6 space-y-4">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm p-6 space-y-4">
           <h2 className="font-bold text-gray-900">Photos</h2>
 
           {images.length > 0 && (
@@ -158,7 +158,7 @@ export default function NewPostPage() {
               {images.length < 10 && (
                 <div
                   {...getRootProps()}
-                  className="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                  className="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center cursor-pointer hover:border-gray-1000 hover:bg-[#fdf2f7] transition-colors"
                 >
                   <input {...getInputProps()} />
                   <Plus className="w-6 h-6 text-gray-400" />
@@ -171,7 +171,7 @@ export default function NewPostPage() {
             <div
               {...getRootProps()}
               className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
-                isDragActive ? "border-blue-600 bg-blue-50" : "border-gray-200 hover:border-blue-500 hover:bg-gray-50"
+                isDragActive ? "border-[#c6185c] bg-[#fdf2f7]" : "border-gray-200 hover:border-gray-1000 hover:bg-gray-50"
               }`}
             >
               <input {...getInputProps()} />
@@ -183,7 +183,7 @@ export default function NewPostPage() {
         </div>
 
         {/* Post Details */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-100 shadow-sm p-6 space-y-4">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm p-6 space-y-4">
           <h2 className="font-bold text-gray-900">Details</h2>
           <Textarea
             label="Caption"
@@ -202,7 +202,7 @@ export default function NewPostPage() {
         </div>
 
         {/* Recipe Toggle */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-100 shadow-sm p-6 space-y-4">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center">
@@ -264,7 +264,7 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   {recipe.ingredients.map((ing, i) => (
                     <div key={i} className="flex gap-2 items-center">
-                      <span className="w-6 h-6 bg-blue-100 text-blue-800 rounded-full flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</span>
+                      <span className="w-6 h-6 bg-[#fce4ef] text-[#7a0e38] rounded-full flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</span>
                       <input value={ing} onChange={(e) => updateIngredient(i, e.target.value)}
                         placeholder={`e.g. 2 cups flour`}
                         className="flex-1 h-10 rounded-xl border border-gray-200 bg-gray-50 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" />
@@ -275,7 +275,7 @@ export default function NewPostPage() {
                       )}
                     </div>
                   ))}
-                  <button type="button" onClick={addIngredient} className="flex items-center gap-2 text-sm text-blue-700 hover:text-blue-800 font-medium mt-1">
+                  <button type="button" onClick={addIngredient} className="flex items-center gap-2 text-sm text-[#9b1247] hover:text-[#7a0e38] font-medium mt-1">
                     <Plus className="w-4 h-4" /> Add ingredient
                   </button>
                 </div>
@@ -287,7 +287,7 @@ export default function NewPostPage() {
                 <div className="space-y-2">
                   {recipe.steps.map((step, i) => (
                     <div key={i} className="flex gap-2 items-start">
-                      <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-2">{i + 1}</span>
+                      <span className="w-6 h-6 bg-[#c6185c] text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-2">{i + 1}</span>
                       <textarea value={step} onChange={(e) => updateStep(i, e.target.value)}
                         placeholder={`Step ${i + 1}...`} rows={2}
                         className="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none" />
@@ -298,7 +298,7 @@ export default function NewPostPage() {
                       )}
                     </div>
                   ))}
-                  <button type="button" onClick={addStep} className="flex items-center gap-2 text-sm text-blue-700 hover:text-blue-800 font-medium mt-1">
+                  <button type="button" onClick={addStep} className="flex items-center gap-2 text-sm text-[#9b1247] hover:text-[#7a0e38] font-medium mt-1">
                     <Plus className="w-4 h-4" /> Add step
                   </button>
                 </div>

@@ -42,7 +42,7 @@ export function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
         <nav className="max-w-[470px] md:max-w-5xl mx-auto px-4 h-[44px] md:h-[60px] flex items-center justify-between">
           <Link href="/" className="flex items-center gap-1.5">
-            <ChefHat className="w-5 h-5 text-blue-600" />
+            <ChefHat className="w-5 h-5 text-[#c6185c]" />
             <span className="font-black text-xl tracking-tight text-gradient-brand">FoodGram</span>
           </Link>
 
@@ -61,7 +61,7 @@ export function Navbar() {
 
             {user ? (
               <div className="relative ml-2">
-                <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-full ring-2 ring-transparent hover:ring-blue-200 transition-all">
+                <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-full ring-2 ring-transparent hover:ring-[#f4b8d3] transition-all">
                   <Avatar src={user.avatar} alt={user.username} size="sm" />
                 </button>
                 {menuOpen && (
@@ -76,7 +76,7 @@ export function Navbar() {
                     <div className="border-t border-gray-100" />
                     {user.isAdmin && (
                       <Link href="/admin" className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors" onClick={() => setMenuOpen(false)}>
-                        <Shield className="w-4 h-4 text-blue-600" />
+                        <Shield className="w-4 h-4 text-[#c6185c]" />
                         <span className="text-sm text-gray-700">Admin Console</span>
                       </Link>
                     )}
@@ -90,7 +90,7 @@ export function Navbar() {
               </div>
             ) : (
               <div className="flex items-center gap-2 ml-2">
-                <Link href="/auth/login" className="px-4 py-1.5 text-sm font-semibold text-blue-700 hover:bg-blue-50 rounded-lg transition-colors">Log in</Link>
+                <Link href="/auth/login" className="px-4 py-1.5 text-sm font-semibold text-[#9b1247] hover:bg-[#fdf2f7] rounded-lg transition-colors">Log in</Link>
                 <Link href="/auth/register" className="px-4 py-1.5 text-sm font-semibold bg-gradient-brand text-white rounded-lg hover:opacity-90 transition-opacity">Sign up</Link>
               </div>
             )}
@@ -104,7 +104,7 @@ export function Navbar() {
                 <div className="relative">
                   <Heart className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
                   {notifCount > 0 && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-white">
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#c6185c] text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-white">
                       {notifCount > 9 ? "9+" : notifCount}
                     </span>
                   )}
@@ -112,7 +112,7 @@ export function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/auth/login" className="text-sm font-semibold text-blue-700">Log in</Link>
+                <Link href="/auth/login" className="text-sm font-semibold text-[#9b1247]">Log in</Link>
                 <Link href="/auth/register" className="px-3 py-1.5 text-sm font-semibold bg-gradient-brand text-white rounded-lg">Sign up</Link>
               </>
             )}
@@ -132,7 +132,7 @@ export function Navbar() {
               >
                 <Icon className="w-6 h-6" strokeWidth={pathname === href ? 2.5 : 1.5} />
                 {href === `/profile/${user.username}` && notifCount > 0 && (
-                  <span className="absolute top-2 right-2 w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-[#c6185c] rounded-full animate-pulse" />
                 )}
               </Link>
             ))}

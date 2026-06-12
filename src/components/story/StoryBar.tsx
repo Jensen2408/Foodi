@@ -38,7 +38,7 @@ export function StoryBar() {
                     </div>
                   )}
                 </div>
-                <div className="absolute bottom-0 right-0 w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center border-2 border-white">
+                <div className="absolute bottom-0 right-0 w-5 h-5 bg-[#c6185c] rounded-full flex items-center justify-center border-2 border-white">
                   <Plus className="w-3 h-3 text-white" strokeWidth={3} />
                 </div>
               </div>

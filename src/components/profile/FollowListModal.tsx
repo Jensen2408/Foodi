@@ -47,7 +47,7 @@ export function FollowListModal({ userId, type, title, onClose }: Props) {
             <div className="flex justify-center py-12">
               <div className="flex gap-1">
                 {[0,1,2].map((i) => (
-                  <div key={i} className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: `${i*0.15}s` }} />
+                  <div key={i} className="w-2 h-2 bg-[#d4347a] rounded-full animate-bounce" style={{ animationDelay: `${i*0.15}s` }} />
                 ))}
               </div>
             </div>

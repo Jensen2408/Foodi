@@ -75,7 +75,7 @@ export function SuggestedUsers() {
               <button
                 onClick={() => follow(u.id)}
                 disabled={followed.has(u.id)}
-                className="text-xs font-semibold text-blue-600 hover:text-blue-800 disabled:text-gray-400 transition-colors"
+                className="text-xs font-semibold text-[#c6185c] hover:text-[#7a0e38] disabled:text-gray-400 transition-colors"
               >
                 {followed.has(u.id) ? "Following" : "Follow"}
               </button>

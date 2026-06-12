@@ -101,7 +101,7 @@ export default function EditProfilePage() {
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="absolute bottom-0 right-0 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center border-2 border-white shadow-md hover:bg-blue-700 transition-colors"
+              className="absolute bottom-0 right-0 w-8 h-8 bg-[#c6185c] rounded-full flex items-center justify-center border-2 border-white shadow-md hover:bg-[#9b1247] transition-colors"
             >
               <Camera className="w-4 h-4 text-white" />
             </button>
@@ -109,7 +109,7 @@ export default function EditProfilePage() {
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
-            className="text-sm font-semibold text-blue-600 hover:text-blue-800"
+            className="text-sm font-semibold text-[#c6185c] hover:text-[#7a0e38]"
           >
             Change photo
           </button>
