@@ -18,6 +18,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid folder" }, { status: 400 });
   }
 
-  const url = await saveUploadedFile(file, folder as "posts" | "stories" | "avatars" | "recipes");
-  return NextResponse.json({ url });
+  try {
+    const url = await saveUploadedFile(file, folder as "posts" | "stories" | "avatars" | "recipes");
+    return NextResponse.json({ url });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("Upload error:", msg);
+    return NextResponse.json({ error: msg }, { status: 500 });
+  }
 }
