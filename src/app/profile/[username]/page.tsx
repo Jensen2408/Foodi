@@ -95,7 +95,9 @@ export default function ProfilePage() {
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-xl font-black text-gray-900">{profile.username}</h1>
               {isMe ? (
-                <Button variant="secondary" size="sm">Edit profile</Button>
+                <Link href="/profile/edit">
+                  <Button variant="secondary" size="sm">Edit profile</Button>
+                </Link>
               ) : me ? (
                 <Button
                   variant={following ? "secondary" : "default"}
