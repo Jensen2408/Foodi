@@ -101,14 +101,14 @@ export function Navbar() {
             {user ? (
               <>
                 <Link href="/post/new" className="text-gray-700"><PlusSquare className="w-6 h-6" strokeWidth={1.5} /></Link>
-                <div className="relative">
-                  <Heart className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+                <Link href="/notifications" className="relative text-gray-700">
+                  <Heart className="w-6 h-6" strokeWidth={1.5} />
                   {notifCount > 0 && (
                     <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#c6185c] text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-white">
                       {notifCount > 9 ? "9+" : notifCount}
                     </span>
                   )}
-                </div>
+                </Link>
               </>
             ) : (
               <>
