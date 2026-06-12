@@ -32,6 +32,7 @@ export function Navbar() {
     ...(user ? [
       { href: "/post/new", icon: PlusSquare, label: "New" },
       { href: "/recipes", icon: BookOpen, label: "Recipes" },
+      { href: "/notifications", icon: Heart, label: "Notifications" },
       { href: `/profile/${user.username}`, icon: User, label: "Profile" },
     ] : []),
   ];
