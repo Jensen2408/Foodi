@@ -58,7 +58,7 @@ export function Feed() {
 
   return (
     <div className="space-y-4">
-      {posts.map((post) => <PostCard key={post.id} post={post} />)}
+      {posts.map((post) => <PostCard key={post.id} post={post} onDelete={(id) => setPosts(prev => prev.filter(p => p.id !== id))} />)}
       <div ref={loaderRef} className="py-4 flex justify-center">
         {loading && (
           <div className="flex gap-1">
