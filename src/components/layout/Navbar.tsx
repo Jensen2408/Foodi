@@ -18,11 +18,14 @@ export function Navbar() {
     fetch("/api/notifications")
       .then((r) => r.json())
       .then((d) => {
-        const lastSeen = localStorage.getItem("notif_seen");
-        const items = d.items ?? [];
-        const count = lastSeen
-          ? items.filter((i: { createdAt: string }) => new Date(i.createdAt) > new Date(lastSeen)).length
-          : d.count ?? 0;
+        const lastSeenStr = localStorage.getItem("notif_seen");
+        const items: { createdAt: string }[] = d.items ?? [];
+        if (!lastSeenStr) {
+          setNotifCount(items.length);
+          return;
+        }
+        const lastSeen = new Date(lastSeenStr).getTime();
+        const count = items.filter((i) => new Date(i.createdAt).getTime() > lastSeen).length;
         setNotifCount(count);
       });
   }, [user]);
