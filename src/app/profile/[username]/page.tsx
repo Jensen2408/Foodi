@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Grid3x3, BookOpen, Heart, MessageCircle, Globe } from "lucide-react";
+import { Grid3x3, BookOpen, Heart, MessageCircle, Globe, LogOut } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/hooks/useUser";
 import { FollowListModal } from "@/components/profile/FollowListModal";
+import { useRouter } from "next/navigation";
 
 interface Profile {
   id: string;
@@ -38,12 +39,18 @@ interface Recipe {
 export default function ProfilePage() {
   const { username } = useParams<{ username: string }>();
   const { user: me } = useUser();
+  const router = useRouter();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [posts, setPosts] = useState<PostPreview[]>([]);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [tab, setTab] = useState<"posts" | "recipes">("posts");
   const [following, setFollowing] = useState(false);
   const [modal, setModal] = useState<"followers" | "following" | null>(null);
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/login");
+  }
 
   useEffect(() => {
     fetch(`/api/users/${username}`)
@@ -97,9 +104,18 @@ export default function ProfilePage() {
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-xl font-black text-gray-900">{profile.username}</h1>
               {isMe ? (
-                <Link href="/profile/edit">
-                  <Button variant="secondary" size="sm">Edit profile</Button>
-                </Link>
+                <div className="flex items-center gap-2">
+                  <Link href="/profile/edit">
+                    <Button variant="secondary" size="sm">Edit profile</Button>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="md:hidden p-1.5 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors"
+                    title="Log out"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </div>
               ) : me ? (
                 <Button
                   variant={following ? "secondary" : "default"}
