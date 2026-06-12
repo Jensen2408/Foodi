@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 
@@ -8,6 +9,10 @@ export async function GET() {
   if (!me) return NextResponse.json({ count: 0, items: [] });
 
   const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+
+  const cookieStore = await cookies();
+  const lastSeenStr = cookieStore.get("notif_seen")?.value;
+  const lastSeen = lastSeenStr ? new Date(lastSeenStr) : since;
 
   const [likes, follows, comments] = await Promise.all([
     prisma.like.findMany({
@@ -58,8 +63,20 @@ export async function GET() {
     })),
   ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
-  const recentCutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-  const count = items.filter((i) => new Date(i.createdAt) >= recentCutoff).length;
+  const count = items.filter((i) => new Date(i.createdAt) > lastSeen).length;
 
   return NextResponse.json({ count, items });
+}
+
+export async function POST() {
+  const me = await getCurrentUser();
+  if (!me) return NextResponse.json({ ok: false });
+
+  const res = NextResponse.json({ ok: true });
+  res.cookies.set("notif_seen", new Date().toISOString(), {
+    httpOnly: false,
+    path: "/",
+    maxAge: 60 * 60 * 24 * 365,
+  });
+  return res;
 }
