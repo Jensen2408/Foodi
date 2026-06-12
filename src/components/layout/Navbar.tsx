@@ -32,7 +32,6 @@ export function Navbar() {
     ...(user ? [
       { href: "/post/new", icon: PlusSquare, label: "New" },
       { href: "/recipes", icon: BookOpen, label: "Recipes" },
-      { href: "/notifications", icon: Heart, label: "Notifications" },
       { href: `/profile/${user.username}`, icon: User, label: "Profile" },
     ] : []),
   ];
@@ -59,6 +58,17 @@ export function Navbar() {
                 <Icon className="w-6 h-6" strokeWidth={pathname === href ? 2.5 : 1.5} />
               </Link>
             ))}
+
+            {user && (
+              <Link href="/notifications" title="Notifications" className={`relative p-2.5 rounded-lg transition-colors ${pathname === "/notifications" ? "text-gray-950" : "text-gray-400 hover:text-gray-700"}`}>
+                <Heart className="w-6 h-6" strokeWidth={pathname === "/notifications" ? 2.5 : 1.5} />
+                {notifCount > 0 && (
+                  <span className="absolute top-1 right-1 w-4 h-4 bg-[#c6185c] text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-white">
+                    {notifCount > 9 ? "9+" : notifCount}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {user ? (
               <div className="relative ml-2">
