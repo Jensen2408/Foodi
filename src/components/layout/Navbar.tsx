@@ -17,7 +17,14 @@ export function Navbar() {
     if (!user) return;
     fetch("/api/notifications")
       .then((r) => r.json())
-      .then((d) => setNotifCount(d.count ?? 0));
+      .then((d) => {
+        const lastSeen = localStorage.getItem("notif_seen");
+        const items = d.items ?? [];
+        const count = lastSeen
+          ? items.filter((i: { createdAt: string }) => new Date(i.createdAt) > new Date(lastSeen)).length
+          : d.count ?? 0;
+        setNotifCount(count);
+      });
   }, [user]);
 
 

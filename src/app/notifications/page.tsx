@@ -42,7 +42,7 @@ export default function NotificationsPage() {
     fetch("/api/notifications")
       .then((r) => r.json())
       .then((d) => { setItems(d.items ?? []); setLoading(false); });
-    fetch("/api/notifications", { method: "POST" });
+    localStorage.setItem("notif_seen", new Date().toISOString());
   }, []);
 
   return (
