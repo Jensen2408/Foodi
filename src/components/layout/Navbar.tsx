@@ -20,6 +20,10 @@ export function Navbar() {
       .then((d) => setNotifCount(d.count ?? 0));
   }, [user]);
 
+  useEffect(() => {
+    if (pathname === "/notifications") setNotifCount(0);
+  }, [pathname]);
+
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
     mutate(null);
