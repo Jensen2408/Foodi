@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Home, Search, PlusSquare, BookOpen, User, LogOut, ChefHat, Shield, Heart } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { useUser } from "@/hooks/useUser";
@@ -11,6 +11,14 @@ export function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [notifCount, setNotifCount] = useState(0);
+
+  useEffect(() => {
+    if (!user) return;
+    fetch("/api/notifications")
+      .then((r) => r.json())
+      .then((d) => setNotifCount(d.count ?? 0));
+  }, [user]);
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -93,7 +101,14 @@ export function Navbar() {
             {user ? (
               <>
                 <Link href="/post/new" className="text-gray-700"><PlusSquare className="w-6 h-6" strokeWidth={1.5} /></Link>
-                <Link href="/explore" className="text-gray-700"><Heart className="w-6 h-6" strokeWidth={1.5} /></Link>
+                <div className="relative">
+                  <Heart className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+                  {notifCount > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-pink-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-white">
+                      {notifCount > 9 ? "9+" : notifCount}
+                    </span>
+                  )}
+                </div>
               </>
             ) : (
               <>
@@ -113,9 +128,12 @@ export function Navbar() {
               <Link
                 key={href}
                 href={href}
-                className={`flex items-center justify-center w-14 h-12 transition-colors ${pathname === href ? "text-gray-900" : "text-gray-400"}`}
+                className={`relative flex items-center justify-center w-14 h-12 transition-colors ${pathname === href ? "text-gray-900" : "text-gray-400"}`}
               >
                 <Icon className="w-6 h-6" strokeWidth={pathname === href ? 2.5 : 1.5} />
+                {href === `/profile/${user.username}` && notifCount > 0 && (
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-pink-500 rounded-full animate-pulse" />
+                )}
               </Link>
             ))}
           </div>

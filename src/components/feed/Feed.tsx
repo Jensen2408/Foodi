@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
+import Link from "next/link";
 import { PostCard } from "@/components/post/PostCard";
+import { SkeletonCard } from "./SkeletonCard";
 
 interface Post {
   id: string;
@@ -19,6 +21,7 @@ export function Feed() {
   const [cursor, setCursor] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
   const loaderRef = useRef<HTMLDivElement>(null);
 
   const loadMore = useCallback(async () => {
@@ -31,11 +34,10 @@ export function Feed() {
     setCursor(data.nextCursor);
     setHasMore(!!data.nextCursor);
     setLoading(false);
+    setInitialLoad(false);
   }, [loading, hasMore, cursor]);
 
-  useEffect(() => {
-    loadMore();
-  }, []);
+  useEffect(() => { loadMore(); }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,27 +48,39 @@ export function Feed() {
     return () => observer.disconnect();
   }, [loadMore]);
 
+  if (initialLoad) {
+    return (
+      <div className="divide-y divide-gray-100">
+        {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+      </div>
+    );
+  }
+
   if (!loading && posts.length === 0) {
     return (
-      <div className="text-center py-20">
-        <p className="text-4xl mb-4">🍕</p>
-        <h3 className="text-lg font-bold text-gray-800 mb-2">No posts yet</h3>
-        <p className="text-gray-500 text-sm">Follow some food creators or share your first dish!</p>
+      <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
+        <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-5">
+          <svg className="w-9 h-9 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+          </svg>
+        </div>
+        <h3 className="text-base font-semibold text-gray-900 mb-1">No posts yet</h3>
+        <p className="text-sm text-gray-500 mb-5 max-w-xs">Follow food creators or share your first dish to get started</p>
+        <Link href="/post/new" className="px-5 py-2.5 bg-gradient-brand text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity">
+          Share a photo
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="space-y-0 divide-y divide-gray-100">
-      {posts.map((post) => <PostCard key={post.id} post={post} onDelete={(id) => setPosts(prev => prev.filter(p => p.id !== id))} />)}
-      <div ref={loaderRef} className="py-4 flex justify-center">
-        {loading && (
-          <div className="flex gap-1">
-            {[0, 1, 2].map((i) => (
-              <div key={i} className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
-            ))}
-          </div>
-        )}
+    <div className="divide-y divide-gray-100">
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} onDelete={(id) => setPosts(prev => prev.filter(p => p.id !== id))} />
+      ))}
+      <div ref={loaderRef} className="py-6 flex justify-center">
+        {loading && <SkeletonCard />}
       </div>
     </div>
   );
