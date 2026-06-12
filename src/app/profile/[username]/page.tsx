@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Grid3x3, BookOpen, Heart, MessageCircle, Globe, MapPin } from "lucide-react";
+import { Grid3x3, BookOpen, Heart, MessageCircle, Globe } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/hooks/useUser";
+import { FollowListModal } from "@/components/profile/FollowListModal";
 
 interface Profile {
   id: string;
@@ -42,6 +43,7 @@ export default function ProfilePage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [tab, setTab] = useState<"posts" | "recipes">("posts");
   const [following, setFollowing] = useState(false);
+  const [modal, setModal] = useState<"followers" | "following" | null>(null);
 
   useEffect(() => {
     fetch(`/api/users/${username}`)
@@ -122,15 +124,15 @@ export default function ProfilePage() {
         {/* Stats */}
         <div className="grid grid-cols-4 gap-2 mt-6 pt-6 border-t border-gray-100">
           {[
-            { label: "Posts", value: profile._count.posts },
-            { label: "Followers", value: profile._count.followers },
-            { label: "Following", value: profile._count.following },
-            { label: "Recipes", value: profile._count.recipes },
-          ].map(({ label, value }) => (
-            <div key={label} className="text-center">
+            { label: "Posts", value: profile._count.posts, onClick: undefined },
+            { label: "Followers", value: profile._count.followers, onClick: () => setModal("followers") },
+            { label: "Following", value: profile._count.following, onClick: () => setModal("following") },
+            { label: "Recipes", value: profile._count.recipes, onClick: undefined },
+          ].map(({ label, value, onClick }) => (
+            <button key={label} onClick={onClick} className={`text-center ${onClick ? "hover:opacity-70 transition-opacity cursor-pointer" : "cursor-default"}`}>
               <p className="text-xl font-black text-gray-900">{value.toLocaleString()}</p>
               <p className="text-xs text-gray-500 mt-0.5">{label}</p>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -227,6 +229,14 @@ export default function ProfilePage() {
             </div>
           )}
         </div>
+      )}
+      {modal && (
+        <FollowListModal
+          userId={profile.id}
+          type={modal}
+          title={modal === "followers" ? "Followers" : "Following"}
+          onClose={() => setModal(null)}
+        />
       )}
     </div>
   );
