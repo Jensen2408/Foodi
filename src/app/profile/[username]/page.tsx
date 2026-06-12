@@ -88,9 +88,9 @@ export default function ProfilePage() {
   const isMe = me?.id === profile.id;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="max-w-[470px] md:max-w-3xl mx-auto px-4 py-6">
       {/* Profile header */}
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 mb-6">
+      <div className="bg-white p-4 mb-4">
         <div className="flex items-start gap-6">
           <Avatar src={profile.avatar} alt={profile.username} size="xl" />
           <div className="flex-1 min-w-0">
@@ -138,22 +138,22 @@ export default function ProfilePage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex bg-white rounded-2xl border border-gray-100 shadow-sm p-1 mb-6">
+      <div className="flex border-t border-gray-200 mb-1">
         <button
           onClick={() => setTab("posts")}
-          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-            tab === "posts" ? "bg-gradient-brand text-white shadow" : "text-gray-500 hover:text-gray-700"
+          className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold uppercase tracking-widest transition-all border-t-2 -mt-px ${
+            tab === "posts" ? "border-gray-900 text-gray-900" : "border-transparent text-gray-400 hover:text-gray-600"
           }`}
         >
-          <Grid3x3 className="w-4 h-4" /> Posts
+          <Grid3x3 className="w-3.5 h-3.5" /> Posts
         </button>
         <button
           onClick={() => setTab("recipes")}
-          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-            tab === "recipes" ? "bg-gradient-brand text-white shadow" : "text-gray-500 hover:text-gray-700"
+          className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold uppercase tracking-widest transition-all border-t-2 -mt-px ${
+            tab === "recipes" ? "border-gray-900 text-gray-900" : "border-transparent text-gray-400 hover:text-gray-600"
           }`}
         >
-          <BookOpen className="w-4 h-4" /> Recipes
+          <BookOpen className="w-3.5 h-3.5" /> Recipes
         </button>
       </div>
 

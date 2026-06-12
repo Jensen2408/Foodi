@@ -39,19 +39,19 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-gradient-to-br from-pink-100 via-fuchsia-50 to-pink-100">
+    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-white">
       <div className="w-full max-w-sm">
-        <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl shadow-pink-200 border border-pink-100 p-8 space-y-6">
+        <div className="space-y-8">
           {/* Logo */}
-          <div className="text-center space-y-2">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto shadow-lg">
-              <ChefHat className="w-8 h-8 text-white" />
+          <div className="text-center space-y-1">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto">
+              <ChefHat className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-2xl font-black text-gradient-brand">FoodGram</h1>
-            <p className="text-sm text-gray-500">Sign in to share your food story</p>
+            <h1 className="text-2xl font-black text-gradient-brand mt-3">FoodGram</h1>
+            <p className="text-sm text-gray-400">Sign in to share your food story</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <Input
               label="Email"
               type="email"
@@ -89,7 +89,7 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-gray-500">
             Don&apos;t have an account?{" "}
-            <Link href="/auth/register" className="font-semibold text-brand-600 hover:underline">
+            <Link href="/auth/register" className="font-semibold text-gray-900 hover:underline">
               Sign up
             </Link>
           </p>

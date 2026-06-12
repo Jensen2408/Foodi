@@ -45,7 +45,7 @@ export function Navbar() {
                 key={href}
                 href={href}
                 title={label}
-                className={`p-2.5 rounded-lg transition-colors ${pathname === href ? "text-gray-900" : "text-gray-400 hover:text-gray-900"}`}
+                className={`p-2.5 rounded-lg transition-colors ${pathname === href ? "text-gray-950" : "text-gray-400 hover:text-gray-700"}`}
               >
                 <Icon className="w-6 h-6" strokeWidth={pathname === href ? 2.5 : 1.5} />
               </Link>

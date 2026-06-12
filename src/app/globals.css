@@ -4,50 +4,46 @@
 
 @layer base {
   * { box-sizing: border-box; }
-  body { @apply antialiased; background: #fafafa; color: #111827; }
+  body { @apply antialiased; background: #fafafa; color: #0f0f0f; }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { @apply bg-pink-200 rounded-full; }
+  ::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 9999px; }
 }
 
 @layer utilities {
+  /* Brand — used only for key CTAs, likes, logo */
   .bg-gradient-brand {
-    background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
+    background: linear-gradient(135deg, #e91e8c 0%, #c2185b 100%);
   }
   .bg-gradient-story {
-    background: linear-gradient(45deg, #f9a8d4, #ec4899, #be185d, #9333ea);
+    background: linear-gradient(45deg, #f9a825, #e91e63, #9c27b0);
   }
-  .bg-gradient-page {
-    background: #fafafa;
-  }
+  .bg-gradient-page { background: #fafafa; }
+
   .text-gradient-brand {
-    background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
+    background: linear-gradient(135deg, #e91e8c 0%, #c2185b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .card {
-    @apply bg-white rounded-xl border border-gray-200 shadow-sm;
-  }
-  .glass {
-    @apply bg-white/90 backdrop-blur-md border border-gray-200;
-  }
+  .card  { @apply bg-white rounded-xl border border-gray-100 shadow-sm; }
+  .glass { @apply bg-white/95 backdrop-blur-md border border-gray-200; }
 
   /* Animations */
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes slide-up {
-    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
   @keyframes heart-pop {
     0%   { transform: scale(0); opacity: 1; }
-    50%  { transform: scale(1.4); opacity: 1; }
+    50%  { transform: scale(1.5); opacity: 1; }
     100% { transform: scale(1.2); opacity: 0; }
   }
-  .animate-fade-in  { animation: fade-in 0.3s ease both; }
-  .animate-slide-up { animation: slide-up 0.2s ease both; }
-  .animate-heart-pop { animation: heart-pop 0.6s ease forwards; }
+  .animate-fade-in  { animation: fade-in 0.25s ease both; }
+  .animate-slide-up { animation: slide-up 0.18s ease both; }
+  .animate-heart-pop { animation: heart-pop 0.55s ease forwards; }
 }
