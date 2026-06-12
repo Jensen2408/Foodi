@@ -73,14 +73,27 @@ export default function NewPostPage() {
 
     // Upload images
     const uploadedUrls: string[] = [];
-    for (const img of images) {
-      if (img.url) { uploadedUrls.push(img.url); continue; }
-      const fd = new FormData();
-      fd.append("file", img.file);
-      fd.append("folder", "posts");
-      const res = await fetch("/api/upload", { method: "POST", body: fd });
-      const data = await res.json();
-      uploadedUrls.push(data.url);
+    try {
+      for (const img of images) {
+        if (img.url) { uploadedUrls.push(img.url); continue; }
+        const fd = new FormData();
+        fd.append("file", img.file);
+        fd.append("folder", "posts");
+        const res = await fetch("/api/upload", { method: "POST", body: fd });
+        const data = await res.json();
+        if (!res.ok || !data.url) {
+          setError(data.error || `Upload failed (${res.status})`);
+          setUploading(false);
+          setSubmitting(false);
+          return;
+        }
+        uploadedUrls.push(data.url);
+      }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Upload failed — check connection");
+      setUploading(false);
+      setSubmitting(false);
+      return;
     }
     setUploading(false);
 
