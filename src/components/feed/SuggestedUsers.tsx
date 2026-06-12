@@ -28,7 +28,7 @@ export function SuggestedUsers() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ targetUserId: id }),
     });
-    setFollowed((prev) => new Set([...prev, id]));
+    setFollowed((prev) => { const next = new Set(prev); next.add(id); return next; });
   }
 
   if (!user || users.length === 0) return null;
