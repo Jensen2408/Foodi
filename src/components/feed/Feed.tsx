@@ -57,7 +57,7 @@ export function Feed() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-0 divide-y divide-gray-100">
       {posts.map((post) => <PostCard key={post.id} post={post} onDelete={(id) => setPosts(prev => prev.filter(p => p.id !== id))} />)}
       <div ref={loaderRef} className="py-4 flex justify-center">
         {loading && (

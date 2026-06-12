@@ -18,44 +18,42 @@ export function StoryBar() {
   const [viewing, setViewing] = useState<StoryGroup | null>(null);
 
   useEffect(() => {
-    fetch("/api/stories")
-      .then((r) => r.json())
-      .then(setGroups);
+    fetch("/api/stories").then((r) => r.json()).then(setGroups);
   }, []);
 
   return (
     <>
-      <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-pink-100 shadow-sm shadow-pink-100 p-4 overflow-x-auto">
-        <div className="flex gap-4 min-w-max">
+      <div className="bg-white border-b border-gray-200 px-2 py-3 overflow-x-auto scrollbar-none">
+        <div className="flex gap-3 px-2 min-w-max">
           {user && (
-            <Link href="/stories/new" className="flex flex-col items-center gap-1.5 group">
+            <Link href="/stories/new" className="flex flex-col items-center gap-1 w-[66px]">
               <div className="relative">
-                <Avatar src={user.avatar} alt={user.username} size="lg" />
-                <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 bg-gradient-brand rounded-full flex items-center justify-center border-2 border-white">
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200">
+                  {user.avatar ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={user.avatar} alt={user.username} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-500 text-xl font-bold">
+                      {user.username[0].toUpperCase()}
+                    </div>
+                  )}
+                </div>
+                <div className="absolute bottom-0 right-0 w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center border-2 border-white">
                   <Plus className="w-3 h-3 text-white" strokeWidth={3} />
                 </div>
               </div>
-              <span className="text-xs text-gray-600 font-medium max-w-[56px] truncate">
-                Your story
-              </span>
+              <span className="text-[11px] text-gray-600 truncate w-full text-center leading-tight">Your story</span>
             </Link>
           )}
 
           {groups.map((group) => (
-            <button
-              key={group.user.id}
-              onClick={() => setViewing(group)}
-              className="flex flex-col items-center gap-1.5 group"
-            >
-              <Avatar
-                src={group.user.avatar}
-                alt={group.user.username}
-                size="lg"
-                hasStory={group.hasNew}
-              />
-              <span className="text-xs text-gray-600 font-medium max-w-[56px] truncate">
-                {group.user.username}
-              </span>
+            <button key={group.user.id} onClick={() => setViewing(group)} className="flex flex-col items-center gap-1 w-[66px]">
+              <div className={`w-16 h-16 rounded-full p-[2px] ${group.hasNew ? "bg-gradient-to-tr from-yellow-300 via-pink-500 to-purple-600" : "bg-gray-300"}`}>
+                <div className="w-full h-full rounded-full border-[3px] border-white overflow-hidden bg-gray-100">
+                  <Avatar src={group.user.avatar} alt={group.user.username} size="lg" />
+                </div>
+              </div>
+              <span className="text-[11px] text-gray-600 truncate w-full text-center leading-tight">{group.user.username}</span>
             </button>
           ))}
 
@@ -65,9 +63,7 @@ export function StoryBar() {
         </div>
       </div>
 
-      {viewing && (
-        <StoryViewer group={viewing} onClose={() => setViewing(null)} />
-      )}
+      {viewing && <StoryViewer group={viewing} onClose={() => setViewing(null)} />}
     </>
   );
 }
