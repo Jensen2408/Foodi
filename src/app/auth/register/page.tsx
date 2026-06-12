@@ -43,7 +43,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-gradient-to-br from-pink-100 via-fuchsia-50 to-pink-100">
       <div className="w-full max-w-sm">
-        <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl shadow-pink-200 border border-pink-100 p-8 space-y-6">
+        <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl shadow-pink-200 border border-blue-100 p-8 space-y-6">
           <div className="text-center space-y-2">
             <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto shadow-lg">
               <ChefHat className="w-8 h-8 text-white" />

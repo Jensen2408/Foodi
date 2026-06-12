@@ -53,16 +53,16 @@ export function UserTagPicker({ tagged, onChange }: Props) {
   return (
     <div className="space-y-2" ref={ref}>
       <label className="block text-sm font-medium text-gray-700 flex items-center gap-1.5">
-        <UserPlus className="w-4 h-4 text-pink-500" /> Tag people
+        <UserPlus className="w-4 h-4 text-blue-600" /> Tag people
       </label>
 
       {tagged.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {tagged.map((u) => (
-            <span key={u.id} className="flex items-center gap-1.5 bg-pink-50 border border-pink-200 text-pink-700 text-sm px-2.5 py-1 rounded-full">
+            <span key={u.id} className="flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-blue-800 text-sm px-2.5 py-1 rounded-full">
               <Avatar src={u.avatar} alt={u.username} size="xs" />
               @{u.username}
-              <button type="button" onClick={() => removeUser(u.id)} className="text-pink-400 hover:text-pink-600 ml-0.5">
+              <button type="button" onClick={() => removeUser(u.id)} className="text-blue-500 hover:text-blue-700 ml-0.5">
                 <X className="w-3 h-3" />
               </button>
             </span>
@@ -71,7 +71,7 @@ export function UserTagPicker({ tagged, onChange }: Props) {
       )}
 
       <div className="relative">
-        <div className="flex items-center gap-2 h-11 rounded-xl border border-gray-200 bg-gray-50 px-3 focus-within:ring-2 focus-within:ring-pink-400 focus-within:border-transparent transition-all">
+        <div className="flex items-center gap-2 h-11 rounded-xl border border-gray-200 bg-gray-50 px-3 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent transition-all">
           <Search className="w-4 h-4 text-gray-400 shrink-0" />
           <input
             value={query}
@@ -89,7 +89,7 @@ export function UserTagPicker({ tagged, onChange }: Props) {
                 key={u.id}
                 type="button"
                 onClick={() => addUser(u)}
-                className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-pink-50 transition-colors text-left"
+                className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-blue-50 transition-colors text-left"
               >
                 <Avatar src={u.avatar} alt={u.username} size="sm" />
                 <div>

@@ -9,6 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        blue: {
+          600: '#1d4ed8',
+          700: '#1e40af',
+        },
         brand: {
           50:  "#fdf2f8",
           100: "#fce7f3",

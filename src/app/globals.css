@@ -11,17 +11,17 @@
 }
 
 @layer utilities {
-  /* Brand — used only for key CTAs, likes, logo */
+  /* Brand — deep blue */
   .bg-gradient-brand {
-    background: linear-gradient(135deg, #e91e8c 0%, #c2185b 100%);
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
   }
   .bg-gradient-story {
-    background: linear-gradient(45deg, #f9a825, #e91e63, #9c27b0);
+    background: linear-gradient(45deg, #f59e0b, #ef4444, #7c3aed);
   }
   .bg-gradient-page { background: #fafafa; }
 
   .text-gradient-brand {
-    background: linear-gradient(135deg, #e91e8c 0%, #c2185b 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

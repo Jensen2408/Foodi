@@ -38,7 +38,7 @@ export function StoryBar() {
                     </div>
                   )}
                 </div>
-                <div className="absolute bottom-0 right-0 w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center border-2 border-white">
+                <div className="absolute bottom-0 right-0 w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center border-2 border-white">
                   <Plus className="w-3 h-3 text-white" strokeWidth={3} />
                 </div>
               </div>
@@ -48,7 +48,7 @@ export function StoryBar() {
 
           {groups.map((group) => (
             <button key={group.user.id} onClick={() => setViewing(group)} className="flex flex-col items-center gap-1 w-[66px]">
-              <div className={`w-16 h-16 rounded-full p-[2px] ${group.hasNew ? "bg-gradient-to-tr from-yellow-300 via-pink-500 to-purple-600" : "bg-gray-300"}`}>
+              <div className={`w-16 h-16 rounded-full p-[2px] ${group.hasNew ? "bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-500" : "bg-gray-300"}`}>
                 <div className="w-full h-full rounded-full border-[3px] border-white overflow-hidden bg-gray-100">
                   <Avatar src={group.user.avatar} alt={group.user.username} size="lg" />
                 </div>

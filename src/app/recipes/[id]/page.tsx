@@ -86,7 +86,7 @@ export default function RecipePage() {
       <div className="grid grid-cols-4 gap-3 mb-6">
         {[
           { label: "Prep", value: recipe.prepTime ? `${recipe.prepTime}m` : "—", icon: Clock, color: "text-brand-500" },
-          { label: "Cook", value: recipe.cookTime ? `${recipe.cookTime}m` : "—", icon: Clock, color: "text-pink-500" },
+          { label: "Cook", value: recipe.cookTime ? `${recipe.cookTime}m` : "—", icon: Clock, color: "text-blue-600" },
           { label: "Total", value: totalTime ? `${totalTime}m` : "—", icon: Clock, color: "text-purple-500" },
           { label: "Serves", value: recipe.servings ? `${recipe.servings}` : "—", icon: Users, color: "text-blue-500" },
         ].map(({ label, value, icon: Icon, color }) => (

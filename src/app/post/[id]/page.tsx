@@ -142,7 +142,7 @@ export default function PostPage() {
               </h3>
               <div className="flex flex-wrap gap-2 text-xs">
                 {recipe.prepTime && <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm"><Clock className="w-3 h-3 text-brand-500" /> {recipe.prepTime}m prep</span>}
-                {recipe.cookTime && <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm"><Clock className="w-3 h-3 text-pink-500" /> {recipe.cookTime}m cook</span>}
+                {recipe.cookTime && <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm"><Clock className="w-3 h-3 text-blue-600" /> {recipe.cookTime}m cook</span>}
                 {recipe.servings && <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-full shadow-sm"><Users className="w-3 h-3 text-purple-500" /> {recipe.servings}</span>}
                 {recipe.difficulty && <span className="bg-white px-2.5 py-1 rounded-full shadow-sm capitalize">{recipe.difficulty}</span>}
               </div>
