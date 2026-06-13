@@ -128,59 +128,66 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
           </div>
         </Link>
 
-        <div className="relative" ref={menuRef}>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded-full hover:bg-[#0f1520]/[0.06] transition-colors"
-          >
-            <MoreHorizontal className="w-5 h-5 text-white/30" />
-          </button>
-          {menuOpen && (
-            <div className="absolute right-0 top-10 w-52 rounded-2xl border border-white/[0.08] overflow-hidden z-50 animate-slide-up" style={{background:"#0f1520"}}>
-              {isOwner ? (
-                <>
-                  <button
-                    onClick={handleDelete}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-red-500/10 text-red-400 transition-colors text-sm font-semibold"
-                  >
-                    <Trash2 className="w-4 h-4" /> Delete post
-                  </button>
-                  <div className="border-t border-white/[0.06]" />
-                  <Link
-                    href={`/post/${post.id}`}
-                    onClick={() => setMenuOpen(false)}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
-                  >
-                    <MessageCircle className="w-4 h-4 text-purple-400" /> View post
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <button
-                    onClick={handleReport}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-red-500/10 text-red-400 transition-colors text-sm font-semibold"
-                  >
-                    <Flag className="w-4 h-4" /> Report
-                  </button>
-                  <div className="border-t border-white/[0.06]" />
-                  <Link
-                    href={`/profile/${post.user.username}`}
-                    onClick={() => setMenuOpen(false)}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
-                  >
-                    <UserPlus className="w-4 h-4 text-purple-400" /> Follow @{post.user.username}
-                  </Link>
-                  <div className="border-t border-white/[0.06]" />
-                  <button
-                    onClick={() => { navigator.clipboard.writeText(window.location.origin + `/post/${post.id}`); setMenuOpen(false); }}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
-                  >
-                    <Share2 className="w-4 h-4 text-purple-400" /> Copy link
-                  </button>
-                </>
-              )}
-            </div>
+        <div className="flex items-center gap-2">
+          {post.recipe && (
+            <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-[#db2777]/40 text-[#db2777] text-xs font-semibold">
+              <Bookmark className="w-3 h-3" /> Recipe
+            </span>
           )}
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2 rounded-full hover:bg-[#0f1520]/[0.06] transition-colors"
+            >
+              <MoreHorizontal className="w-5 h-5 text-white/30" />
+            </button>
+            {menuOpen && (
+              <div className="absolute right-0 top-10 w-52 rounded-2xl border border-white/[0.08] overflow-hidden z-50 animate-slide-up" style={{background:"#0f1520"}}>
+                {isOwner ? (
+                  <>
+                    <button
+                      onClick={handleDelete}
+                      className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-red-500/10 text-red-400 transition-colors text-sm font-semibold"
+                    >
+                      <Trash2 className="w-4 h-4" /> Delete post
+                    </button>
+                    <div className="border-t border-white/[0.06]" />
+                    <Link
+                      href={`/post/${post.id}`}
+                      onClick={() => setMenuOpen(false)}
+                      className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
+                    >
+                      <MessageCircle className="w-4 h-4 text-purple-400" /> View post
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={handleReport}
+                      className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-red-500/10 text-red-400 transition-colors text-sm font-semibold"
+                    >
+                      <Flag className="w-4 h-4" /> Report
+                    </button>
+                    <div className="border-t border-white/[0.06]" />
+                    <Link
+                      href={`/profile/${post.user.username}`}
+                      onClick={() => setMenuOpen(false)}
+                      className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
+                    >
+                      <UserPlus className="w-4 h-4 text-purple-400" /> Follow @{post.user.username}
+                    </Link>
+                    <div className="border-t border-white/[0.06]" />
+                    <button
+                      onClick={() => { navigator.clipboard.writeText(window.location.origin + `/post/${post.id}`); setMenuOpen(false); }}
+                      className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
+                    >
+                      <Share2 className="w-4 h-4 text-purple-400" /> Copy link
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -193,7 +200,6 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
             fill
             className="object-cover"
           />
-          {/* Double tap heart */}
           {doubleTapHeart && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <Heart className="w-24 h-24 text-white fill-white drop-shadow-lg animate-ping" />
@@ -277,7 +283,13 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
             <Link href={`/profile/${post.user.username}`} className="font-bold text-white mr-1 hover:text-purple-400">
               {post.user.name || post.user.username}
             </Link>
-            {post.caption}
+            {post.caption.split(" ").map((word, i) =>
+              word.startsWith("#") ? (
+                <span key={i} className="text-[#db2777] font-medium">{word} </span>
+              ) : (
+                <span key={i}>{word} </span>
+              )
+            )}
           </p>
         )}
 
@@ -307,7 +319,6 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
 
         <p className="text-xs text-white/20 uppercase tracking-wide">{formatRelativeTime(post.createdAt)}</p>
 
-        {/* Recipe Card */}
         {showRecipe && recipe && (
           <div className="mt-1 p-4 rounded-2xl border border-purple-500/20 space-y-3" style={{background:"rgba(168,85,247,0.08)"}}>
             <div className="flex items-center gap-2">
@@ -366,7 +377,6 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
           </div>
         )}
 
-        {/* Comment input */}
         {user && (
           <form onSubmit={submitComment} className="flex items-center gap-2 pt-2 border-t border-white/[0.06]">
             <Avatar src={user.avatar} alt={user.username} size="xs" />
