@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Grid3x3, BookOpen, Heart, MessageCircle, Globe, LogOut } from "lucide-react";
+import { Grid3x3, BookOpen, Heart, MessageCircle, Globe, LogOut, Settings } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/hooks/useUser";
@@ -43,7 +43,7 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [posts, setPosts] = useState<PostPreview[]>([]);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [tab, setTab] = useState<"posts" | "recipes">("posts");
+  const [tab, setTab] = useState<"posts" | "recipes" | "liked">("posts");
   const [following, setFollowing] = useState(false);
   const [modal, setModal] = useState<"followers" | "following" | null>(null);
 
@@ -97,80 +97,75 @@ export default function ProfilePage() {
   return (
     <div className="max-w-[470px] md:max-w-3xl mx-auto px-4 py-6">
       {/* Profile header */}
-      <div className="p-4 mb-4 rounded-2xl border border-white/[0.07]" style={{background:"rgba(255,255,255,0.03)"}}>
-        <div className="flex items-start gap-6">
-          <Avatar src={profile.avatar} alt={profile.username} size="xl" />
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-xl font-black text-white">{profile.username}</h1>
-              {isMe ? (
-                <div className="flex items-center gap-2">
-                  <Link href="/profile/edit">
-                    <Button variant="secondary" size="sm">Edit profile</Button>
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="md:hidden p-1.5 rounded-lg text-white/40 hover:text-red-400 hover:bg-red-500/10 transition-colors"
-                    title="Log out"
-                  >
-                    <LogOut className="w-4 h-4" />
-                  </button>
-                </div>
-              ) : me ? (
-                <Button
-                  variant={following ? "secondary" : "default"}
-                  size="sm"
-                  onClick={toggleFollow}
-                >
-                  {following ? "Following" : "Follow"}
-                </Button>
-              ) : null}
-            </div>
-            {profile.name && <p className="text-white/60 font-medium mt-1">{profile.name}</p>}
-            {profile.bio && <p className="text-sm text-white/50 mt-1 leading-relaxed">{profile.bio}</p>}
-            {profile.website && (
-              <a href={profile.website} target="_blank" rel="noreferrer"
-                className="text-sm text-purple-400 flex items-center gap-1 mt-1 hover:underline">
-                <Globe className="w-3 h-3" /> {profile.website.replace(/https?:\/\//, "")}
-              </a>
-            )}
+      <div className="flex items-start gap-6 mb-6">
+        {/* Avatar with pink ring */}
+        <div className="shrink-0 w-20 h-20 rounded-full p-0.5" style={{background:"linear-gradient(135deg, #db2777, #a855f7)"}}>
+          <div className="w-full h-full rounded-full overflow-hidden" style={{background:"#0d1117"}}>
+            <Avatar src={profile.avatar} alt={profile.username} size="xl" />
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-4 gap-2 mt-6 pt-6 border-t border-white/[0.06]">
-          {[
-            { label: "Posts", value: profile._count.posts, onClick: undefined },
-            { label: "Followers", value: profile._count.followers, onClick: () => setModal("followers") },
-            { label: "Following", value: profile._count.following, onClick: () => setModal("following") },
-            { label: "Recipes", value: profile._count.recipes, onClick: undefined },
-          ].map(({ label, value, onClick }) => (
-            <button key={label} onClick={onClick} className={`text-center ${onClick ? "hover:opacity-70 transition-opacity cursor-pointer" : "cursor-default"}`}>
-              <p className="text-xl font-black text-white">{value.toLocaleString()}</p>
-              <p className="text-xs text-white/40 mt-0.5">{label}</p>
+        <div className="flex-1 min-w-0 pt-1">
+          <div className="flex items-center gap-2 flex-wrap mb-3">
+            <h1 className="text-lg font-bold text-white">{profile.name || profile.username}</h1>
+            {isMe ? (
+              <>
+                <Link href="/profile/edit" className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/[0.12] text-white/70 text-xs font-medium hover:bg-white/[0.05] transition-colors">
+                  <Settings className="w-3 h-3" /> Edit
+                </Link>
+                <button onClick={handleLogout} className="p-1.5 rounded-lg border border-white/[0.08] text-white/40 hover:text-white/70 transition-colors">
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </>
+            ) : me ? (
+              <Button variant={following ? "secondary" : "default"} size="sm" onClick={toggleFollow}>
+                {following ? "Following" : "Follow"}
+              </Button>
+            ) : null}
+          </div>
+
+          {profile.bio && <p className="text-sm text-white/50 mb-2 leading-relaxed">{profile.bio}</p>}
+          {profile.website && (
+            <a href={profile.website} target="_blank" rel="noreferrer" className="text-sm text-purple-400 flex items-center gap-1 hover:underline">
+              <Globe className="w-3 h-3" /> {profile.website.replace(/https?:\/\//, "")}
+            </a>
+          )}
+
+          {/* Stats */}
+          <div className="flex gap-6 mt-3">
+            <div className="text-center">
+              <p className="font-bold text-white">{profile._count.posts}</p>
+              <p className="text-xs text-white/40">posts</p>
+            </div>
+            <button onClick={() => setModal("followers")} className="text-center hover:opacity-70 transition-opacity">
+              <p className="font-bold text-white">{profile._count.followers}</p>
+              <p className="text-xs text-white/40">followers</p>
             </button>
-          ))}
+            <button onClick={() => setModal("following")} className="text-center hover:opacity-70 transition-opacity">
+              <p className="font-bold text-white">{profile._count.following}</p>
+              <p className="text-xs text-white/40">following</p>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-t border-white/[0.08] mb-1">
-        <button
-          onClick={() => setTab("posts")}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold uppercase tracking-widest transition-all border-t-2 -mt-px ${
-            tab === "posts" ? "border-white text-white" : "border-transparent text-white/30 hover:text-white/50"
-          }`}
-        >
-          <Grid3x3 className="w-3.5 h-3.5" /> Posts
-        </button>
-        <button
-          onClick={() => setTab("recipes")}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold uppercase tracking-widest transition-all border-t-2 -mt-px ${
-            tab === "recipes" ? "border-white text-white" : "border-transparent text-white/30 hover:text-white/50"
-          }`}
-        >
-          <BookOpen className="w-3.5 h-3.5" /> Recipes
-        </button>
+      <div className="flex border-b border-white/[0.08] mb-3">
+        {([
+          { key: "posts", icon: Grid3x3, label: "Posts" },
+          { key: "recipes", icon: BookOpen, label: "Recipes" },
+          { key: "liked", icon: Heart, label: "Liked" },
+        ] as const).map(({ key, icon: Icon, label }) => (
+          <button
+            key={key}
+            onClick={() => setTab(key)}
+            className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium transition-all border-b-2 -mb-px ${
+              tab === key ? "border-[#db2777] text-white" : "border-transparent text-white/30 hover:text-white/50"
+            }`}
+          >
+            <Icon className="w-4 h-4" /> {label}
+          </button>
+        ))}
       </div>
 
       {/* Posts grid */}
@@ -199,6 +194,14 @@ export default function ProfilePage() {
               <p>No posts yet</p>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Liked tab */}
+      {tab === "liked" && (
+        <div className="py-20 text-center text-white/30">
+          <Heart className="w-10 h-10 mx-auto mb-3 opacity-30" />
+          <p className="text-sm">Liked posts will appear here</p>
         </div>
       )}
 
@@ -246,6 +249,7 @@ export default function ProfilePage() {
           )}
         </div>
       )}
+
       {modal && (
         <FollowListModal
           userId={profile.id}
