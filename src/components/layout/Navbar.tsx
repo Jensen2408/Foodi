@@ -1,157 +1,130 @@
 "use client";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Home, Search, PlusSquare, BookOpen, User, LogOut, ChefHat, Shield, Heart } from "lucide-react";
-import { Avatar } from "@/components/ui/avatar";
+import { usePathname, useRouter } from "next/navigation";
+import { Home, Search, Plus, BookOpen, Bell, User, LogOut, ChefHat } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
+import { useEffect, useState } from "react";
 
 export function Navbar() {
-  const { user, mutate } = useUser();
-  const router = useRouter();
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+  const { user } = useUser();
   const [notifCount, setNotifCount] = useState(0);
 
   useEffect(() => {
     if (!user) return;
-    fetch("/api/notifications")
+    fetch("/api/notifications/unread-count")
       .then((r) => r.json())
-      .then((d) => {
-        const lastSeenStr = localStorage.getItem("notif_seen");
-        const items: { createdAt: string }[] = d.items ?? [];
-        if (!lastSeenStr) { setNotifCount(items.length); return; }
-        const lastSeen = new Date(lastSeenStr).getTime();
-        const count = items.filter((i) => new Date(i.createdAt).getTime() > lastSeen).length;
-        setNotifCount(count);
-      });
+      .then((d) => setNotifCount(d.count ?? 0))
+      .catch(() => {});
   }, [user]);
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
-    mutate(null);
-    router.push("/auth/login");
+    router.push("/login");
   }
 
-  const navLinks = [
+  const links = [
     { href: "/", icon: Home, label: "Home" },
-    { href: "/explore", icon: Search, label: "Search" },
-    ...(user ? [
-      { href: "/post/new", icon: PlusSquare, label: "Post" },
-      { href: "/notifications", icon: Heart, label: "Activity", badge: notifCount },
-      { href: `/profile/${user.username}`, icon: User, label: "Profile" },
-    ] : []),
+    { href: "/explore", icon: Search, label: "Explore" },
+    { href: "/post/new", icon: Plus, label: "Create" },
+    { href: "/recipes", icon: BookOpen, label: "Recipes" },
+    { href: "/notifications", icon: Bell, label: "Activity", badge: notifCount },
+    ...(user ? [{ href: `/profile/${user.username}`, icon: User, label: "Profile" }] : []),
   ];
 
   return (
     <>
-      {/* Top navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#080c14]/90 backdrop-blur-md border-b border-white/[0.06]">
-        <nav className="max-w-[470px] md:max-w-5xl mx-auto px-4 h-[52px] md:h-[60px] flex items-center justify-between">
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex fixed left-0 top-0 h-full w-60 flex-col border-r border-white/[0.06] z-40" style={{background:"#080c14"}}>
+        {/* Logo */}
+        <div className="px-6 py-6 mb-2">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-brand flex items-center justify-center">
-              <ChefHat className="w-4.5 h-4.5 text-white" />
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
+              <ChefHat className="w-4 h-4 text-white" />
             </div>
-            <span className="font-black text-xl tracking-tight text-gradient-brand">FOODGRAM</span>
+            <span className="font-bold text-white text-lg">FoodGram</span>
           </Link>
+        </div>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(({ href, icon: Icon, label, badge }) => (
+        {/* Nav links */}
+        <nav className="flex-1 px-3 space-y-1">
+          {links.map(({ href, icon: Icon, label, badge }) => {
+            const active = pathname === href || (href !== "/" && pathname.startsWith(href));
+            return (
               <Link
                 key={href}
                 href={href}
-                title={label}
-                className={`relative p-2.5 rounded-lg transition-colors ${pathname === href ? "text-white" : "text-white/30 hover:text-white/70"}`}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all relative ${
+                  active
+                    ? "bg-[#db2777]/15 text-[#db2777]"
+                    : "text-white/50 hover:text-white hover:bg-white/[0.05]"
+                }`}
               >
-                <Icon className="w-6 h-6" strokeWidth={pathname === href ? 2.5 : 1.5} />
-                {badge && badge > 0 && (
-                  <span className="absolute top-1 right-1 w-4 h-4 bg-[#a855f7] text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-[#080c14]">
+                <Icon className="w-5 h-5 shrink-0" />
+                {label}
+                {badge > 0 && (
+                  <span className="ml-auto w-5 h-5 rounded-full bg-[#db2777] text-white text-[10px] font-bold flex items-center justify-center">
                     {badge > 9 ? "9+" : badge}
                   </span>
                 )}
               </Link>
-            ))}
-
-            {user ? (
-              <div className="relative ml-2">
-                <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-full ring-2 ring-transparent hover:ring-purple-500/40 transition-all">
-                  <Avatar src={user.avatar} alt={user.username} size="sm" />
-                </button>
-                {menuOpen && (
-                  <div className="absolute right-0 top-11 w-56 bg-[#0f1520] rounded-2xl border border-white/[0.08] overflow-hidden animate-slide-up">
-                    <Link href={`/profile/${user.username}`} onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-white/[0.04] transition-colors">
-                      <Avatar src={user.avatar} alt={user.username} size="sm" />
-                      <div>
-                        <p className="text-sm font-semibold text-white">{user.username}</p>
-                        <p className="text-xs text-white/40">View profile</p>
-                      </div>
-                    </Link>
-                    <div className="border-t border-white/[0.06]" />
-                    {user.isAdmin && (
-                      <Link href="/admin" className="flex items-center gap-3 px-4 py-3 hover:bg-white/[0.04] transition-colors" onClick={() => setMenuOpen(false)}>
-                        <Shield className="w-4 h-4 text-[#a855f7]" />
-                        <span className="text-sm text-white/70">Admin Console</span>
-                      </Link>
-                    )}
-                    <div className="border-t border-white/[0.06]" />
-                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/[0.04] text-white/70 transition-colors">
-                      <LogOut className="w-4 h-4 text-white/30" />
-                      <span className="text-sm">Log out</span>
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center gap-2 ml-2">
-                <Link href="/auth/login" className="px-4 py-1.5 text-sm font-semibold text-white/60 hover:text-white transition-colors">Log in</Link>
-                <Link href="/auth/register" className="px-4 py-1.5 text-sm font-semibold bg-gradient-brand text-white rounded-lg hover:opacity-90 transition-opacity">Sign up</Link>
-              </div>
-            )}
-          </div>
-
-          {/* Mobile top right (not logged in) */}
-          {!user && (
-            <div className="flex md:hidden items-center gap-3">
-              <Link href="/auth/login" className="text-sm font-semibold text-white/60">Log in</Link>
-              <Link href="/auth/register" className="px-3 py-1.5 text-sm font-semibold bg-gradient-brand text-white rounded-lg">Sign up</Link>
-            </div>
-          )}
+            );
+          })}
         </nav>
+
+        {/* Bottom: New Post card + logout */}
+        <div className="px-3 pb-6 space-y-3">
+          {user && (
+            <Link href="/post/new" className="block w-full py-2.5 rounded-xl text-white text-sm font-semibold text-center transition-opacity hover:opacity-90"
+              style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
+              + New Post
+            </Link>
+          )}
+          {user && (
+            <button onClick={handleLogout} className="flex items-center gap-2 px-3 py-2 rounded-xl text-white/30 hover:text-white/60 text-sm transition-colors w-full">
+              <LogOut className="w-4 h-4" /> Log out
+            </button>
+          )}
+          {!user && (
+            <Link href="/login" className="block w-full py-2.5 rounded-xl text-white text-sm font-semibold text-center hover:opacity-90 transition-opacity"
+              style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
+              Sign in
+            </Link>
+          )}
+        </div>
+      </aside>
+
+      {/* Mobile top bar */}
+      <header className="md:hidden fixed top-0 left-0 right-0 h-14 flex items-center justify-between px-4 z-40 border-b border-white/[0.06]" style={{background:"#080c14"}}>
+        <Link href="/" className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
+            <ChefHat className="w-3.5 h-3.5 text-white" />
+          </div>
+          <span className="font-bold text-white">FoodGram</span>
+        </Link>
+        <Link href="/notifications" className="relative p-2">
+          <Bell className="w-5 h-5 text-white/60" />
+          {notifCount > 0 && (
+            <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#db2777] text-white text-[9px] font-bold flex items-center justify-center">
+              {notifCount > 9 ? "9+" : notifCount}
+            </span>
+          )}
+        </Link>
       </header>
 
-      {/* Mobile bottom tab bar */}
-      {user && (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#080c14]/95 backdrop-blur-xl border-t border-white/[0.06]" style={{paddingBottom: "env(safe-area-inset-bottom)"}}>
-          <div className="flex items-center justify-around h-16">
-            {navLinks.map(({ href, icon: Icon, label, badge }) => {
-              const active = pathname === href || (href !== "/" && pathname.startsWith(href) && href !== "/post/new");
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className="relative flex flex-col items-center justify-center gap-0.5 flex-1 h-full pt-1"
-                >
-                  <div className={`relative p-1.5 rounded-xl transition-all ${active ? "bg-white/[0.08]" : ""}`}>
-                    <Icon
-                      className={`w-6 h-6 transition-all ${active ? "text-white" : "text-white/35"}`}
-                      strokeWidth={active ? 2.5 : 1.5}
-                    />
-                    {badge && badge > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#a855f7] text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-[#080c14]">
-                        {badge > 9 ? "9+" : badge}
-                      </span>
-                    )}
-                  </div>
-                  <span className={`text-[10px] font-semibold tracking-tight transition-colors ${active ? "text-white" : "text-white/30"}`}>
-                    {label}
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </nav>
-      )}
+      {/* Mobile bottom nav */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 flex items-center border-t border-white/[0.06] z-40 px-2" style={{background:"#080c14"}}>
+        {links.filter(l => l.label !== "Activity").map(({ href, icon: Icon, label }) => {
+          const active = pathname === href || (href !== "/" && pathname.startsWith(href));
+          return (
+            <Link key={href} href={href} className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${active ? "text-[#db2777]" : "text-white/30 hover:text-white/60"}`}>
+              <Icon className="w-5 h-5" />
+              <span className="text-[10px]">{label}</span>
+            </Link>
+          );
+        })}
+      </nav>
     </>
   );
 }
