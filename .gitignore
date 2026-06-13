@@ -7,3 +7,8 @@ prisma/dev.db-journal
 public/uploads
 .vercel
 .env*
+
+# Capacitor native projects
+/ios
+/android
+/out
