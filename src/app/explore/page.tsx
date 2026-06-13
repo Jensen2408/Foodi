@@ -43,24 +43,42 @@ export default function ExplorePage() {
     return () => clearTimeout(t);
   }, [query]);
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-black text-white">Explore</h1>
-        <p className="text-white/40 text-sm mt-1">Discover amazing food from the community</p>
-      </div>
+  const trendingTags = ["#pasta", "#sushi", "#dessert", "#vegan", "#brunch", "#baking", "#grilling", "#cocktails"];
 
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-6">
       {/* Search bar */}
-      <div className="relative mb-6">
+      <div className="relative mb-5">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search creators..."
-          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/[0.08] text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/40 placeholder:text-white/20"
+          placeholder="Search users..."
+          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/[0.08] text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#db2777]/40 placeholder:text-white/20"
           style={{background:"rgba(255,255,255,0.04)"}}
         />
       </div>
+
+      {/* Trending tags */}
+      {!query.trim() && (
+        <div className="mb-6">
+          <p className="text-sm font-semibold text-white/60 mb-3 flex items-center gap-1.5">
+            <span className="text-[#db2777]">↗</span> Trending
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {trendingTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setQuery(tag.slice(1))}
+                className="px-3 py-1.5 rounded-full border border-white/[0.08] text-white/50 text-sm hover:border-[#db2777]/50 hover:text-[#db2777] transition-colors"
+                style={{background:"rgba(255,255,255,0.03)"}}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* User search results */}
       {query.trim() && (
