@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Plus, BookOpen, Clock, Users, ChefHat } from "lucide-react";
+import { Search, Plus, BookOpen, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/hooks/useUser";
 
@@ -19,12 +19,15 @@ interface Recipe {
   user: { id: string; username: string; avatar: string | null };
 }
 
+const TAG_FILTERS = ["japanese", "soup", "noodles", "comfort", "bread", "baking", "sourdough", "artisan", "thai", "curry", "spicy", "asian"];
+
 export default function RecipesPage() {
   const { user } = useUser();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [activeTag, setActiveTag] = useState<string | null>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(search), 300);
@@ -38,34 +41,60 @@ export default function RecipesPage() {
       .then((d) => { setRecipes(d); setLoading(false); });
   }, [debouncedSearch]);
 
+  const filteredRecipes = activeTag
+    ? recipes.filter((r) => r.tags?.toLowerCase().includes(activeTag))
+    : recipes;
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-5">
         <div>
-          <h1 className="text-2xl font-black text-white flex items-center gap-2">
-            <ChefHat className="w-7 h-7 text-purple-400" /> Recipe Collection
-          </h1>
-          <p className="text-white/40 text-sm mt-1">Discover amazing food recipes from the community</p>
+          <h1 className="text-2xl font-bold text-white">Recipes</h1>
+          <p className="text-white/40 text-sm mt-0.5">Discover delicious recipes</p>
         </div>
         {user && (
-          <Link href="/recipes/new">
-            <Button size="sm" className="gap-2">
-              <Plus className="w-4 h-4" /> New Recipe
-            </Button>
+          <Link href="/recipes/new" className="w-10 h-10 rounded-full bg-[#db2777] flex items-center justify-center hover:opacity-90 transition-opacity">
+            <Plus className="w-5 h-5 text-white" />
           </Link>
         )}
       </div>
 
       {/* Search */}
-      <div className="relative mb-8">
+      <div className="relative mb-4">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search recipes, ingredients, tags..."
-          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/[0.08] bg-[#0f1520] shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+          placeholder="Search recipes..."
+          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/[0.08] text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#db2777]/30 placeholder:text-white/25"
+          style={{background:"rgba(255,255,255,0.04)"}}
         />
+      </div>
+
+      {/* Tag filter chips */}
+      <div className="flex gap-2 flex-wrap mb-6">
+        <button
+          onClick={() => setActiveTag(null)}
+          className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+            activeTag === null ? "bg-[#db2777] text-white" : "border border-white/[0.08] text-white/50 hover:text-white"
+          }`}
+          style={activeTag !== null ? {background:"rgba(255,255,255,0.04)"} : {}}
+        >
+          All
+        </button>
+        {TAG_FILTERS.map((tag) => (
+          <button
+            key={tag}
+            onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+            className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
+              activeTag === tag ? "bg-[#db2777] text-white font-medium" : "border border-white/[0.08] text-white/50 hover:text-white"
+            }`}
+            style={activeTag !== tag ? {background:"rgba(255,255,255,0.04)"} : {}}
+          >
+            {tag}
+          </button>
+        ))}
       </div>
 
       {/* Grid */}
@@ -81,9 +110,9 @@ export default function RecipesPage() {
             </div>
           ))}
         </div>
-      ) : recipes.length === 0 ? (
+      ) : filteredRecipes.length === 0 ? (
         <div className="text-center py-20">
-          <BookOpen className="w-16 h-16 text-gray-200 mx-auto mb-4" />
+          <BookOpen className="w-16 h-16 text-white/10 mx-auto mb-4" />
           <h3 className="text-lg font-bold text-white/60">No recipes found</h3>
           <p className="text-white/30 text-sm mt-1">
             {search ? `No results for "${search}"` : "Be the first to share a recipe!"}
@@ -95,8 +124,8 @@ export default function RecipesPage() {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {recipes.map((recipe) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {filteredRecipes.map((recipe) => (
             <Link key={recipe.id} href={`/recipes/${recipe.id}`}
               className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm overflow-hidden hover:shadow-lg transition-shadow group">
               {recipe.coverImage ? (
