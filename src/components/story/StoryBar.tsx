@@ -48,7 +48,7 @@ export function StoryBar() {
 
           {groups.map((group) => (
             <button key={group.user.id} onClick={() => setViewing(group)} className="flex flex-col items-center gap-1 w-[66px]">
-              <div className={`w-16 h-16 rounded-full p-[2px] ${group.hasNew ? "bg-gradient-to-tr from-purple-500 via-pink-500 to-orange-400" : "bg-white/10"}`}>
+              <div className={`w-16 h-16 rounded-full p-[2px] ${group.hasNew ? "bg-gradient-to-tr from-purple-500 via-pink-500 to-orange-400" : "bg-[#0f1520]/10"}`}>
                 <div className="w-full h-full rounded-full border-[3px] border-[#080c14] overflow-hidden" style={{background:"rgba(255,255,255,0.05)"}}>
                   <Avatar src={group.user.avatar} alt={group.user.username} size="lg" />
                 </div>

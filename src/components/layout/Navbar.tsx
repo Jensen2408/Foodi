@@ -90,7 +90,7 @@ export function Navbar() {
                 </button>
                 {menuOpen && (
                   <div className="absolute right-0 top-11 w-56 bg-[#0f1520] rounded-2xl border border-white/[0.08] overflow-hidden animate-slide-up">
-                    <Link href={`/profile/${user.username}`} onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-white/[0.05] transition-colors">
+                    <Link href={`/profile/${user.username}`} onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-[#0f1520]/[0.05] transition-colors">
                       <Avatar src={user.avatar} alt={user.username} size="sm" />
                       <div>
                         <p className="text-sm font-semibold text-white">{user.username}</p>
@@ -99,13 +99,13 @@ export function Navbar() {
                     </Link>
                     <div className="border-t border-white/[0.06]" />
                     {user.isAdmin && (
-                      <Link href="/admin" className="flex items-center gap-3 px-4 py-3 hover:bg-white/[0.05] transition-colors" onClick={() => setMenuOpen(false)}>
+                      <Link href="/admin" className="flex items-center gap-3 px-4 py-3 hover:bg-[#0f1520]/[0.05] transition-colors" onClick={() => setMenuOpen(false)}>
                         <Shield className="w-4 h-4 text-[#a855f7]" />
                         <span className="text-sm text-white/70">Admin Console</span>
                       </Link>
                     )}
                     <div className="border-t border-white/[0.06]" />
-                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/[0.05] text-white/70 transition-colors">
+                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#0f1520]/[0.05] text-white/70 transition-colors">
                       <LogOut className="w-4 h-4 text-white/30" />
                       <span className="text-sm">Log out</span>
                     </button>

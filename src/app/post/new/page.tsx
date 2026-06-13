@@ -127,14 +127,14 @@ export default function NewPostPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-black text-gray-900">Share a dish</h1>
-        <p className="text-gray-500 text-sm mt-1">Show the world your food creation</p>
+        <h1 className="text-2xl font-black text-white">Share a dish</h1>
+        <p className="text-white/40 text-sm mt-1">Show the world your food creation</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Image Upload */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm p-6 space-y-4">
-          <h2 className="font-bold text-gray-900">Photos</h2>
+        <div className="bg-[#0f1520]/80 backdrop-blur-sm rounded-3xl border border-white/[0.06] shadow-sm p-6 space-y-4">
+          <h2 className="font-bold text-white">Photos</h2>
 
           {images.length > 0 && (
             <div className="grid grid-cols-3 gap-2">
@@ -158,10 +158,10 @@ export default function NewPostPage() {
               {images.length < 10 && (
                 <div
                   {...getRootProps()}
-                  className="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center cursor-pointer hover:border-gray-1000 hover:bg-[#fdf2f7] transition-colors"
+                  className="aspect-square rounded-xl border-2 border-dashed border-white/[0.08] flex items-center justify-center cursor-pointer hover:border-white/[0.06]0 hover:bg-[#fdf2f7] transition-colors"
                 >
                   <input {...getInputProps()} />
-                  <Plus className="w-6 h-6 text-gray-400" />
+                  <Plus className="w-6 h-6 text-white/30" />
                 </div>
               )}
             </div>
@@ -171,20 +171,20 @@ export default function NewPostPage() {
             <div
               {...getRootProps()}
               className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
-                isDragActive ? "border-[#c6185c] bg-[#fdf2f7]" : "border-gray-200 hover:border-gray-1000 hover:bg-gray-50"
+                isDragActive ? "border-purple-500/60 bg-purple-500/10" : "border-white/[0.08] hover:border-white/[0.06]0 hover:bg-white/[0.03]"
               }`}
             >
               <input {...getInputProps()} />
-              <Upload className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-              <p className="font-semibold text-gray-700">Drop your food photos here</p>
-              <p className="text-sm text-gray-400 mt-1">or click to browse · Up to 10 photos</p>
+              <Upload className="w-10 h-10 text-white/20 mx-auto mb-3" />
+              <p className="font-semibold text-white/60">Drop your food photos here</p>
+              <p className="text-sm text-white/30 mt-1">or click to browse · Up to 10 photos</p>
             </div>
           )}
         </div>
 
         {/* Post Details */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm p-6 space-y-4">
-          <h2 className="font-bold text-gray-900">Details</h2>
+        <div className="bg-[#0f1520]/80 backdrop-blur-sm rounded-3xl border border-white/[0.06] shadow-sm p-6 space-y-4">
+          <h2 className="font-bold text-white">Details</h2>
           <Textarea
             label="Caption"
             placeholder="Tell the story of this dish..."
@@ -202,23 +202,23 @@ export default function NewPostPage() {
         </div>
 
         {/* Recipe Toggle */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm p-6 space-y-4">
+        <div className="bg-[#0f1520]/80 backdrop-blur-sm rounded-3xl border border-white/[0.06] shadow-sm p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center">
                 <ChefHat className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h2 className="font-bold text-gray-900">Attach a Recipe</h2>
-                <p className="text-xs text-gray-500">Let people cook this dish too</p>
+                <h2 className="font-bold text-white">Attach a Recipe</h2>
+                <p className="text-xs text-white/40">Let people cook this dish too</p>
               </div>
             </div>
             <button
               type="button"
               onClick={() => setIncludeRecipe(!includeRecipe)}
-              className={`w-12 h-6 rounded-full transition-all ${includeRecipe ? "bg-gradient-brand" : "bg-gray-200"}`}
+              className={`w-12 h-6 rounded-full transition-all ${includeRecipe ? "bg-gradient-brand" : "bg-white/[0.08]"}`}
             >
-              <div className={`w-5 h-5 bg-white rounded-full shadow transition-transform mx-0.5 ${includeRecipe ? "translate-x-6" : ""}`} />
+              <div className={`w-5 h-5 bg-[#0f1520] rounded-full shadow transition-transform mx-0.5 ${includeRecipe ? "translate-x-6" : ""}`} />
             </button>
           </div>
 
@@ -229,30 +229,30 @@ export default function NewPostPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                  <label className="block text-sm font-medium text-white/60 mb-1 flex items-center gap-1">
                     <Clock className="w-3 h-3" /> Prep time (min)
                   </label>
                   <input type="number" min="0" value={recipe.prepTime} onChange={(e) => setRecipe((r) => ({ ...r, prepTime: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="15" />
+                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="15" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                  <label className="block text-sm font-medium text-white/60 mb-1 flex items-center gap-1">
                     <Clock className="w-3 h-3" /> Cook time (min)
                   </label>
                   <input type="number" min="0" value={recipe.cookTime} onChange={(e) => setRecipe((r) => ({ ...r, cookTime: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="30" />
+                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="30" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                  <label className="block text-sm font-medium text-white/60 mb-1 flex items-center gap-1">
                     <Users className="w-3 h-3" /> Servings
                   </label>
                   <input type="number" min="1" value={recipe.servings} onChange={(e) => setRecipe((r) => ({ ...r, servings: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="4" />
+                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="4" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Difficulty</label>
+                  <label className="block text-sm font-medium text-white/60 mb-1">Difficulty</label>
                   <select value={recipe.difficulty} onChange={(e) => setRecipe((r) => ({ ...r, difficulty: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 capitalize">
+                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 capitalize">
                     {["easy", "medium", "hard", "expert"].map((d) => <option key={d} value={d} className="capitalize">{d}</option>)}
                   </select>
                 </div>
@@ -260,16 +260,16 @@ export default function NewPostPage() {
 
               {/* Ingredients */}
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Ingredients</label>
+                <label className="block text-sm font-bold text-white/60 mb-2">Ingredients</label>
                 <div className="space-y-2">
                   {recipe.ingredients.map((ing, i) => (
                     <div key={i} className="flex gap-2 items-center">
                       <span className="w-6 h-6 bg-[#fce4ef] text-[#7a0e38] rounded-full flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</span>
                       <input value={ing} onChange={(e) => updateIngredient(i, e.target.value)}
                         placeholder={`e.g. 2 cups flour`}
-                        className="flex-1 h-10 rounded-xl border border-gray-200 bg-gray-50 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" />
+                        className="flex-1 h-10 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" />
                       {recipe.ingredients.length > 1 && (
-                        <button type="button" onClick={() => removeIngredient(i)} className="text-gray-400 hover:text-red-400">
+                        <button type="button" onClick={() => removeIngredient(i)} className="text-white/30 hover:text-red-400">
                           <X className="w-4 h-4" />
                         </button>
                       )}
@@ -283,16 +283,16 @@ export default function NewPostPage() {
 
               {/* Steps */}
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Steps</label>
+                <label className="block text-sm font-bold text-white/60 mb-2">Steps</label>
                 <div className="space-y-2">
                   {recipe.steps.map((step, i) => (
                     <div key={i} className="flex gap-2 items-start">
                       <span className="w-6 h-6 bg-[#c6185c] text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-2">{i + 1}</span>
                       <textarea value={step} onChange={(e) => updateStep(i, e.target.value)}
                         placeholder={`Step ${i + 1}...`} rows={2}
-                        className="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none" />
+                        className="flex-1 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none" />
                       {recipe.steps.length > 1 && (
-                        <button type="button" onClick={() => removeStep(i)} className="text-gray-400 hover:text-red-400 mt-2">
+                        <button type="button" onClick={() => removeStep(i)} className="text-white/30 hover:text-red-400 mt-2">
                           <X className="w-4 h-4" />
                         </button>
                       )}
@@ -307,7 +307,7 @@ export default function NewPostPage() {
           )}
         </div>
 
-        {error && <p className="text-sm text-red-500 bg-red-50 px-4 py-2 rounded-xl">{error}</p>}
+        {error && <p className="text-sm text-red-400 bg-red-500/10 px-4 py-2 rounded-xl">{error}</p>}
 
         <div className="flex gap-3">
           <Button type="button" variant="secondary" onClick={() => router.back()} className="flex-1">

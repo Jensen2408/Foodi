@@ -131,7 +131,7 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
         <div className="relative" ref={menuRef}>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded-full hover:bg-white/[0.06] transition-colors"
+            className="p-2 rounded-full hover:bg-[#0f1520]/[0.06] transition-colors"
           >
             <MoreHorizontal className="w-5 h-5 text-white/30" />
           </button>
@@ -149,7 +149,7 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
                   <Link
                     href={`/post/${post.id}`}
                     onClick={() => setMenuOpen(false)}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-white/[0.05] text-white/60 transition-colors text-sm"
+                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
                   >
                     <MessageCircle className="w-4 h-4 text-purple-400" /> View post
                   </Link>
@@ -166,14 +166,14 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
                   <Link
                     href={`/profile/${post.user.username}`}
                     onClick={() => setMenuOpen(false)}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-white/[0.05] text-white/60 transition-colors text-sm"
+                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
                   >
                     <UserPlus className="w-4 h-4 text-purple-400" /> Follow @{post.user.username}
                   </Link>
                   <div className="border-t border-white/[0.06]" />
                   <button
                     onClick={() => { navigator.clipboard.writeText(window.location.origin + `/post/${post.id}`); setMenuOpen(false); }}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-white/[0.05] text-white/60 transition-colors text-sm"
+                    className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#0f1520]/[0.05] text-white/60 transition-colors text-sm"
                   >
                     <Share2 className="w-4 h-4 text-purple-400" /> Copy link
                   </button>
@@ -186,7 +186,7 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
 
       {/* Images */}
       {post.images.length > 0 && (
-        <div className="relative aspect-square bg-gray-50 cursor-pointer" onDoubleClick={handleDoubleTap}>
+        <div className="relative aspect-square bg-white/[0.03] cursor-pointer" onDoubleClick={handleDoubleTap}>
           <Image
             src={post.images[imgIdx]?.url}
             alt={post.caption ?? "Food photo"}
@@ -209,7 +209,7 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
                   <button
                     key={i}
                     onClick={() => setImgIdx(i)}
-                    className={`transition-all rounded-full ${i === imgIdx ? "w-4 h-1.5 bg-white" : "w-1.5 h-1.5 bg-white/60"}`}
+                    className={`transition-all rounded-full ${i === imgIdx ? "w-4 h-1.5 bg-[#0f1520]" : "w-1.5 h-1.5 bg-[#0f1520]/60"}`}
                   />
                 ))}
               </div>

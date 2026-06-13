@@ -79,29 +79,29 @@ export default function EditProfilePage() {
     <div className="max-w-lg mx-auto px-4 py-6">
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <Link href={`/profile/${user.username}`} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-          <ArrowLeft className="w-5 h-5 text-gray-700" />
+        <Link href={`/profile/${user.username}`} className="p-2 rounded-full hover:bg-white/[0.06] transition-colors">
+          <ArrowLeft className="w-5 h-5 text-white/60" />
         </Link>
-        <h1 className="text-lg font-bold text-gray-900">Edit profile</h1>
+        <h1 className="text-lg font-bold text-white">Edit profile</h1>
       </div>
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Avatar */}
         <div className="flex flex-col items-center gap-3">
           <div className="relative">
-            <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200">
+            <div className="w-24 h-24 rounded-full overflow-hidden bg-white/[0.06] border-2 border-white/[0.08]">
               {avatarPreview ? (
                 <Image src={avatarPreview} alt="Avatar" fill className="object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <ChefHat className="w-10 h-10 text-gray-300" />
+                  <ChefHat className="w-10 h-10 text-white/20" />
                 </div>
               )}
             </div>
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="absolute bottom-0 right-0 w-8 h-8 bg-[#c6185c] rounded-full flex items-center justify-center border-2 border-white shadow-md hover:bg-[#9b1247] transition-colors"
+              className="absolute bottom-0 right-0 w-8 h-8 rounded-full flex items-center justify-center border-2 border-[#080c14] shadow-md hover:opacity-90 transition-opacity bg-gradient-brand"
             >
               <Camera className="w-4 h-4 text-white" />
             </button>
@@ -109,7 +109,7 @@ export default function EditProfilePage() {
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
-            className="text-sm font-semibold text-[#c6185c] hover:text-[#7a0e38]"
+            className="text-sm font-semibold text-purple-400 hover:text-pink-400 transition-colors"
           >
             Change photo
           </button>
@@ -117,59 +117,59 @@ export default function EditProfilePage() {
         </div>
 
         {/* Fields */}
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden divide-y divide-gray-100">
+        <div className="bg-[#0f1520] rounded-2xl border border-white/[0.08] overflow-hidden divide-y divide-white/[0.06]">
           <div className="flex items-center gap-3 px-4 py-3.5">
-            <User className="w-5 h-5 text-gray-400 shrink-0" />
+            <User className="w-5 h-5 text-white/30 shrink-0" />
             <div className="flex-1">
-              <label className="block text-xs font-semibold text-gray-500 mb-0.5">Name</label>
+              <label className="block text-xs font-semibold text-white/40 mb-0.5">Name</label>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
-                className="w-full text-sm text-gray-900 outline-none bg-transparent placeholder:text-gray-300"
+                className="w-full text-sm text-white outline-none bg-transparent placeholder:text-white/20"
               />
             </div>
           </div>
 
           <div className="flex items-start gap-3 px-4 py-3.5">
-            <FileText className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />
+            <FileText className="w-5 h-5 text-white/30 shrink-0 mt-0.5" />
             <div className="flex-1">
-              <label className="block text-xs font-semibold text-gray-500 mb-0.5">Bio</label>
+              <label className="block text-xs font-semibold text-white/40 mb-0.5">Bio</label>
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Tell people about yourself..."
                 rows={3}
                 maxLength={150}
-                className="w-full text-sm text-gray-900 outline-none bg-transparent resize-none placeholder:text-gray-300"
+                className="w-full text-sm text-white outline-none bg-transparent resize-none placeholder:text-white/20"
               />
-              <p className="text-xs text-gray-300 text-right">{bio.length}/150</p>
+              <p className="text-xs text-white/20 text-right">{bio.length}/150</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 px-4 py-3.5">
-            <Globe className="w-5 h-5 text-gray-400 shrink-0" />
+            <Globe className="w-5 h-5 text-white/30 shrink-0" />
             <div className="flex-1">
-              <label className="block text-xs font-semibold text-gray-500 mb-0.5">Website</label>
+              <label className="block text-xs font-semibold text-white/40 mb-0.5">Website</label>
               <input
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
                 placeholder="https://yoursite.com"
                 type="url"
-                className="w-full text-sm text-gray-900 outline-none bg-transparent placeholder:text-gray-300"
+                className="w-full text-sm text-white outline-none bg-transparent placeholder:text-white/20"
               />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-200 px-4 py-3.5">
-          <p className="text-xs font-semibold text-gray-500 mb-0.5">Username</p>
-          <p className="text-sm text-gray-400">@{user.username}</p>
-          <p className="text-xs text-gray-300 mt-1">Username cannot be changed</p>
+        <div className="bg-[#0f1520] rounded-2xl border border-white/[0.08] px-4 py-3.5">
+          <p className="text-xs font-semibold text-white/40 mb-0.5">Username</p>
+          <p className="text-sm text-white/30">@{user.username}</p>
+          <p className="text-xs text-white/20 mt-1">Username cannot be changed</p>
         </div>
 
         {error && (
-          <p className="text-sm text-red-500 bg-red-50 px-4 py-3 rounded-xl">{error}</p>
+          <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 px-4 py-3 rounded-xl">{error}</p>
         )}
 
         <button

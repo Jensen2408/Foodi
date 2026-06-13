@@ -48,12 +48,12 @@ export default function NewStoryPage() {
   return (
     <div className="max-w-md mx-auto px-4 py-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-black text-gray-900">Add a story</h1>
-        <p className="text-gray-500 text-sm mt-1">Disappears after 24 hours</p>
+        <h1 className="text-2xl font-black text-white">Add a story</h1>
+        <p className="text-white/40 text-sm mt-1">Disappears after 24 hours</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm p-6">
           {preview ? (
             <div className="relative">
               <div className="relative aspect-[9/16] max-h-96 rounded-2xl overflow-hidden">
@@ -71,18 +71,18 @@ export default function NewStoryPage() {
             <div
               {...getRootProps()}
               className={`border-2 border-dashed rounded-2xl p-16 text-center cursor-pointer transition-all ${
-                isDragActive ? "border-brand-500 bg-brand-50" : "border-gray-200 hover:border-brand-400"
+                isDragActive ? "border-purple-500 bg-purple-500/10" : "border-white/[0.08] hover:border-purple-400"
               }`}
             >
               <input {...getInputProps()} />
-              <Upload className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-              <p className="font-semibold text-gray-700">Drop your story photo</p>
-              <p className="text-sm text-gray-400 mt-1">Tap to browse</p>
+              <Upload className="w-10 h-10 text-white/20 mx-auto mb-3" />
+              <p className="font-semibold text-white/60">Drop your story photo</p>
+              <p className="text-sm text-white/30 mt-1">Tap to browse</p>
             </div>
           )}
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm p-6">
           <Input
             label="Caption (optional)"
             placeholder="What's cooking? 🍳"

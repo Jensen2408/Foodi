@@ -50,7 +50,7 @@ export function Feed() {
 
   if (initialLoad) {
     return (
-      <div className="divide-y divide-gray-100">
+      <div className="divide-y divide-white/[0.04]">
         {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
       </div>
     );

@@ -41,15 +41,15 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-gradient-to-br from-pink-100 via-fuchsia-50 to-pink-100">
+    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4" style={{background:"#080c14"}}>
       <div className="w-full max-w-sm">
-        <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl shadow-gray-100 border border-gray-100 p-8 space-y-6">
+        <div className="bg-[#0f1520] backdrop-blur-md rounded-3xl border border-white/[0.06] p-8 space-y-6">
           <div className="text-center space-y-2">
             <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto shadow-lg">
               <ChefHat className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-2xl font-black text-gradient-brand">Join FoodGram</h1>
-            <p className="text-sm text-gray-500">Share your food passion with the world</p>
+            <p className="text-sm text-white/40">Share your food passion with the world</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -66,21 +66,21 @@ export default function RegisterPage() {
                 required
                 minLength={8}
               />
-              <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-8 text-gray-400">
+              <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-8 text-white/30">
                 {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
 
-            {error && <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-xl">{error}</p>}
+            {error && <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-xl">{error}</p>}
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Creating account..." : "Create account"}
             </Button>
           </form>
 
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-white/40">
             Already have an account?{" "}
-            <Link href="/auth/login" className="font-semibold text-brand-600 hover:underline">Sign in</Link>
+            <Link href="/auth/login" className="font-semibold text-white hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

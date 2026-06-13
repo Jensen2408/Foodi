@@ -62,9 +62,9 @@ export function StoryViewer({ group, onClose }: { group: StoryGroup; onClose: ()
         {/* Progress bars */}
         <div className="absolute top-3 left-3 right-3 flex gap-1 z-10">
           {group.stories.map((_, i) => (
-            <div key={i} className="flex-1 h-0.5 bg-white/30 rounded-full overflow-hidden">
+            <div key={i} className="flex-1 h-0.5 bg-[#0f1520]/30 rounded-full overflow-hidden">
               <div
-                className="h-full bg-white rounded-full transition-none"
+                className="h-full bg-[#0f1520] rounded-full transition-none"
                 style={{ width: i < idx ? "100%" : i === idx ? `${progress}%` : "0%" }}
               />
             </div>
