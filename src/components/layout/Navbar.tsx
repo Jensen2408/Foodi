@@ -24,7 +24,7 @@ export function Navbar() {
     router.push("/login");
   }
 
-  const links = [
+  const links: { href: string; icon: React.ElementType; label: string; badge?: number }[] = [
     { href: "/", icon: Home, label: "Home" },
     { href: "/explore", icon: Search, label: "Explore" },
     { href: "/post/new", icon: Plus, label: "Create" },
@@ -63,9 +63,9 @@ export function Navbar() {
               >
                 <Icon className="w-5 h-5 shrink-0" />
                 {label}
-                {badge > 0 && (
+                {(badge ?? 0) > 0 && (
                   <span className="ml-auto w-5 h-5 rounded-full bg-[#db2777] text-white text-[10px] font-bold flex items-center justify-center">
-                    {badge > 9 ? "9+" : badge}
+                    {(badge ?? 0) > 9 ? "9+" : badge}
                   </span>
                 )}
               </Link>
