@@ -4,7 +4,7 @@ import { SuggestedUsers } from "@/components/feed/SuggestedUsers";
 
 export default function HomePage() {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-0 flex gap-8 justify-center">
+    <div className="max-w-5xl mx-auto md:px-4 py-0 flex gap-8 justify-center">
       {/* Main feed */}
       <div className="w-full max-w-[470px]">
         <StoryBar />

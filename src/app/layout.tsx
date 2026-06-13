@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${inter.variable} font-sans bg-[#080c14] min-h-screen`}>
         <Navbar />
-        <main className="min-h-screen pt-14 pb-20 md:pb-0">{children}</main>
+        <main className="min-h-screen pt-[52px] md:pt-[60px] pb-[76px] md:pb-0">{children}</main>
       </body>
     </html>
   );
