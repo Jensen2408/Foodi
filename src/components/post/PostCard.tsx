@@ -128,7 +128,13 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
           </div>
         </Link>
 
-        <div className="relative" ref={menuRef}>
+        <div className="flex items-center gap-2">
+          {post.recipe && (
+            <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-[#db2777]/40 text-[#db2777] text-xs font-semibold">
+              <Bookmark className="w-3 h-3" /> Recipe
+            </span>
+          )}
+          <div className="relative" ref={menuRef}>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="p-2 rounded-full hover:bg-[#0f1520]/[0.06] transition-colors"
@@ -181,6 +187,7 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
               )}
             </div>
           )}
+          </div>
         </div>
       </div>
 
@@ -277,7 +284,13 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
             <Link href={`/profile/${post.user.username}`} className="font-bold text-white mr-1 hover:text-purple-400">
               {post.user.name || post.user.username}
             </Link>
-            {post.caption}
+            {post.caption.split(" ").map((word, i) =>
+              word.startsWith("#") ? (
+                <span key={i} className="text-[#db2777] font-medium">{word} </span>
+              ) : (
+                <span key={i}>{word} </span>
+              )
+            )}
           </p>
         )}
 

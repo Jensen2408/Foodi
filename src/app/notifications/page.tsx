@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
-import { Heart, MessageCircle, UserPlus } from "lucide-react";
+import { Heart, MessageCircle, UserPlus, Bell } from "lucide-react";
 
 interface NotifItem {
   id: string;
@@ -47,8 +47,8 @@ export default function NotificationsPage() {
 
   return (
     <div className="max-w-lg mx-auto px-0 pb-20 md:pb-0">
-      <div className="sticky top-[44px] md:top-[60px] z-10 px-4 py-3 border-b border-white/[0.06]" style={{background:"#080c14"}}>
-        <h1 className="text-lg font-black text-white">Notifications</h1>
+      <div className="px-4 py-5 text-center border-b border-white/[0.06]">
+        <h1 className="text-lg font-bold text-white">Activity</h1>
       </div>
 
       {loading && (
@@ -67,10 +67,9 @@ export default function NotificationsPage() {
       )}
 
       {!loading && items.length === 0 && (
-        <div className="py-24 text-center text-white/30">
-          <Heart className="w-10 h-10 mx-auto mb-3 opacity-30" />
-          <p className="font-medium text-white/40">No notifications yet</p>
-          <p className="text-sm mt-1">When someone likes or follows you, it shows here</p>
+        <div className="py-32 text-center">
+          <Bell className="w-12 h-12 mx-auto mb-3 text-white/20" />
+          <p className="text-white/30 text-sm">No activity yet</p>
         </div>
       )}
 

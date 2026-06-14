@@ -125,100 +125,99 @@ export default function NewPostPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-black text-white">Share a dish</h1>
-        <p className="text-white/40 text-sm mt-1">Show the world your food creation</p>
+    <div className="max-w-xl mx-auto px-4">
+      {/* Header */}
+      <div className="flex items-center justify-between py-4 mb-2">
+        <button type="button" onClick={() => router.back()} className="text-white/60 hover:text-white transition-colors">
+          <span className="text-xl">←</span>
+        </button>
+        <h1 className="text-base font-bold text-white">New Post</h1>
+        <button
+          form="new-post-form"
+          type="submit"
+          disabled={submitting}
+          className="px-4 py-1.5 rounded-xl bg-[#db2777] text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+        >
+          {submitting ? "Sharing..." : "Share"}
+        </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form id="new-post-form" onSubmit={handleSubmit} className="space-y-3">
         {/* Image Upload */}
-        <div className="bg-[#0f1520]/80 backdrop-blur-sm rounded-3xl border border-white/[0.06] shadow-sm p-6 space-y-4">
-          <h2 className="font-bold text-white">Photos</h2>
+        {images.length === 0 ? (
+          <div
+            {...getRootProps()}
+            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
+              isDragActive ? "border-[#db2777]/60 bg-[#db2777]/5" : "border-white/[0.10] hover:border-white/20"
+            }`}
+          >
+            <input {...getInputProps()} />
+            <Upload className="w-8 h-8 text-white/20 mx-auto mb-2" />
+            <p className="text-xs text-white/30">{images.length}/10</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2">
+            {images.map((img, i) => (
+              <div key={i} className="relative aspect-square rounded-xl overflow-hidden group">
+                <Image src={img.preview} alt="" fill className="object-cover" />
+                <button type="button" onClick={() => removeImage(i)}
+                  className="absolute top-1 right-1 w-6 h-6 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <X className="w-3 h-3 text-white" />
+                </button>
+                {i === 0 && <span className="absolute bottom-1 left-1 text-[10px] bg-black/60 text-white px-1.5 py-0.5 rounded-full">Cover</span>}
+              </div>
+            ))}
+            {images.length < 10 && (
+              <div {...getRootProps()} className="aspect-square rounded-xl border-2 border-dashed border-white/[0.08] flex items-center justify-center cursor-pointer hover:bg-white/[0.03]">
+                <input {...getInputProps()} />
+                <Plus className="w-6 h-6 text-white/30" />
+              </div>
+            )}
+          </div>
+        )}
 
-          {images.length > 0 && (
-            <div className="grid grid-cols-3 gap-2">
-              {images.map((img, i) => (
-                <div key={i} className="relative aspect-square rounded-xl overflow-hidden group">
-                  <Image src={img.preview} alt="" fill className="object-cover" />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(i)}
-                    className="absolute top-1 right-1 w-6 h-6 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <X className="w-3 h-3 text-white" />
-                  </button>
-                  {i === 0 && (
-                    <span className="absolute bottom-1 left-1 text-[10px] bg-black/60 text-white px-1.5 py-0.5 rounded-full">
-                      Cover
-                    </span>
-                  )}
-                </div>
-              ))}
-              {images.length < 10 && (
-                <div
-                  {...getRootProps()}
-                  className="aspect-square rounded-xl border-2 border-dashed border-white/[0.08] flex items-center justify-center cursor-pointer hover:border-white/[0.06]0 hover:bg-[#fdf2f7] transition-colors"
-                >
-                  <input {...getInputProps()} />
-                  <Plus className="w-6 h-6 text-white/30" />
-                </div>
-              )}
-            </div>
-          )}
+        {/* Caption */}
+        <textarea
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
+          placeholder="Write a caption..."
+          rows={3}
+          className="w-full rounded-2xl border border-white/[0.08] px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30 resize-none"
+          style={{background:"rgba(255,255,255,0.04)"}}
+        />
 
-          {images.length === 0 && (
-            <div
-              {...getRootProps()}
-              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
-                isDragActive ? "border-purple-500/60 bg-purple-500/10" : "border-white/[0.08] hover:border-white/[0.06]0 hover:bg-white/[0.03]"
-              }`}
-            >
-              <input {...getInputProps()} />
-              <Upload className="w-10 h-10 text-white/20 mx-auto mb-3" />
-              <p className="font-semibold text-white/60">Drop your food photos here</p>
-              <p className="text-sm text-white/30 mt-1">or click to browse · Up to 10 photos</p>
-            </div>
-          )}
-        </div>
-
-        {/* Post Details */}
-        <div className="bg-[#0f1520]/80 backdrop-blur-sm rounded-3xl border border-white/[0.06] shadow-sm p-6 space-y-4">
-          <h2 className="font-bold text-white">Details</h2>
-          <Textarea
-            label="Caption"
-            placeholder="Tell the story of this dish..."
-            value={caption}
-            onChange={(e) => setCaption(e.target.value)}
-            rows={3}
-          />
-          <Input
-            label="Location"
-            placeholder="Where was this made?"
+        {/* Location */}
+        <div className="relative">
+          <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+          <input
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+            placeholder="Add location"
+            className="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30"
+            style={{background:"rgba(255,255,255,0.04)"}}
           />
-          <UserTagPicker tagged={taggedUsers} onChange={setTaggedUsers} />
         </div>
 
+        {/* Tags */}
+        <input
+          placeholder="Tags (comma separated)"
+          className="w-full h-12 px-4 rounded-2xl border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30"
+          style={{background:"rgba(255,255,255,0.04)"}}
+        />
+
         {/* Recipe Toggle */}
-        <div className="bg-[#0f1520]/80 backdrop-blur-sm rounded-3xl border border-white/[0.06] shadow-sm p-6 space-y-4">
+        <div className="rounded-2xl border border-white/[0.08] p-4" style={{background:"rgba(255,255,255,0.04)"}}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center">
-                <ChefHat className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h2 className="font-bold text-white">Attach a Recipe</h2>
-                <p className="text-xs text-white/40">Let people cook this dish too</p>
-              </div>
+              <ChefHat className="w-5 h-5 text-[#db2777]" />
+              <span className="font-semibold text-white text-sm">Include Recipe</span>
             </div>
             <button
               type="button"
               onClick={() => setIncludeRecipe(!includeRecipe)}
-              className={`w-12 h-6 rounded-full transition-all ${includeRecipe ? "bg-gradient-brand" : "bg-white/[0.08]"}`}
+              className={`w-11 h-6 rounded-full transition-all relative ${includeRecipe ? "bg-[#db2777]" : "bg-white/[0.12]"}`}
             >
-              <div className={`w-5 h-5 bg-[#0f1520] rounded-full shadow transition-transform mx-0.5 ${includeRecipe ? "translate-x-6" : ""}`} />
+              <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${includeRecipe ? "left-5" : "left-0.5"}`} />
             </button>
           </div>
 
