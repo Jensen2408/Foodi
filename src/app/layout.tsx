@@ -4,7 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
-  title: "FoodGram — Share Your Food Story",
+  title: "Foodi — Share Your Food Story",
   description: "The best place to share food photos, recipes, and food stories",
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
