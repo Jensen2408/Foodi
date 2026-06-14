@@ -47,7 +47,7 @@ export default function LoginPage() {
             <div className="w-14 h-14 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto">
               <ChefHat className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-2xl font-black text-gradient-brand mt-3">Foodi</h1>
+            <h1 className="text-2xl font-black text-gradient-brand mt-3">Morsel</h1>
             <p className="text-sm text-white/30">Sign in to share your food story</p>
           </div>
 

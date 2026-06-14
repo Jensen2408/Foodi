@@ -82,7 +82,7 @@ export function SuggestedUsers() {
         </div>
       </div>
 
-      <p className="text-[11px] text-white/20 leading-relaxed">© 2026 Foodi</p>
+      <p className="text-[11px] text-white/20 leading-relaxed">© 2026 Morsel</p>
     </div>
   );
 }
