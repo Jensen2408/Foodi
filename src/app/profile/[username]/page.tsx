@@ -101,7 +101,13 @@ export default function ProfilePage() {
         {/* Avatar with pink ring */}
 <div className="shrink-0 w-20 h-20 rounded-full p-0.5" style={{background:"linear-gradient(135deg, #db2777, #a855f7)"}}>
   <div className="w-full h-full rounded-full overflow-hidden" style={{background:"#0d1117"}}>
-    <Avatar src={profile.avatar} alt={profile.username} size="lg" />
+    {profile.avatar ? (
+      <Image src={profile.avatar} alt={profile.username} width={80} height={80} className="w-full h-full object-cover rounded-full" />
+    ) : (
+      <div className="w-full h-full rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-2xl">
+        {profile.username[0].toUpperCase()}
+      </div>
+    )}
   </div>
 </div>
 
