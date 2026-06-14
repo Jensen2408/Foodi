@@ -41,7 +41,7 @@ export function Navbar() {
             <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
               <ChefHat className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold text-white text-lg">FoodGram</span>
+            <span className="font-bold text-white text-lg">Foodi</span>
           </Link>
         </div>
 
@@ -95,7 +95,7 @@ export function Navbar() {
           <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
             <ChefHat className="w-3.5 h-3.5 text-white" />
           </div>
-          <span className="font-bold text-white">FoodGram</span>
+          <span className="font-bold text-white">Foodi</span>
         </Link>
         <Link href="/notifications" className="relative p-2">
           <Bell className="w-5 h-5 text-white/60" />
