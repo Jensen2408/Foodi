@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params}`);
   }
 
-  // Exchange code for tokens
   const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -33,7 +32,6 @@ export async function GET(req: NextRequest) {
   });
   const tokens = await tokenRes.json();
 
-  // Get user info
   const userRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
     headers: { Authorization: `Bearer ${tokens.access_token}` },
   });
@@ -43,7 +41,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/auth/login?error=google`);
   }
 
-  // Find or create user
   let user = await prisma.user.findUnique({ where: { email: googleUser.email } });
   if (!user) {
     const baseUsername = googleUser.email.split("@")[0].replace(/[^a-z0-9]/gi, "").toLowerCase();
@@ -63,7 +60,6 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Create session
   const token = generateToken();
   const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
   await prisma.session.create({ data: { userId: user.id, token, expiresAt } });
