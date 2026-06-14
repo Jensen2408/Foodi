@@ -61,7 +61,7 @@ export function Navbar() {
             <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center">
               <ChefHat className="w-5 h-5 text-white" />
             </div>
-            <span className="font-black text-xl tracking-tight text-gradient-brand">FoodGram</span>
+            <span className="font-black text-xl tracking-tight text-gradient-brand">Foodi</span>
           </Link>
         </div>
 
@@ -132,7 +132,7 @@ export function Navbar() {
             <div className="w-7 h-7 rounded-lg bg-gradient-brand flex items-center justify-center">
               <ChefHat className="w-4 h-4 text-white" />
             </div>
-            <span className="font-black text-lg tracking-tight text-gradient-brand">FoodGram</span>
+            <span className="font-black text-lg tracking-tight text-gradient-brand">Foodi</span>
           </Link>
           <div className="flex items-center gap-4">
             {user ? (

@@ -48,7 +48,7 @@ export default function RegisterPage() {
             <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto shadow-lg">
               <ChefHat className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-black text-gradient-brand">Join FoodGram</h1>
+            <h1 className="text-2xl font-black text-gradient-brand">Join Foodi</h1>
             <p className="text-sm text-white/40">Share your food passion with the world</p>
           </div>
 
