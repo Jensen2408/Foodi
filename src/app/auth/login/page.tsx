@@ -87,6 +87,22 @@ export default function LoginPage() {
             </Button>
           </form>
 
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-white/[0.08]" />
+            </div>
+            <div className="relative flex justify-center text-xs text-white/30">
+              <span className="px-3" style={{background:"#0f1520"}}>or</span>
+            </div>
+          </div>
+
+          <button
+            onClick={() => router.push("/")}
+            className="w-full py-2.5 rounded-xl border border-white/[0.10] text-white/50 text-sm font-medium hover:text-white hover:border-white/20 transition-colors"
+          >
+            Continue as guest
+          </button>
+
           <p className="text-center text-sm text-white/40">
             Don&apos;t have an account?{" "}
             <Link href="/auth/register" className="font-semibold text-white hover:underline">
