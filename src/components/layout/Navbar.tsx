@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Search, Plus, BookOpen, Bell, User, LogOut, ChefHat } from "lucide-react";
+import { Home, Search, Plus, BookOpen, Bell, User, LogOut } from "lucide-react";
+import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import { useEffect, useState } from "react";
 
@@ -38,9 +39,7 @@ export function Navbar() {
       <aside className="hidden md:flex fixed left-0 top-0 h-full w-60 flex-col border-r border-white/[0.06] z-40" style={{background:"#080c14"}}>
         <div className="px-6 py-6 mb-2">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
-              <ChefHat className="w-4 h-4 text-white" />
-            </div>
+            <Image src="/logo.png" alt="Morsel" width={32} height={32} className="rounded-xl" />
             <span className="font-bold text-white text-lg">Morsel</span>
           </Link>
         </div>
@@ -92,9 +91,7 @@ export function Navbar() {
       {/* Mobile top bar */}
       <header className="md:hidden fixed top-0 left-0 right-0 h-14 flex items-center justify-between px-4 z-40 border-b border-white/[0.06]" style={{background:"#080c14"}}>
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
-            <ChefHat className="w-3.5 h-3.5 text-white" />
-          </div>
+          <Image src="/logo.png" alt="Morsel" width={28} height={28} className="rounded-lg" />
           <span className="font-bold text-white">Morsel</span>
         </Link>
         <Link href="/notifications" className="relative p-2">

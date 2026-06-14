@@ -2,7 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChefHat, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@/hooks/useUser";
@@ -44,9 +45,7 @@ export default function LoginPage() {
         <div className="space-y-8">
           {/* Logo */}
           <div className="text-center space-y-1">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto">
-              <ChefHat className="w-7 h-7 text-white" />
-            </div>
+            <Image src="/logo.png" alt="Morsel" width={56} height={56} className="rounded-2xl mx-auto" />
             <h1 className="text-2xl font-black text-gradient-brand mt-3">Morsel</h1>
             <p className="text-sm text-white/30">Sign in to share your food story</p>
           </div>

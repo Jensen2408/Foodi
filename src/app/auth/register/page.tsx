@@ -2,7 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChefHat, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@/hooks/useUser";
@@ -45,9 +46,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-sm">
         <div className="bg-[#0f1520] backdrop-blur-md rounded-3xl border border-white/[0.06] p-8 space-y-6">
           <div className="text-center space-y-2">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center mx-auto shadow-lg">
-              <ChefHat className="w-8 h-8 text-white" />
-            </div>
+            <Image src="/logo.png" alt="Morsel" width={64} height={64} className="rounded-2xl mx-auto shadow-lg" />
             <h1 className="text-2xl font-black text-gradient-brand">Join Morsel</h1>
             <p className="text-sm text-white/40">Share your food passion with the world</p>
           </div>
