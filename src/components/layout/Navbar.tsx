@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Search, Plus, BookOpen, Bell, User, LogOut, ChefHat } from "lucide-react";
+import { Home, Search, Plus, Bell, User, LogOut, ChefHat } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
 import { useEffect, useState } from "react";
 
@@ -21,23 +21,20 @@ export function Navbar() {
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/login");
+    router.push("/auth/login");
   }
 
   const links: { href: string; icon: React.ElementType; label: string; badge?: number }[] = [
     { href: "/", icon: Home, label: "Home" },
     { href: "/explore", icon: Search, label: "Explore" },
-    { href: "/post/new", icon: Plus, label: "Create" },
-    { href: "/recipes", icon: BookOpen, label: "Recipes" },
     { href: "/notifications", icon: Bell, label: "Activity", badge: notifCount },
-    ...(user ? [{ href: `/profile/${user.username}`, icon: User, label: "Profile" }] : []),
+    ...(user ? [{ href: `/profile/${user.username}`, icon: User, label: "Profile" }] : [{ href: "/auth/login", icon: User, label: "Profile" }]),
   ];
 
   return (
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex fixed left-0 top-0 h-full w-60 flex-col border-r border-white/[0.06] z-40" style={{background:"#080c14"}}>
-        {/* Logo */}
         <div className="px-6 py-6 mb-2">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
@@ -47,18 +44,15 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Nav links */}
         <nav className="flex-1 px-3 space-y-1">
-          {links.map(({ href, icon: Icon, label, badge }) => {
+          {[...links, ...(user ? [{ href: "/post/new", icon: Plus, label: "Create" }] : [])].map(({ href, icon: Icon, label, badge }) => {
             const active = pathname === href || (href !== "/" && pathname.startsWith(href));
             return (
               <Link
                 key={href}
                 href={href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all relative ${
-                  active
-                    ? "bg-[#db2777]/15 text-[#db2777]"
-                    : "text-white/50 hover:text-white hover:bg-white/[0.05]"
+                  active ? "bg-[#db2777]/15 text-[#db2777]" : "text-white/50 hover:text-white hover:bg-white/[0.05]"
                 }`}
               >
                 <Icon className="w-5 h-5 shrink-0" />
@@ -73,7 +67,6 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Bottom: New Post card + logout */}
         <div className="px-3 pb-6 space-y-3">
           {user && (
             <Link href="/post/new" className="block w-full py-2.5 rounded-xl text-white text-sm font-semibold text-center transition-opacity hover:opacity-90"
@@ -113,17 +106,41 @@ export function Navbar() {
         </Link>
       </header>
 
-      {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 flex items-center border-t border-white/[0.06] z-40 px-2" style={{background:"#080c14"}}>
-        {links.filter(l => l.label !== "Activity").map(({ href, icon: Icon, label }) => {
-          const active = pathname === href || (href !== "/" && pathname.startsWith(href));
-          return (
-            <Link key={href} href={href} className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${active ? "text-[#db2777]" : "text-white/30 hover:text-white/60"}`}>
-              <Icon className="w-5 h-5" />
-              <span className="text-[10px]">{label}</span>
-            </Link>
-          );
-        })}
+      {/* Mobile bottom nav — Home, Explore, [pink +], Activity, Profile */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 flex items-center border-t border-white/[0.06] z-40" style={{background:"#080c14"}}>
+        {/* Home */}
+        <Link href="/" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname === "/" ? "text-[#db2777]" : "text-white/30"}`}>
+          <Home className="w-5 h-5" />
+          <span className="text-[10px]">Home</span>
+        </Link>
+        {/* Explore */}
+        <Link href="/explore" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/explore") ? "text-[#db2777]" : "text-white/30"}`}>
+          <Search className="w-5 h-5" />
+          <span className="text-[10px]">Explore</span>
+        </Link>
+        {/* Pink floating create button */}
+        <div className="flex-1 flex justify-center">
+          <Link href="/post/new" className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg -mt-4"
+            style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
+            <Plus className="w-6 h-6 text-white" strokeWidth={2.5} />
+          </Link>
+        </div>
+        {/* Activity */}
+        <Link href="/notifications" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors relative ${pathname.startsWith("/notifications") ? "text-[#db2777]" : "text-white/30"}`}>
+          <Bell className="w-5 h-5" />
+          {notifCount > 0 && (
+            <span className="absolute top-1.5 right-6 w-4 h-4 rounded-full bg-[#db2777] text-white text-[9px] font-bold flex items-center justify-center">
+              {notifCount > 9 ? "9+" : notifCount}
+            </span>
+          )}
+          <span className="text-[10px]">Activity</span>
+        </Link>
+        {/* Profile */}
+        <Link href={user ? `/profile/${user.username}` : "/auth/login"}
+          className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/profile") ? "text-[#db2777]" : "text-white/30"}`}>
+          <User className="w-5 h-5" />
+          <span className="text-[10px]">Profile</span>
+        </Link>
       </nav>
     </>
   );
