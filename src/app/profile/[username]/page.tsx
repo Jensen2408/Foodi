@@ -99,11 +99,11 @@ export default function ProfilePage() {
       {/* Profile header */}
       <div className="flex items-start gap-6 mb-6">
         {/* Avatar with pink ring */}
-        <div className="shrink-0 w-20 h-20 rounded-full p-0.5" style={{background:"linear-gradient(135deg, #db2777, #a855f7)"}}>
-          <div className="w-full h-full rounded-full overflow-hidden" style={{background:"#0d1117"}}>
-            <Avatar src={profile.avatar} alt={profile.username} size="xl" />
-          </div>
-        </div>
+<div className="shrink-0 w-20 h-20 rounded-full p-0.5" style={{background:"linear-gradient(135deg, #db2777, #a855f7)"}}>
+  <div className="w-full h-full rounded-full overflow-hidden" style={{background:"#0d1117"}}>
+    <Avatar src={profile.avatar} alt={profile.username} size="lg" />
+  </div>
+</div>
 
         <div className="flex-1 min-w-0 pt-1">
           <div className="flex items-center gap-2 flex-wrap mb-3">
