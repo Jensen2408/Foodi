@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Search, Plus, Bell, User, LogOut, ChefHat } from "lucide-react";
+import { Home, Search, Plus, BookOpen, Bell, User, LogOut, ChefHat } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
 import { useEffect, useState } from "react";
 
@@ -24,9 +24,10 @@ export function Navbar() {
     router.push("/auth/login");
   }
 
-  const links: { href: string; icon: React.ElementType; label: string; badge?: number }[] = [
+  const sidebarLinks: { href: string; icon: React.ElementType; label: string; badge?: number }[] = [
     { href: "/", icon: Home, label: "Home" },
     { href: "/explore", icon: Search, label: "Explore" },
+    { href: "/recipes", icon: BookOpen, label: "Recipes" },
     { href: "/notifications", icon: Bell, label: "Activity", badge: notifCount },
     ...(user ? [{ href: `/profile/${user.username}`, icon: User, label: "Profile" }] : [{ href: "/auth/login", icon: User, label: "Profile" }]),
   ];
@@ -44,8 +45,8 @@ export function Navbar() {
           </Link>
         </div>
 
-             <nav className="flex-1 px-3 space-y-1">
-          {([...links, ...(user ? [{ href: "/post/new", icon: Plus, label: "Create", badge: undefined }] : [])] as typeof links).map(({ href, icon: Icon, label, badge }) => {
+        <nav className="flex-1 px-3 space-y-1">
+          {sidebarLinks.map(({ href, icon: Icon, label, badge }) => {
             const active = pathname === href || (href !== "/" && pathname.startsWith(href));
             return (
               <Link
@@ -106,26 +107,22 @@ export function Navbar() {
         </Link>
       </header>
 
-      {/* Mobile bottom nav — Home, Explore, [pink +], Activity, Profile */}
+      {/* Mobile bottom nav */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 flex items-center border-t border-white/[0.06] z-40" style={{background:"#080c14"}}>
-        {/* Home */}
         <Link href="/" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname === "/" ? "text-[#db2777]" : "text-white/30"}`}>
           <Home className="w-5 h-5" />
           <span className="text-[10px]">Home</span>
         </Link>
-        {/* Explore */}
         <Link href="/explore" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/explore") ? "text-[#db2777]" : "text-white/30"}`}>
           <Search className="w-5 h-5" />
           <span className="text-[10px]">Explore</span>
         </Link>
-        {/* Pink floating create button */}
         <div className="flex-1 flex justify-center">
           <Link href="/post/new" className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg -mt-4"
             style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
             <Plus className="w-6 h-6 text-white" strokeWidth={2.5} />
           </Link>
         </div>
-        {/* Activity */}
         <Link href="/notifications" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors relative ${pathname.startsWith("/notifications") ? "text-[#db2777]" : "text-white/30"}`}>
           <Bell className="w-5 h-5" />
           {notifCount > 0 && (
@@ -135,7 +132,6 @@ export function Navbar() {
           )}
           <span className="text-[10px]">Activity</span>
         </Link>
-        {/* Profile */}
         <Link href={user ? `/profile/${user.username}` : "/auth/login"}
           className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/profile") ? "text-[#db2777]" : "text-white/30"}`}>
           <User className="w-5 h-5" />
