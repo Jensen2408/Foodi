@@ -87,7 +87,7 @@ export function Navbar() {
             </button>
           )}
           {!user && (
-            <Link href="/login" className="block w-full py-2.5 rounded-xl text-white text-sm font-semibold text-center hover:opacity-90 transition-opacity"
+            <Link href="/auth/login" className="block w-full py-2.5 rounded-xl text-white text-sm font-semibold text-center hover:opacity-90 transition-opacity"
               style={{background:"linear-gradient(135deg,#db2777,#a855f7)"}}>
               Sign in
             </Link>
