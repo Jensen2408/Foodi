@@ -1,0 +1,81 @@
+export const dynamic = "force-dynamic";
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { generateToken } from "@/lib/utils";
+import { cookies } from "next/headers";
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const code = searchParams.get("code");
+
+  if (!code) {
+    const params = new URLSearchParams({
+      client_id: process.env.GOOGLE_CLIENT_ID!,
+      redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/google`,
+      response_type: "code",
+      scope: "openid email profile",
+      access_type: "offline",
+    });
+    return NextResponse.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params}`);
+  }
+
+  // Exchange code for tokens
+  const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      code,
+      client_id: process.env.GOOGLE_CLIENT_ID!,
+      client_secret: process.env.GOOGLE_CLIENT_SECRET!,
+      redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/google`,
+      grant_type: "authorization_code",
+    }),
+  });
+  const tokens = await tokenRes.json();
+
+  // Get user info
+  const userRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+    headers: { Authorization: `Bearer ${tokens.access_token}` },
+  });
+  const googleUser = await userRes.json();
+
+  if (!googleUser.email) {
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/auth/login?error=google`);
+  }
+
+  // Find or create user
+  let user = await prisma.user.findUnique({ where: { email: googleUser.email } });
+  if (!user) {
+    const baseUsername = googleUser.email.split("@")[0].replace(/[^a-z0-9]/gi, "").toLowerCase();
+    let username = baseUsername;
+    let i = 1;
+    while (await prisma.user.findUnique({ where: { username } })) {
+      username = `${baseUsername}${i++}`;
+    }
+    user = await prisma.user.create({
+      data: {
+        email: googleUser.email,
+        username,
+        name: googleUser.name ?? null,
+        avatar: googleUser.picture ?? null,
+        passwordHash: "",
+      },
+    });
+  }
+
+  // Create session
+  const token = generateToken();
+  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  await prisma.session.create({ data: { userId: user.id, token, expiresAt } });
+
+  const cookieStore = await cookies();
+  cookieStore.set("session_token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    expires: expiresAt,
+    path: "/",
+  });
+
+  return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/`);
+}
