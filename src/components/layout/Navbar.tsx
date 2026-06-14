@@ -44,8 +44,8 @@ export function Navbar() {
           </Link>
         </div>
 
-        <nav className="flex-1 px-3 space-y-1">
-          {[...links, ...(user ? [{ href: "/post/new", icon: Plus, label: "Create" }] : [])].map(({ href, icon: Icon, label, badge }) => {
+             <nav className="flex-1 px-3 space-y-1">
+          {([...links, ...(user ? [{ href: "/post/new", icon: Plus, label: "Create", badge: undefined }] : [])] as typeof links).map(({ href, icon: Icon, label, badge }) => {
             const active = pathname === href || (href !== "/" && pathname.startsWith(href));
             return (
               <Link
