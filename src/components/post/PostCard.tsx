@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, MessageCircle, Bookmark, MoreHorizontal, MapPin, ChefHat, Clock, Users, Trash2, Flag, Share2, UserPlus } from "lucide-react";
@@ -44,6 +44,16 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
   const [doubleTapHeart, setDoubleTapHeart] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const isOwner = user?.id === post.user.id;
+  const cardRef = useRef<HTMLElement>(null);
+  const handleTilt = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientY - rect.top - rect.height / 2) / 20;
+    const y = -(e.clientX - rect.left - rect.width / 2) / 20;
+    e.currentTarget.style.transform = `perspective(800px) rotateX(${x}deg) rotateY(${y}deg) scale(1.01)`;
+  }, []);
+  const resetTilt = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
+  }, []);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -105,7 +115,7 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
     : null;
 
   return (
-    <article className="rounded-2xl overflow-hidden border border-gray-200 bg-white">
+    <article ref={cardRef} onMouseMove={handleTilt} onMouseLeave={resetTilt} style={{transition:"transform 0.15s ease", willChange:"transform"}} className="rounded-2xl overflow-hidden border border-gray-200 bg-white">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3">
         <Link href={`/profile/${post.user.username}`} className="flex items-center gap-3 group">
