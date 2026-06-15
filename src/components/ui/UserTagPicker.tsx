@@ -52,7 +52,7 @@ export function UserTagPicker({ tagged, onChange }: Props) {
 
   return (
     <div className="space-y-2" ref={ref}>
-      <label className="block text-sm font-medium text-white/60 flex items-center gap-1.5">
+      <label className="block text-sm font-medium text-gray-500 flex items-center gap-1.5">
         <UserPlus className="w-4 h-4 text-purple-400" /> Tag people
       </label>
 
@@ -62,7 +62,7 @@ export function UserTagPicker({ tagged, onChange }: Props) {
             <span key={u.id} className="flex items-center gap-1.5 bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm px-2.5 py-1 rounded-full">
               <Avatar src={u.avatar} alt={u.username} size="xs" />
               @{u.username}
-              <button type="button" onClick={() => removeUser(u.id)} className="text-white/40 hover:text-white/70 ml-0.5">
+              <button type="button" onClick={() => removeUser(u.id)} className="text-gray-400 hover:text-gray-600 ml-0.5">
                 <X className="w-3 h-3" />
               </button>
             </span>
@@ -71,30 +71,30 @@ export function UserTagPicker({ tagged, onChange }: Props) {
       )}
 
       <div className="relative">
-        <div className="flex items-center gap-2 h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 focus-within:ring-2 focus-within:ring-purple-500/50 focus-within:border-purple-500/50 transition-all">
-          <Search className="w-4 h-4 text-white/30 shrink-0" />
+        <div className="flex items-center gap-2 h-11 rounded-xl border border-gray-200 bg-gray-50 px-3 focus-within:ring-2 focus-within:ring-purple-500/50 focus-within:border-purple-500/50 transition-all">
+          <Search className="w-4 h-4 text-gray-400 shrink-0" />
           <input
             value={query}
             onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
             onFocus={() => setOpen(true)}
             placeholder="Search by username..."
-            className="flex-1 bg-transparent text-sm outline-none text-white/80 placeholder:text-white/30"
+            className="flex-1 bg-transparent text-sm outline-none text-gray-700 placeholder:text-gray-400"
           />
         </div>
 
         {open && results.length > 0 && (
-          <div className="absolute top-12 left-0 right-0 bg-[#0f1520] rounded-2xl shadow-xl border border-white/[0.06] overflow-hidden z-20 animate-slide-up">
+          <div className="absolute top-12 left-0 right-0 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden z-20 animate-slide-up">
             {results.map((u) => (
               <button
                 key={u.id}
                 type="button"
                 onClick={() => addUser(u)}
-                className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-white/[0.04] transition-colors text-left"
+                className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition-colors text-left"
               >
                 <Avatar src={u.avatar} alt={u.username} size="sm" />
                 <div>
-                  <p className="text-sm font-semibold text-white">@{u.username}</p>
-                  {u.name && <p className="text-xs text-white/30">{u.name}</p>}
+                  <p className="text-sm font-semibold text-gray-900">@{u.username}</p>
+                  {u.name && <p className="text-xs text-gray-400">{u.name}</p>}
                 </div>
               </button>
             ))}

@@ -50,8 +50,8 @@ export default function RecipesPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div>
-          <h1 className="text-2xl font-bold text-white">Recipes</h1>
-          <p className="text-white/40 text-sm mt-0.5">Discover delicious recipes</p>
+          <h1 className="text-2xl font-bold text-gray-900">Recipes</h1>
+          <p className="text-gray-400 text-sm mt-0.5">Discover delicious recipes</p>
         </div>
         {user && (
           <Link href="/recipes/new" className="w-10 h-10 rounded-full bg-[#db2777] flex items-center justify-center hover:opacity-90 transition-opacity">
@@ -62,13 +62,13 @@ export default function RecipesPage() {
 
       {/* Search */}
       <div className="relative mb-4">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search recipes..."
-          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/[0.08] text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#db2777]/30 placeholder:text-white/25"
-          style={{background:"rgba(255,255,255,0.04)"}}
+          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#db2777]/30 placeholder:text-gray-300"
+          style={{background:"#f5f4f2"}}
         />
       </div>
 
@@ -77,9 +77,9 @@ export default function RecipesPage() {
         <button
           onClick={() => setActiveTag(null)}
           className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            activeTag === null ? "bg-[#db2777] text-white" : "border border-white/[0.08] text-white/50 hover:text-white"
+            activeTag === null ? "bg-[#db2777] text-white" : "border border-gray-200 text-gray-500 hover:text-gray-900"
           }`}
-          style={activeTag !== null ? {background:"rgba(255,255,255,0.04)"} : {}}
+          style={activeTag !== null ? {background:"#f5f4f2"} : {}}
         >
           All
         </button>
@@ -88,9 +88,9 @@ export default function RecipesPage() {
             key={tag}
             onClick={() => setActiveTag(activeTag === tag ? null : tag)}
             className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
-              activeTag === tag ? "bg-[#db2777] text-white font-medium" : "border border-white/[0.08] text-white/50 hover:text-white"
+              activeTag === tag ? "bg-[#db2777] text-white font-medium" : "border border-gray-200 text-gray-500 hover:text-gray-900"
             }`}
-            style={activeTag !== tag ? {background:"rgba(255,255,255,0.04)"} : {}}
+            style={activeTag !== tag ? {background:"#f5f4f2"} : {}}
           >
             {tag}
           </button>
@@ -101,20 +101,20 @@ export default function RecipesPage() {
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="bg-[#0f1520] rounded-2xl border border-white/[0.06] overflow-hidden animate-pulse">
-              <div className="aspect-video bg-white/[0.06]" />
+            <div key={i} className="bg-white rounded-2xl border border-gray-200 overflow-hidden animate-pulse">
+              <div className="aspect-video bg-gray-100" />
               <div className="p-4 space-y-2">
-                <div className="h-4 bg-white/[0.06] rounded w-3/4" />
-                <div className="h-3 bg-white/[0.06] rounded w-1/2" />
+                <div className="h-4 bg-gray-100 rounded w-3/4" />
+                <div className="h-3 bg-gray-100 rounded w-1/2" />
               </div>
             </div>
           ))}
         </div>
       ) : filteredRecipes.length === 0 ? (
         <div className="text-center py-20">
-          <BookOpen className="w-16 h-16 text-white/10 mx-auto mb-4" />
-          <h3 className="text-lg font-bold text-white/60">No recipes found</h3>
-          <p className="text-white/30 text-sm mt-1">
+          <BookOpen className="w-16 h-16 text-gray-200 mx-auto mb-4" />
+          <h3 className="text-lg font-bold text-gray-500">No recipes found</h3>
+          <p className="text-gray-400 text-sm mt-1">
             {search ? `No results for "${search}"` : "Be the first to share a recipe!"}
           </p>
           {user && (
@@ -127,7 +127,7 @@ export default function RecipesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {filteredRecipes.map((recipe) => (
             <Link key={recipe.id} href={`/recipes/${recipe.id}`}
-              className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm overflow-hidden hover:shadow-lg transition-shadow group">
+              className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-lg transition-shadow group">
               {recipe.coverImage ? (
                 <div className="relative aspect-video overflow-hidden">
                   <Image src={recipe.coverImage} alt={recipe.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -151,11 +151,11 @@ export default function RecipesPage() {
                 </div>
               )}
               <div className="p-4">
-                <h3 className="font-bold text-white group-hover:text-purple-400 transition-colors line-clamp-1">{recipe.title}</h3>
+                <h3 className="font-bold text-gray-900 group-hover:text-purple-400 transition-colors line-clamp-1">{recipe.title}</h3>
                 {recipe.description && (
-                  <p className="text-xs text-white/40 mt-1 line-clamp-2">{recipe.description}</p>
+                  <p className="text-xs text-gray-400 mt-1 line-clamp-2">{recipe.description}</p>
                 )}
-                <div className="flex items-center gap-3 mt-3 text-xs text-white/40">
+                <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
                   {recipe.prepTime && (
                     <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {recipe.prepTime}m prep</span>
                   )}
@@ -163,11 +163,11 @@ export default function RecipesPage() {
                     <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {recipe.servings}</span>
                   )}
                 </div>
-                <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/[0.06]">
+                <div className="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
                   <div className="w-5 h-5 rounded-full bg-gradient-brand flex items-center justify-center text-white text-[8px] font-bold">
                     {recipe.user.username[0].toUpperCase()}
                   </div>
-                  <span className="text-xs text-white/40 font-medium">{recipe.user.username}</span>
+                  <span className="text-xs text-gray-400 font-medium">{recipe.user.username}</span>
                 </div>
               </div>
             </Link>

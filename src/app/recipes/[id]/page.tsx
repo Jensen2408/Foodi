@@ -46,7 +46,7 @@ export default function RecipePage() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
-      <Link href="javascript:history.back()" className="inline-flex items-center gap-2 text-white/40 hover:text-white/80 mb-6 transition-colors">
+      <Link href="javascript:history.back()" className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-700 mb-6 transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back
       </Link>
 
@@ -55,22 +55,22 @@ export default function RecipePage() {
         <div className="relative aspect-video rounded-3xl overflow-hidden mb-6 shadow-lg">
           <Image src={recipe.coverImage} alt={recipe.title} fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          <h1 className="absolute bottom-6 left-6 right-6 text-3xl font-black text-white leading-tight">{recipe.title}</h1>
+          <h1 className="absolute bottom-6 left-6 right-6 text-3xl font-black text-gray-900 leading-tight">{recipe.title}</h1>
         </div>
       ) : (
         <div className="aspect-video rounded-3xl bg-gradient-to-br from-purple-900/20 to-pink-900/20 flex flex-col items-center justify-center mb-6">
           <BookOpen className="w-16 h-16 text-purple-300/40 mb-3" />
-          <h1 className="text-3xl font-black text-white/80 text-center px-6">{recipe.title}</h1>
+          <h1 className="text-3xl font-black text-gray-700 text-center px-6">{recipe.title}</h1>
         </div>
       )}
 
       {/* Author */}
-      <div className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm p-5 mb-6 flex items-center justify-between">
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 mb-6 flex items-center justify-between">
         <Link href={`/profile/${recipe.user.username}`} className="flex items-center gap-3 group">
           <Avatar src={recipe.user.avatar} alt={recipe.user.username} size="md" />
           <div>
-            <p className="font-semibold text-white group-hover:text-purple-400 transition-colors">{recipe.user.username}</p>
-            {recipe.user.name && <p className="text-sm text-white/40">{recipe.user.name}</p>}
+            <p className="font-semibold text-gray-900 group-hover:text-purple-400 transition-colors">{recipe.user.username}</p>
+            {recipe.user.name && <p className="text-sm text-gray-400">{recipe.user.name}</p>}
           </div>
         </Link>
         {tags.length > 0 && (
@@ -90,17 +90,17 @@ export default function RecipePage() {
           { label: "Total", value: totalTime ? `${totalTime}m` : "—", icon: Clock, color: "text-purple-500" },
           { label: "Serves", value: recipe.servings ? `${recipe.servings}` : "—", icon: Users, color: "text-[#d4347a]" },
         ].map(({ label, value, icon: Icon, color }) => (
-          <div key={label} className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm p-3 text-center">
+          <div key={label} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-3 text-center">
             <Icon className={`w-5 h-5 mx-auto mb-1 ${color}`} />
-            <p className="text-lg font-black text-white">{value}</p>
-            <p className="text-xs text-white/40">{label}</p>
+            <p className="text-lg font-black text-gray-900">{value}</p>
+            <p className="text-xs text-gray-400">{label}</p>
           </div>
         ))}
       </div>
 
       {recipe.description && (
-        <div className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm p-5 mb-6">
-          <p className="text-white/60 leading-relaxed">{recipe.description}</p>
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 mb-6">
+          <p className="text-gray-500 leading-relaxed">{recipe.description}</p>
         </div>
       )}
 
@@ -118,14 +118,14 @@ export default function RecipePage() {
       )}
 
       {/* Ingredients */}
-      <div className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm p-6 mb-6">
-        <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-6">
+        <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
           <span className="w-6 h-6 bg-gradient-brand rounded-lg flex items-center justify-center text-white text-xs">🥄</span>
           Ingredients
         </h2>
         <ul className="space-y-2">
           {ingredients.map((ing, i) => (
-            <li key={i} className="flex items-start gap-3 text-white/60">
+            <li key={i} className="flex items-start gap-3 text-gray-500">
               <span className="w-6 h-6 bg-purple-500/10 text-purple-400 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
               {ing}
             </li>
@@ -134,8 +134,8 @@ export default function RecipePage() {
       </div>
 
       {/* Steps */}
-      <div className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm p-6 mb-8">
-        <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-8">
+        <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
           <span className="w-6 h-6 bg-gradient-brand rounded-lg flex items-center justify-center text-white text-xs">📋</span>
           Instructions
         </h2>
@@ -143,7 +143,7 @@ export default function RecipePage() {
           {steps.map((step, i) => (
             <li key={i} className="flex gap-4">
               <span className="w-8 h-8 bg-gradient-brand text-white rounded-xl flex items-center justify-center text-sm font-black shrink-0">{i + 1}</span>
-              <p className="text-white/60 leading-relaxed pt-1">{step}</p>
+              <p className="text-gray-500 leading-relaxed pt-1">{step}</p>
             </li>
           ))}
         </ol>

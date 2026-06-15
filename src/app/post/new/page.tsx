@@ -147,12 +147,12 @@ export default function NewPostPage() {
           <div
             {...getRootProps()}
             className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
-              isDragActive ? "border-[#db2777]/60 bg-[#db2777]/5" : "border-gray-200 hover:border-white/20"
+              isDragActive ? "border-[#db2777]/60 bg-[#db2777]/5" : "border-gray-200 hover:border-gray-300"
             }`}
           >
             <input {...getInputProps()} />
-            <Upload className="w-8 h-8 text-white/20 mx-auto mb-2" />
-            <p className="text-xs text-white/30">{images.length}/10</p>
+            <Upload className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+            <p className="text-xs text-gray-400">{images.length}/10</p>
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-2">
@@ -167,9 +167,9 @@ export default function NewPostPage() {
               </div>
             ))}
             {images.length < 10 && (
-              <div {...getRootProps()} className="aspect-square rounded-xl border-2 border-dashed border-white/[0.08] flex items-center justify-center cursor-pointer hover:bg-white/[0.03]">
+              <div {...getRootProps()} className="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-50">
                 <input {...getInputProps()} />
-                <Plus className="w-6 h-6 text-white/30" />
+                <Plus className="w-6 h-6 text-gray-400" />
               </div>
             )}
           </div>
@@ -181,40 +181,40 @@ export default function NewPostPage() {
           onChange={(e) => setCaption(e.target.value)}
           placeholder="Write a caption..."
           rows={3}
-          className="w-full rounded-2xl border border-white/[0.08] px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30 resize-none"
-          style={{background:"rgba(255,255,255,0.04)"}}
+          className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30 resize-none"
+          style={{background:"#f5f4f2"}}
         />
 
         {/* Location */}
         <div className="relative">
-          <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+          <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="Add location"
-            className="w-full h-12 pl-11 pr-4 rounded-2xl border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30"
-            style={{background:"rgba(255,255,255,0.04)"}}
+            className="w-full h-12 pl-11 pr-4 rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30"
+            style={{background:"#f5f4f2"}}
           />
         </div>
 
         {/* Tags */}
         <input
           placeholder="Tags (comma separated)"
-          className="w-full h-12 px-4 rounded-2xl border border-white/[0.08] text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30"
-          style={{background:"rgba(255,255,255,0.04)"}}
+          className="w-full h-12 px-4 rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#db2777]/30"
+          style={{background:"#f5f4f2"}}
         />
 
         {/* Recipe Toggle */}
-        <div className="rounded-2xl border border-white/[0.08] p-4" style={{background:"rgba(255,255,255,0.04)"}}>
+        <div className="rounded-2xl border border-gray-200 p-4" style={{background:"#f5f4f2"}}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <ChefHat className="w-5 h-5 text-[#db2777]" />
-              <span className="font-semibold text-white text-sm">Include Recipe</span>
+              <span className="font-semibold text-gray-900 text-sm">Include Recipe</span>
             </div>
             <button
               type="button"
               onClick={() => setIncludeRecipe(!includeRecipe)}
-              className={`w-11 h-6 rounded-full transition-all relative ${includeRecipe ? "bg-[#db2777]" : "bg-white/[0.12]"}`}
+              className={`w-11 h-6 rounded-full transition-all relative ${includeRecipe ? "bg-[#db2777]" : "bg-gray-200"}`}
             >
               <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${includeRecipe ? "left-5" : "left-0.5"}`} />
             </button>
@@ -227,30 +227,30 @@ export default function NewPostPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-1 flex items-center gap-1">
+                  <label className="block text-sm font-medium text-gray-500 mb-1 flex items-center gap-1">
                     <Clock className="w-3 h-3" /> Prep time (min)
                   </label>
                   <input type="number" min="0" value={recipe.prepTime} onChange={(e) => setRecipe((r) => ({ ...r, prepTime: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="15" />
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="15" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-1 flex items-center gap-1">
+                  <label className="block text-sm font-medium text-gray-500 mb-1 flex items-center gap-1">
                     <Clock className="w-3 h-3" /> Cook time (min)
                   </label>
                   <input type="number" min="0" value={recipe.cookTime} onChange={(e) => setRecipe((r) => ({ ...r, cookTime: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="30" />
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="30" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-1 flex items-center gap-1">
+                  <label className="block text-sm font-medium text-gray-500 mb-1 flex items-center gap-1">
                     <Users className="w-3 h-3" /> Servings
                   </label>
                   <input type="number" min="1" value={recipe.servings} onChange={(e) => setRecipe((r) => ({ ...r, servings: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="4" />
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" placeholder="4" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-1">Difficulty</label>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">Difficulty</label>
                   <select value={recipe.difficulty} onChange={(e) => setRecipe((r) => ({ ...r, difficulty: e.target.value }))}
-                    className="w-full h-11 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 capitalize">
+                    className="w-full h-11 rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 capitalize">
                     {["easy", "medium", "hard", "expert"].map((d) => <option key={d} value={d} className="capitalize">{d}</option>)}
                   </select>
                 </div>
@@ -258,16 +258,16 @@ export default function NewPostPage() {
 
               {/* Ingredients */}
               <div>
-                <label className="block text-sm font-bold text-white/60 mb-2">Ingredients</label>
+                <label className="block text-sm font-bold text-gray-500 mb-2">Ingredients</label>
                 <div className="space-y-2">
                   {recipe.ingredients.map((ing, i) => (
                     <div key={i} className="flex gap-2 items-center">
                       <span className="w-6 h-6 bg-[#fce4ef] text-[#7a0e38] rounded-full flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</span>
                       <input value={ing} onChange={(e) => updateIngredient(i, e.target.value)}
                         placeholder="e.g. 2 cups flour"
-                        className="flex-1 h-10 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" />
+                        className="flex-1 h-10 rounded-xl border border-gray-200 bg-gray-50 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50" />
                       {recipe.ingredients.length > 1 && (
-                        <button type="button" onClick={() => removeIngredient(i)} className="text-white/30 hover:text-red-400">
+                        <button type="button" onClick={() => removeIngredient(i)} className="text-gray-400 hover:text-red-400">
                           <X className="w-4 h-4" />
                         </button>
                       )}
@@ -281,16 +281,16 @@ export default function NewPostPage() {
 
               {/* Steps */}
               <div>
-                <label className="block text-sm font-bold text-white/60 mb-2">Steps</label>
+                <label className="block text-sm font-bold text-gray-500 mb-2">Steps</label>
                 <div className="space-y-2">
                   {recipe.steps.map((step, i) => (
                     <div key={i} className="flex gap-2 items-start">
                       <span className="w-6 h-6 bg-[#c6185c] text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-2">{i + 1}</span>
                       <textarea value={step} onChange={(e) => updateStep(i, e.target.value)}
                         placeholder={`Step ${i + 1}...`} rows={2}
-                        className="flex-1 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none" />
+                        className="flex-1 rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none" />
                       {recipe.steps.length > 1 && (
-                        <button type="button" onClick={() => removeStep(i)} className="text-white/30 hover:text-red-400 mt-2">
+                        <button type="button" onClick={() => removeStep(i)} className="text-gray-400 hover:text-red-400 mt-2">
                           <X className="w-4 h-4" />
                         </button>
                       )}

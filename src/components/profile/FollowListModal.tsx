@@ -31,12 +31,12 @@ export function FollowListModal({ userId, type, title, onClose }: Props) {
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full sm:w-[400px] sm:rounded-2xl rounded-t-2xl max-h-[70vh] flex flex-col" style={{background:"#0f1520", border:"0.5px solid rgba(255,255,255,0.08)"}}>
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
+      <div className="relative w-full sm:w-[400px] sm:rounded-2xl rounded-t-2xl max-h-[70vh] flex flex-col" style={{background:"#ffffff", border:"0.5px solid rgba(0,0,0,0.08)"}}>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
           <div className="w-8" />
-          <h2 className="font-bold text-white text-sm">{title}</h2>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-[#0f1520]/[0.06] transition-colors">
-            <X className="w-5 h-5 text-white/40" />
+          <h2 className="font-bold text-gray-900 text-sm">{title}</h2>
+          <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100 transition-colors">
+            <X className="w-5 h-5 text-gray-400" />
           </button>
         </div>
         <div className="overflow-y-auto flex-1">
@@ -49,26 +49,26 @@ export function FollowListModal({ userId, type, title, onClose }: Props) {
               </div>
             </div>
           ) : users.length === 0 ? (
-            <div className="text-center py-12 text-white/30">
+            <div className="text-center py-12 text-gray-400">
               <p className="text-3xl mb-2">👥</p>
               <p className="text-sm">No {type} yet</p>
             </div>
           ) : (
             users.map((u) => (
               <Link key={u.id} href={`/profile/${u.username}`} onClick={onClose}
-                className="flex items-center gap-3 px-4 py-3 hover:bg-[#0f1520]/[0.04] transition-colors">
-                <div className="w-11 h-11 rounded-full overflow-hidden shrink-0" style={{background:"rgba(255,255,255,0.08)"}}>
+                className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors">
+                <div className="w-11 h-11 rounded-full overflow-hidden shrink-0" style={{background:"rgba(0,0,0,0.06)"}}>
                   {u.avatar ? (
                     <Image src={u.avatar} alt={u.username} width={44} height={44} className="object-cover w-full h-full" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-white/40 font-bold text-lg">
+                    <div className="w-full h-full flex items-center justify-center text-gray-400 font-bold text-lg">
                       {u.username[0].toUpperCase()}
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-white truncate">{u.username}</p>
-                  {u.name && <p className="text-xs text-white/30 truncate">{u.name}</p>}
+                  <p className="text-sm font-semibold text-gray-900 truncate">{u.username}</p>
+                  {u.name && <p className="text-xs text-gray-400 truncate">{u.name}</p>}
                 </div>
               </Link>
             ))
