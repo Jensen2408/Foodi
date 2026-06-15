@@ -6,7 +6,7 @@ import { generateToken } from "@/lib/utils";
 import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
-  const { email, password } = await req.json();
+  const { email, password, rememberMe } = await req.json();
 
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    expires: expiresAt,
+    ...(rememberMe ? { expires: expiresAt } : {}),
     path: "/",
   });
 
