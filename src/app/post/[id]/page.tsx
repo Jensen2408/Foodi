@@ -88,14 +88,14 @@ export default function PostPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 pb-24 md:pb-8">
-      <Link href="javascript:history.back()" className="inline-flex items-center gap-1.5 text-white/40 hover:text-white/80 mb-5 transition-colors text-sm">
+      <Link href="javascript:history.back()" className="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 mb-5 transition-colors text-sm">
         <ArrowLeft className="w-4 h-4" /> Back
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_380px] gap-6 items-start">
         {/* Left: image(s) */}
         <div className="space-y-2">
-          <div className="relative aspect-square rounded-2xl overflow-hidden" style={{background:"rgba(255,255,255,0.04)"}}>
+          <div className="relative aspect-square rounded-2xl overflow-hidden" style={{background:"#f5f4f2"}}>
             {post.images[imgIdx] && (
               <Image src={post.images[imgIdx].url} alt="" fill className="object-cover" />
             )}
@@ -113,17 +113,17 @@ export default function PostPage() {
         </div>
 
         {/* Right: details panel */}
-        <div className="rounded-2xl border border-white/[0.07] overflow-hidden flex flex-col" style={{background:"rgba(255,255,255,0.02)"}}>
+        <div className="rounded-2xl border border-gray-200 overflow-hidden flex flex-col" style={{background:"rgba(0,0,0,0.02)"}}>
           {/* Author header */}
-          <div className="flex items-center justify-between px-4 py-3.5 border-b border-white/[0.06]">
+          <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-200">
             <Link href={`/profile/${post.user.username}`} className="flex items-center gap-3 group">
               <div className="p-0.5 rounded-full bg-gradient-brand shrink-0">
-                <div className="p-0.5 rounded-full" style={{background:"#080c14"}}>
+                <div className="p-0.5 rounded-full" style={{background:"#f8f6f3"}}>
                   <Avatar src={post.user.avatar} alt={post.user.username} size="sm" />
                 </div>
               </div>
               <div>
-                <p className="text-sm font-bold text-white group-hover:text-purple-400 transition-colors leading-tight">
+                <p className="text-sm font-bold text-gray-900 group-hover:text-purple-400 transition-colors leading-tight">
                   {post.user.name || post.user.username}
                 </p>
                 {post.location ? (
@@ -131,39 +131,39 @@ export default function PostPage() {
                     <MapPin className="w-2.5 h-2.5" /> {post.location}
                   </p>
                 ) : (
-                  <p className="text-xs text-white/30 leading-tight">@{post.user.username}</p>
+                  <p className="text-xs text-gray-400 leading-tight">@{post.user.username}</p>
                 )}
               </div>
             </Link>
-            <p className="text-xs text-white/25">{formatRelativeTime(post.createdAt)}</p>
+            <p className="text-xs text-gray-300">{formatRelativeTime(post.createdAt)}</p>
           </div>
 
           {/* Caption */}
           {post.caption && (
-            <div className="px-4 py-3 border-b border-white/[0.06]">
-              <p className="text-sm text-white/75 leading-relaxed">{post.caption}</p>
+            <div className="px-4 py-3 border-b border-gray-200">
+              <p className="text-sm text-gray-600 leading-relaxed">{post.caption}</p>
             </div>
           )}
 
           {/* Recipe card */}
           {recipe && (
-            <div className="mx-4 my-3 p-3.5 rounded-xl border border-white/[0.07] space-y-3" style={{background:"rgba(168,85,247,0.06)"}}>
-              <p className="text-xs font-bold text-white flex items-center gap-1.5">
+            <div className="mx-4 my-3 p-3.5 rounded-xl border border-gray-200 space-y-3" style={{background:"rgba(168,85,247,0.06)"}}>
+              <p className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
                 <ChefHat className="w-4 h-4 text-purple-400" /> {recipe.title}
               </p>
               <div className="flex flex-wrap gap-1.5 text-[11px]">
                 {recipe.prepTime && (
-                  <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-white/60 border border-white/[0.07]" style={{background:"rgba(255,255,255,0.04)"}}>
+                  <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-gray-500 border border-gray-200" style={{background:"#f5f4f2"}}>
                     <Clock className="w-2.5 h-2.5 text-purple-400" /> {recipe.prepTime}m prep
                   </span>
                 )}
                 {recipe.cookTime && (
-                  <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-white/60 border border-white/[0.07]" style={{background:"rgba(255,255,255,0.04)"}}>
+                  <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-gray-500 border border-gray-200" style={{background:"#f5f4f2"}}>
                     <Clock className="w-2.5 h-2.5 text-purple-400" /> {recipe.cookTime}m cook
                   </span>
                 )}
                 {recipe.servings && (
-                  <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-white/60 border border-white/[0.07]" style={{background:"rgba(255,255,255,0.04)"}}>
+                  <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-gray-500 border border-gray-200" style={{background:"#f5f4f2"}}>
                     <Users className="w-2.5 h-2.5 text-purple-400" /> {recipe.servings} servings
                   </span>
                 )}
@@ -175,10 +175,10 @@ export default function PostPage() {
               </div>
               {(recipe.ingredients as string[]).length > 0 && (
                 <div>
-                  <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-1.5">Ingredients</p>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Ingredients</p>
                   <ul className="space-y-0.5">
                     {(recipe.ingredients as string[]).map((ing, i) => (
-                      <li key={i} className="text-xs text-white/55 flex gap-2">
+                      <li key={i} className="text-xs text-gray-500 flex gap-2">
                         <span className="text-purple-400 shrink-0">·</span>{ing}
                       </li>
                     ))}
@@ -187,11 +187,11 @@ export default function PostPage() {
               )}
               {(recipe.steps as string[]).length > 0 && (
                 <div>
-                  <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-1.5">Steps</p>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Steps</p>
                   <ol className="space-y-1.5">
                     {(recipe.steps as string[]).map((step, i) => (
-                      <li key={i} className="text-xs text-white/55 flex gap-2">
-                        <span className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 text-white" style={{background:"rgba(168,85,247,0.5)"}}>
+                      <li key={i} className="text-xs text-gray-500 flex gap-2">
+                        <span className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 text-gray-900" style={{background:"rgba(168,85,247,0.5)"}}>
                           {i + 1}
                         </span>
                         {step}
@@ -204,35 +204,35 @@ export default function PostPage() {
           )}
 
           {/* Actions */}
-          <div className="px-4 py-3 flex items-center justify-between border-t border-white/[0.06]">
+          <div className="px-4 py-3 flex items-center justify-between border-t border-gray-200">
             <button
               onClick={toggleLike}
-              className={`flex items-center gap-1.5 transition-all ${liked ? "text-pink-500" : "text-white/40 hover:text-pink-500"}`}
+              className={`flex items-center gap-1.5 transition-all ${liked ? "text-pink-500" : "text-gray-400 hover:text-pink-500"}`}
             >
               <Heart className={`w-5 h-5 transition-transform ${liked ? "fill-current scale-110" : ""}`} />
               <span className="text-sm font-semibold">{likeCount.toLocaleString()}</span>
             </button>
-            <button className="text-white/30 hover:text-white/60 transition-colors">
+            <button className="text-gray-400 hover:text-gray-500 transition-colors">
               <Bookmark className="w-5 h-5" />
             </button>
           </div>
 
           {/* Comments */}
-          <div className="flex-1 overflow-y-auto px-4 space-y-3 py-2 max-h-64 border-t border-white/[0.06]">
+          <div className="flex-1 overflow-y-auto px-4 space-y-3 py-2 max-h-64 border-t border-gray-200">
             {comments.length === 0 && (
-              <p className="text-xs text-white/20 text-center py-4">No comments yet</p>
+              <p className="text-xs text-gray-300 text-center py-4">No comments yet</p>
             )}
             {comments.map((c) => (
               <div key={c.id} className="flex gap-2.5">
                 <Avatar src={c.user.avatar} alt={c.user.username} size="xs" />
                 <div className="flex-1 min-w-0">
                   <p className="text-xs leading-relaxed">
-                    <Link href={`/profile/${c.user.username}`} className="font-bold text-white/80 hover:text-purple-400 transition-colors mr-1.5">
+                    <Link href={`/profile/${c.user.username}`} className="font-bold text-gray-700 hover:text-purple-400 transition-colors mr-1.5">
                       {c.user.username}
                     </Link>
-                    <span className="text-white/50">{c.text}</span>
+                    <span className="text-gray-500">{c.text}</span>
                   </p>
-                  <p className="text-[10px] text-white/20 mt-0.5">{formatRelativeTime(c.createdAt)}</p>
+                  <p className="text-[10px] text-gray-300 mt-0.5">{formatRelativeTime(c.createdAt)}</p>
                 </div>
               </div>
             ))}
@@ -240,19 +240,19 @@ export default function PostPage() {
 
           {/* Comment input */}
           {user && (
-            <form onSubmit={submitComment} className="flex items-center gap-2 px-4 py-3 border-t border-white/[0.06]">
+            <form onSubmit={submitComment} className="flex items-center gap-2 px-4 py-3 border-t border-gray-200">
               <Avatar src={user.avatar} alt={user.username} size="xs" />
               <input
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add a comment…"
-                className="flex-1 h-9 rounded-full px-4 text-sm text-white placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-purple-500/50 border border-white/[0.06]"
-                style={{background:"rgba(255,255,255,0.04)"}}
+                className="flex-1 h-9 rounded-full px-4 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-purple-500/50 border border-gray-200"
+                style={{background:"#f5f4f2"}}
               />
               <button
                 type="submit"
                 disabled={!comment.trim()}
-                className="w-8 h-8 bg-gradient-brand rounded-full flex items-center justify-center text-white disabled:opacity-30 transition-opacity shrink-0"
+                className="w-8 h-8 bg-gradient-brand rounded-full flex items-center justify-center text-gray-900 disabled:opacity-30 transition-opacity shrink-0"
               >
                 <Send className="w-3.5 h-3.5" />
               </button>

@@ -4,7 +4,7 @@
 
 @layer base {
   * { box-sizing: border-box; }
-  body { @apply antialiased; background: #080c14; color: #e2e8f0; }
+  body { @apply antialiased; background: #f8f6f3; color: #1a1a1a; }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.3); border-radius: 9999px; }
@@ -17,7 +17,7 @@
   .bg-gradient-story {
     background: linear-gradient(45deg, #a855f7, #ec4899, #f97316);
   }
-  .bg-gradient-page { background: #080c14; }
+  .bg-gradient-page { background: #f8f6f3; }
 
   .text-gradient-brand {
     background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
@@ -26,12 +26,12 @@
     background-clip: text;
   }
 
-  .card  { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 16px; }
-  .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 0.5px solid rgba(255,255,255,0.1); }
+  .card  { background: #ffffff; border: 1px solid #e8e4e0; border-radius: 16px; }
+  .glass { background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); border: 1px solid #e8e4e0; }
 
   .futuristic-card {
-    background: rgba(255,255,255,0.03);
-    border: 0.5px solid rgba(255,255,255,0.08);
+    background: #ffffff;
+    border: 1px solid #e8e4e0;
     border-radius: 16px;
   }
 

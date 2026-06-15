@@ -42,13 +42,13 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4" style={{background:"#080c14"}}>
+    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-[#f8f6f3]">
       <div className="w-full max-w-sm">
-        <div className="bg-[#0f1520] backdrop-blur-md rounded-3xl border border-white/[0.06] p-8 space-y-6">
+        <div className="bg-white rounded-3xl border border-gray-200 p-8 space-y-6 shadow-sm">
           <div className="text-center space-y-2">
             <Image src="/logo.png" alt="Morsel" width={64} height={64} className="rounded-2xl mx-auto shadow-lg" />
             <h1 className="text-2xl font-black text-gradient-brand">Join Morsel</h1>
-            <p className="text-sm text-white/40">Share your food passion with the world</p>
+            <p className="text-sm text-gray-400">Share your food passion with the world</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -65,7 +65,7 @@ export default function RegisterPage() {
                 required
                 minLength={8}
               />
-              <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-8 text-white/30">
+              <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-8 text-gray-400">
                 {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
@@ -77,9 +77,9 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-white/40">
+          <p className="text-center text-sm text-gray-400">
             Already have an account?{" "}
-            <Link href="/auth/login" className="font-semibold text-white hover:underline">Sign in</Link>
+            <Link href="/auth/login" className="font-semibold text-gray-900 hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

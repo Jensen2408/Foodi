@@ -41,14 +41,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-[#0f1520]">
+    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center p-4 bg-[#f8f6f3]">
       <div className="w-full max-w-sm">
         <div className="space-y-8">
           {/* Logo */}
           <div className="text-center space-y-1">
             <Image src="/logo.png" alt="Morsel" width={56} height={56} className="rounded-2xl mx-auto" />
             <h1 className="text-2xl font-black text-gradient-brand mt-3">Morsel</h1>
-            <p className="text-sm text-white/30">Sign in to share your food story</p>
+            <p className="text-sm text-gray-400">Sign in to share your food story</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-3">
@@ -86,7 +86,7 @@ export default function LoginPage() {
                 onChange={(e) => setRememberMe(e.target.checked)}
                 className="w-4 h-4 rounded accent-pink-500 cursor-pointer"
               />
-              <label htmlFor="remember" className="text-sm text-white/40 cursor-pointer select-none">Remember me</label>
+              <label htmlFor="remember" className="text-sm text-gray-400 cursor-pointer select-none">Remember me</label>
             </div>
 
             {error && (
@@ -100,15 +100,15 @@ export default function LoginPage() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/[0.08]" />
+              <div className="w-full border-t border-gray-200" />
             </div>
             <div className="relative flex justify-center text-xs text-white/30">
-              <span className="px-3" style={{background:"#0f1520"}}>or</span>
+              <span className="px-3 bg-[#f8f6f3] text-gray-400">or</span>
             </div>
           </div>
 <a
   href="/api/auth/google"
-  className="w-full py-2.5 rounded-xl border border-white/[0.10] text-white text-sm font-medium hover:border-white/20 transition-colors flex items-center justify-center gap-2"
+  className="w-full py-2.5 rounded-xl border border-gray-200 text-gray-700 text-sm font-medium hover:border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
 >
   <svg className="w-4 h-4" viewBox="0 0 24 24">
     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -121,14 +121,14 @@ export default function LoginPage() {
 
 <button
   onClick={() => router.push("/")}
-  className="w-full py-2.5 rounded-xl border border-white/[0.10] text-white/50 text-sm font-medium hover:text-white hover:border-white/20 transition-colors"
+  className="w-full py-2.5 rounded-xl border border-gray-200 text-gray-400 text-sm font-medium hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition-colors"
 >
   Continue as guest
 </button>
 
-          <p className="text-center text-sm text-white/40">
+          <p className="text-center text-sm text-gray-400">
             Don&apos;t have an account?{" "}
-            <Link href="/auth/register" className="font-semibold text-white hover:underline">
+            <Link href="/auth/register" className="font-semibold text-gray-900 hover:underline">
               Sign up
             </Link>
           </p>

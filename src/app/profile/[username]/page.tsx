@@ -100,7 +100,7 @@ export default function ProfilePage() {
       <div className="flex items-start gap-6 mb-6">
         {/* Avatar with pink ring */}
 <div className="shrink-0 w-20 h-20 rounded-full p-0.5" style={{background:"linear-gradient(135deg, #db2777, #a855f7)"}}>
-  <div className="w-full h-full rounded-full overflow-hidden" style={{background:"#0d1117"}}>
+  <div className="w-full h-full rounded-full overflow-hidden bg-white">
     {profile.avatar ? (
       <Image src={profile.avatar} alt={profile.username} width={80} height={80} className="w-full h-full object-cover rounded-full" />
     ) : (
@@ -113,13 +113,13 @@ export default function ProfilePage() {
 
         <div className="flex-1 min-w-0 pt-1">
           <div className="flex items-center gap-2 flex-wrap mb-3">
-            <h1 className="text-lg font-bold text-white">{profile.name || profile.username}</h1>
+            <h1 className="text-lg font-bold text-gray-900">{profile.name || profile.username}</h1>
             {isMe ? (
               <>
-                <Link href="/profile/edit" className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/[0.12] text-white/70 text-xs font-medium hover:bg-white/[0.05] transition-colors">
+                <Link href="/profile/edit" className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-gray-200 text-gray-600 text-xs font-medium hover:bg-gray-50 transition-colors">
                   <Settings className="w-3 h-3" /> Edit
                 </Link>
-                <button onClick={handleLogout} className="p-1.5 rounded-lg border border-white/[0.08] text-white/40 hover:text-white/70 transition-colors">
+                <button onClick={handleLogout} className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-600 transition-colors">
                   <LogOut className="w-3.5 h-3.5" />
                 </button>
               </>
@@ -130,7 +130,7 @@ export default function ProfilePage() {
             ) : null}
           </div>
 
-          {profile.bio && <p className="text-sm text-white/50 mb-2 leading-relaxed">{profile.bio}</p>}
+          {profile.bio && <p className="text-sm text-gray-500 mb-2 leading-relaxed">{profile.bio}</p>}
           {profile.website && (
             <a href={profile.website} target="_blank" rel="noreferrer" className="text-sm text-purple-400 flex items-center gap-1 hover:underline">
               <Globe className="w-3 h-3" /> {profile.website.replace(/https?:\/\//, "")}
@@ -140,23 +140,23 @@ export default function ProfilePage() {
           {/* Stats */}
           <div className="flex gap-6 mt-3">
             <div className="text-center">
-              <p className="font-bold text-white">{profile._count.posts}</p>
-              <p className="text-xs text-white/40">posts</p>
+              <p className="font-bold text-gray-900">{profile._count.posts}</p>
+              <p className="text-xs text-gray-400">posts</p>
             </div>
             <button onClick={() => setModal("followers")} className="text-center hover:opacity-70 transition-opacity">
-              <p className="font-bold text-white">{profile._count.followers}</p>
-              <p className="text-xs text-white/40">followers</p>
+              <p className="font-bold text-gray-900">{profile._count.followers}</p>
+              <p className="text-xs text-gray-400">followers</p>
             </button>
             <button onClick={() => setModal("following")} className="text-center hover:opacity-70 transition-opacity">
-              <p className="font-bold text-white">{profile._count.following}</p>
-              <p className="text-xs text-white/40">following</p>
+              <p className="font-bold text-gray-900">{profile._count.following}</p>
+              <p className="text-xs text-gray-400">following</p>
             </button>
           </div>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-white/[0.08] mb-3">
+      <div className="flex border-b border-gray-200 mb-3">
         {([
           { key: "posts", icon: Grid3x3, label: "Posts" },
           { key: "recipes", icon: BookOpen, label: "Recipes" },
@@ -166,7 +166,7 @@ export default function ProfilePage() {
             key={key}
             onClick={() => setTab(key)}
             className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium transition-all border-b-2 -mb-px ${
-              tab === key ? "border-[#db2777] text-white" : "border-transparent text-white/30 hover:text-white/50"
+              tab === key ? "border-[#db2777] text-gray-900" : "border-transparent text-gray-400 hover:text-gray-500"
             }`}
           >
             <Icon className="w-4 h-4" /> {label}
@@ -182,7 +182,7 @@ export default function ProfilePage() {
               {post.images[0] ? (
                 <Image src={post.images[0].url} alt="" fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
               ) : (
-                <div className="w-full h-full bg-white/[0.06]" />
+                <div className="w-full h-full bg-gray-100" />
               )}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100">
                 <span className="flex items-center gap-1 text-white text-sm font-bold">
@@ -195,7 +195,7 @@ export default function ProfilePage() {
             </Link>
           ))}
           {posts.length === 0 && (
-            <div className="col-span-3 py-16 text-center text-white/30">
+            <div className="col-span-3 py-16 text-center text-gray-400">
               <p className="text-4xl mb-2">📸</p>
               <p>No posts yet</p>
             </div>
@@ -205,7 +205,7 @@ export default function ProfilePage() {
 
       {/* Liked tab */}
       {tab === "liked" && (
-        <div className="py-20 text-center text-white/30">
+        <div className="py-20 text-center text-gray-400">
           <Heart className="w-10 h-10 mx-auto mb-3 opacity-30" />
           <p className="text-sm">Liked posts will appear here</p>
         </div>
@@ -216,13 +216,13 @@ export default function ProfilePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {recipes.map((recipe) => (
             <Link key={recipe.id} href={`/recipes/${recipe.id}`}
-              className="bg-[#0f1520] rounded-2xl border border-white/[0.06] shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+              className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
               {recipe.coverImage ? (
                 <div className="relative aspect-video overflow-hidden">
                   <Image src={recipe.coverImage} alt={recipe.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                 </div>
               ) : (
-                <div className="aspect-video flex items-center justify-center" style={{background:"rgba(168,85,247,0.1)"}}>
+                <div className="aspect-video flex items-center justify-center" style={{background:"rgba(168,85,247,0.08)"}}>
                   <BookOpen className="w-10 h-10 text-purple-400/50" />
                 </div>
               )}
@@ -233,17 +233,17 @@ export default function ProfilePage() {
                     <span className="text-xs bg-purple-500/10 text-purple-300 px-2 py-0.5 rounded-full capitalize">{recipe.difficulty}</span>
                   )}
                   {recipe.prepTime && (
-                    <span className="text-xs bg-white/[0.06] text-white/50 px-2 py-0.5 rounded-full">Prep {recipe.prepTime}m</span>
+                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Prep {recipe.prepTime}m</span>
                   )}
                   {recipe.cookTime && (
-                    <span className="text-xs bg-white/[0.06] text-white/50 px-2 py-0.5 rounded-full">Cook {recipe.cookTime}m</span>
+                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Cook {recipe.cookTime}m</span>
                   )}
                 </div>
               </div>
             </Link>
           ))}
           {recipes.length === 0 && (
-            <div className="col-span-2 py-16 text-center text-white/30">
+            <div className="col-span-2 py-16 text-center text-gray-400">
               <p className="text-4xl mb-2">📖</p>
               <p>No public recipes yet</p>
               {isMe && (

@@ -36,11 +36,11 @@ export function Navbar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex fixed left-0 top-0 h-full w-60 flex-col border-r border-white/[0.06] z-40" style={{background:"#080c14"}}>
+      <aside className="hidden md:flex fixed left-0 top-0 h-full w-60 flex-col border-r border-gray-200 z-40 bg-white">
         <div className="px-6 py-6 mb-2">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Morsel" width={32} height={32} className="rounded-xl" />
-            <span className="font-bold text-white text-lg">Morsel</span>
+            <span className="font-bold text-gray-900 text-lg">Morsel</span>
           </Link>
         </div>
 
@@ -52,7 +52,7 @@ export function Navbar() {
                 key={href}
                 href={href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all relative ${
-                  active ? "bg-[#db2777]/15 text-[#db2777]" : "text-white/50 hover:text-white hover:bg-white/[0.05]"
+                  active ? "bg-[#db2777]/10 text-[#db2777]" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
                 }`}
               >
                 <Icon className="w-5 h-5 shrink-0" />
@@ -75,7 +75,7 @@ export function Navbar() {
             </Link>
           )}
           {user && (
-            <button onClick={handleLogout} className="flex items-center gap-2 px-3 py-2 rounded-xl text-white/30 hover:text-white/60 text-sm transition-colors w-full">
+            <button onClick={handleLogout} className="flex items-center gap-2 px-3 py-2 rounded-xl text-gray-400 hover:text-gray-600 text-sm transition-colors w-full">
               <LogOut className="w-4 h-4" /> Log out
             </button>
           )}
@@ -89,13 +89,13 @@ export function Navbar() {
       </aside>
 
       {/* Mobile top bar */}
-      <header className="md:hidden fixed top-0 left-0 right-0 h-14 flex items-center justify-between px-4 z-40 border-b border-white/[0.06]" style={{background:"#080c14"}}>
+      <header className="md:hidden fixed top-0 left-0 right-0 h-14 flex items-center justify-between px-4 z-40 border-b border-gray-200 bg-white">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/logo.png" alt="Morsel" width={28} height={28} className="rounded-lg" />
-          <span className="font-bold text-white">Morsel</span>
+          <span className="font-bold text-gray-900">Morsel</span>
         </Link>
         <Link href="/notifications" className="relative p-2">
-          <Bell className="w-5 h-5 text-white/60" />
+          <Bell className="w-5 h-5 text-gray-500" />
           {notifCount > 0 && (
             <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#db2777] text-white text-[9px] font-bold flex items-center justify-center">
               {notifCount > 9 ? "9+" : notifCount}
@@ -105,12 +105,12 @@ export function Navbar() {
       </header>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 flex items-center border-t border-white/[0.06] z-40" style={{background:"#080c14"}}>
-        <Link href="/" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname === "/" ? "text-[#db2777]" : "text-white/30"}`}>
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 flex items-center border-t border-gray-200 z-40 bg-white">
+        <Link href="/" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname === "/" ? "text-[#db2777]" : "text-gray-400"}`}>
           <Home className="w-5 h-5" />
           <span className="text-[10px]">Home</span>
         </Link>
-        <Link href="/explore" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/explore") ? "text-[#db2777]" : "text-white/30"}`}>
+        <Link href="/explore" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/explore") ? "text-[#db2777]" : "text-gray-400"}`}>
           <Search className="w-5 h-5" />
           <span className="text-[10px]">Explore</span>
         </Link>
@@ -120,7 +120,7 @@ export function Navbar() {
             <Plus className="w-6 h-6 text-white" strokeWidth={2.5} />
           </Link>
         </div>
-        <Link href="/notifications" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors relative ${pathname.startsWith("/notifications") ? "text-[#db2777]" : "text-white/30"}`}>
+        <Link href="/notifications" className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors relative ${pathname.startsWith("/notifications") ? "text-[#db2777]" : "text-gray-400"}`}>
           <Bell className="w-5 h-5" />
           {notifCount > 0 && (
             <span className="absolute top-1.5 right-6 w-4 h-4 rounded-full bg-[#db2777] text-white text-[9px] font-bold flex items-center justify-center">
@@ -130,7 +130,7 @@ export function Navbar() {
           <span className="text-[10px]">Activity</span>
         </Link>
         <Link href={user ? `/profile/${user.username}` : "/auth/login"}
-          className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/profile") ? "text-[#db2777]" : "text-white/30"}`}>
+          className={`flex-1 flex flex-col items-center gap-1 py-2 transition-colors ${pathname.startsWith("/profile") ? "text-[#db2777]" : "text-gray-400"}`}>
           <User className="w-5 h-5" />
           <span className="text-[10px]">Profile</span>
         </Link>

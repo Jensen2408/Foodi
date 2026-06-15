@@ -127,10 +127,10 @@ export default function NewPostPage() {
     <div className="max-w-xl mx-auto px-4">
       {/* Header */}
       <div className="flex items-center justify-between py-4 mb-2">
-        <button type="button" onClick={() => router.back()} className="text-white/60 hover:text-white transition-colors">
+        <button type="button" onClick={() => router.back()} className="text-gray-500 hover:text-gray-900 transition-colors">
           <span className="text-xl">←</span>
         </button>
-        <h1 className="text-base font-bold text-white">New Post</h1>
+        <h1 className="text-base font-bold text-gray-900">New Post</h1>
         <button
           form="new-post-form"
           type="submit"
@@ -147,7 +147,7 @@ export default function NewPostPage() {
           <div
             {...getRootProps()}
             className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all ${
-              isDragActive ? "border-[#db2777]/60 bg-[#db2777]/5" : "border-white/[0.10] hover:border-white/20"
+              isDragActive ? "border-[#db2777]/60 bg-[#db2777]/5" : "border-gray-200 hover:border-white/20"
             }`}
           >
             <input {...getInputProps()} />
