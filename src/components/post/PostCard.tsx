@@ -329,17 +329,17 @@ export function PostCard({ post: initial, onDelete }: { post: Post; onDelete?: (
             </div>
             <div className="flex flex-wrap gap-2 text-xs">
               {recipe.prepTime && (
-                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-gray-200 font-medium text-gray-500 bg-white>
+                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-gray-200 font-medium text-gray-500 bg-white">
                   <Clock className="w-3 h-3 text-pink-400" /> Prep {recipe.prepTime}m
                 </span>
               )}
               {recipe.cookTime && (
-                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-gray-200 font-medium text-gray-500 bg-white>
+                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-gray-200 font-medium text-gray-500 bg-white">
                   <Clock className="w-3 h-3 text-orange-400" /> Cook {recipe.cookTime}m
                 </span>
               )}
               {recipe.servings && (
-                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-gray-200 font-medium text-gray-500 bg-white>
+                <span className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-gray-200 font-medium text-gray-500 bg-white">
                   <Users className="w-3 h-3 text-purple-400" /> {recipe.servings} servings
                 </span>
               )}
