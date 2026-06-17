@@ -25,14 +25,12 @@ export function useUser() {
 
   useEffect(() => {
     listeners.add(setUser);
-    if (cachedUser === undefined) {
-      fetch("/api/auth/me")
-        .then((r) => r.json())
-        .then((u) => {
-          cachedUser = u;
-          listeners.forEach((fn) => fn(u));
-        });
-    }
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((u) => {
+        cachedUser = u;
+        listeners.forEach((fn) => fn(u));
+      });
     return () => { listeners.delete(setUser); };
   }, []);
 
