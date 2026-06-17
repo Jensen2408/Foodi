@@ -10,8 +10,7 @@ export function middleware(request: NextRequest) {
     PUBLIC_PATHS.some((p) => pathname.startsWith(p)) ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon") ||
-    pathname.startsWith("/logo") ||
-    pathname === "/";
+    pathname.startsWith("/logo");
 
   const token = request.cookies.get("session_token")?.value;
 
