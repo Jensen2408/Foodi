@@ -1,18 +1,18 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.foodgram.app',
-  appName: 'FoodGram',
+  appId: 'com.morsel.app',
+  appName: 'Morsel',
   webDir: 'out',
   server: {
-    url: 'https://foodgram-jensen2408s-projects.vercel.app',
+    url: 'https://foodgram-tau.vercel.app',
     cleartext: false,
   },
   ios: {
     contentInset: 'always',
   },
   android: {
-    backgroundColor: '#080c14',
+    backgroundColor: '#f8f6f3',
   },
 };
 
