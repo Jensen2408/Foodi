@@ -178,10 +178,7 @@ export default function ProfilePage() {
       {tab === "posts" && (
         <div className="grid grid-cols-3 gap-1">
           {posts.map((post) => (
-            <Link key={post.id} href={`/post/${post.id}`} className="group relative aspect-square overflow-hidden rounded-xl"
-              style={{transition:"transform 0.15s ease, box-shadow 0.15s ease", willChange:"transform"}}
-              onMouseMove={(e) => { const r = e.currentTarget.getBoundingClientRect(); const x = (e.clientY - r.top - r.height/2)/14; const y = -(e.clientX - r.left - r.width/2)/14; e.currentTarget.style.transform=`perspective(500px) rotateX(${x}deg) rotateY(${y}deg) scale(1.05)`; e.currentTarget.style.boxShadow="0 12px 30px rgba(0,0,0,0.15)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform="perspective(500px) rotateX(0deg) rotateY(0deg) scale(1)"; e.currentTarget.style.boxShadow=""; }}>
+            <Link key={post.id} href={`/post/${post.id}`} className="group relative aspect-square overflow-hidden rounded-xl">
               {post.images[0] ? (
                 <Image src={post.images[0].url} alt="" fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
               ) : (

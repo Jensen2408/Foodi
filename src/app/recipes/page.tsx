@@ -127,10 +127,7 @@ export default function RecipesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {filteredRecipes.map((recipe) => (
             <Link key={recipe.id} href={`/recipes/${recipe.id}`}
-              className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden group"
-              style={{transition:"transform 0.15s ease, box-shadow 0.15s ease", willChange:"transform"}}
-              onMouseMove={(e) => { const r = e.currentTarget.getBoundingClientRect(); const x = (e.clientY - r.top - r.height/2)/18; const y = -(e.clientX - r.left - r.width/2)/18; e.currentTarget.style.transform=`perspective(700px) rotateX(${x}deg) rotateY(${y}deg) scale(1.02)`; e.currentTarget.style.boxShadow="0 16px 40px rgba(0,0,0,0.12)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform="perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)"; e.currentTarget.style.boxShadow=""; }}>
+              className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-lg transition-shadow group">
               {recipe.coverImage ? (
                 <div className="relative aspect-video overflow-hidden">
                   <Image src={recipe.coverImage} alt={recipe.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
