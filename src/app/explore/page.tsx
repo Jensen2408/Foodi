@@ -54,7 +54,7 @@ export default function ExplorePage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search users..."
-          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#db2777]/40 placeholder:text-white/20"
+          className="w-full h-12 pl-11 pr-4 rounded-2xl border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#db2777]/40 placeholder:text-gray-300"
           style={{background:"#f5f4f2"}}
         />
       </div>
@@ -70,7 +70,7 @@ export default function ExplorePage() {
               <button
                 key={tag}
                 onClick={() => setQuery(tag.slice(1))}
-                className="px-3 py-1.5 rounded-full border border-gray-200 text-white/50 text-sm hover:border-[#db2777]/50 hover:text-[#db2777] transition-colors"
+                className="px-3 py-1.5 rounded-full border border-gray-200 text-gray-500 text-sm hover:border-[#db2777]/50 hover:text-[#db2777] transition-colors"
                 style={{background:"#f5f4f2"}}
               >
                 {tag}
