@@ -46,7 +46,15 @@ export default function LoginPage() {
         <div className="space-y-8">
           {/* Logo */}
           <div className="text-center space-y-1">
-            <Image src="/logo.png" alt="Morsel" width={56} height={56} className="rounded-2xl mx-auto" />
+            <style>{`
+              @keyframes float3d {
+                0%, 100% { transform: translateY(0px) rotateY(0deg) rotateX(0deg); }
+                33%       { transform: translateY(-10px) rotateY(12deg) rotateX(4deg); }
+                66%       { transform: translateY(-5px) rotateY(-8deg) rotateX(-2deg); }
+              }
+              .logo-float { animation: float3d 4s ease-in-out infinite; filter: drop-shadow(0 12px 20px rgba(219,39,119,0.3)); }
+            `}</style>
+            <Image src="/logo.png" alt="Morsel" width={56} height={56} className="rounded-2xl mx-auto logo-float" />
             <h1 className="text-2xl font-black text-gradient-brand mt-3">Morsel</h1>
             <p className="text-sm text-gray-400">Sign in to share your food story</p>
           </div>

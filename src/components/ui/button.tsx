@@ -31,8 +31,28 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {}
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => (
-    <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+  ({ className, variant, size, onMouseDown, onMouseUp, onMouseLeave, style, ...props }, ref) => (
+    <button
+      className={cn(buttonVariants({ variant, size, className }))}
+      ref={ref}
+      style={{ transition: "transform 0.1s ease, box-shadow 0.1s ease", ...style }}
+      onMouseDown={(e) => {
+        e.currentTarget.style.transform = "perspective(400px) translateZ(-6px) translateY(2px) scale(0.97)";
+        e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.1)";
+        onMouseDown?.(e);
+      }}
+      onMouseUp={(e) => {
+        e.currentTarget.style.transform = "";
+        e.currentTarget.style.boxShadow = "";
+        onMouseUp?.(e);
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "";
+        e.currentTarget.style.boxShadow = "";
+        onMouseLeave?.(e);
+      }}
+      {...props}
+    />
   )
 );
 Button.displayName = "Button";
