@@ -33,6 +33,9 @@ export function Navbar() {
     ...(user ? [{ href: `/profile/${user.username}`, icon: User, label: "Profile" }] : [{ href: "/auth/login", icon: User, label: "Profile" }]),
   ];
 
+  const isAuthPage = pathname.startsWith("/auth/");
+  if (isAuthPage) return null;
+
   return (
     <>
       {/* Desktop sidebar */}

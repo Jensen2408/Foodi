@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
+import { AppShell } from "@/components/layout/AppShell";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "Morsel — Share Your Food Story",
@@ -12,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${inter.variable} font-sans bg-[#f8f6f3] min-h-screen`}>
         <Navbar />
-        <main className="min-h-screen pt-14 pb-20 md:pt-8 md:pb-8 md:pl-60">{children}</main>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
