@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Home, Search, Plus, BookOpen, Bell, User, LogOut } from "lucide-react";
 import Image from "next/image";
-import { useUser } from "@/hooks/useUser";
+import { useUser, clearUserCache } from "@/hooks/useUser";
 import { useEffect, useState } from "react";
 
 export function Navbar() {
@@ -22,7 +22,8 @@ export function Navbar() {
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/auth/login");
+    clearUserCache();
+    router.push("/");
   }
 
   const sidebarLinks: { href: string; icon: React.ElementType; label: string; badge?: number }[] = [

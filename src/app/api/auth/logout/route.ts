@@ -10,5 +10,7 @@ export async function POST() {
     await prisma.session.deleteMany({ where: { token } });
     cookieStore.delete("session_token");
   }
-  return NextResponse.json({ ok: true });
+  const res = NextResponse.json({ ok: true });
+  res.cookies.set("session_token", "", { maxAge: 0, path: "/" });
+  return res;
 }

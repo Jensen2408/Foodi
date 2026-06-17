@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Grid3x3, BookOpen, Heart, MessageCircle, Globe, LogOut, Settings } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useUser } from "@/hooks/useUser";
+import { useUser, clearUserCache } from "@/hooks/useUser";
 import { FollowListModal } from "@/components/profile/FollowListModal";
 import { useRouter } from "next/navigation";
 
@@ -49,7 +49,8 @@ export default function ProfilePage() {
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/auth/login");
+    clearUserCache();
+    router.push("/");
   }
 
   useEffect(() => {

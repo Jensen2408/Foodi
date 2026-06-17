@@ -15,6 +15,11 @@ interface User {
 let cachedUser: User | null | undefined = undefined;
 const listeners = new Set<(u: User | null) => void>();
 
+export function clearUserCache() {
+  cachedUser = undefined;
+  listeners.forEach((fn) => fn(null));
+}
+
 export function useUser() {
   const [user, setUser] = useState<User | null | undefined>(cachedUser);
 
