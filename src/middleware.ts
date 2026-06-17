@@ -9,6 +9,8 @@ const PROTECTED_PATHS = [
   "/recipes/new",
 ];
 
+// "/" is the landing page — guests stay there, logged-in users see feed
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get("session_token")?.value;
