@@ -33,7 +33,12 @@ export async function PATCH(req: NextRequest, { params }: { params: { username: 
   if (currentUser.username !== params.username) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const body = await req.json();
-  const { name, bio, website, avatar } = body;
+  const { name, bio, website, avatar, username: newUsername } = body;
+
+  if (newUsername !== undefined && newUsername !== params.username) {
+    const existing = await prisma.user.findUnique({ where: { username: newUsername } });
+    if (existing) return NextResponse.json({ error: "Username already taken" }, { status: 409 });
+  }
 
   const updated = await prisma.user.update({
     where: { username: params.username },
@@ -42,6 +47,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { username: 
       ...(bio !== undefined && { bio: bio || null }),
       ...(website !== undefined && { website: website || null }),
       ...(avatar !== undefined && { avatar: avatar || null }),
+      ...(newUsername !== undefined && newUsername && { username: newUsername }),
     },
     select: { id: true, username: true, name: true, bio: true, avatar: true, website: true },
   });

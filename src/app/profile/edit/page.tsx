@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Camera, ChefHat, Globe, FileText, User, ArrowLeft } from "lucide-react";
+import { Camera, ChefHat, Globe, FileText, User, ArrowLeft, AtSign } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
 
@@ -14,6 +14,7 @@ export default function EditProfilePage() {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [website, setWebsite] = useState("");
+  const [username, setUsername] = useState("");
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
@@ -24,6 +25,7 @@ export default function EditProfilePage() {
       setName(user.name ?? "");
       setBio(user.bio ?? "");
       setWebsite(user.website ?? "");
+      setUsername(user.username ?? "");
       setAvatarPreview(user.avatar ?? null);
     }
   }, [user]);
@@ -61,7 +63,7 @@ export default function EditProfilePage() {
     const res = await fetch(`/api/users/${user!.username}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, bio, website, avatar: avatarUrl }),
+      body: JSON.stringify({ name, bio, website, avatar: avatarUrl, username }),
     });
 
     const data = await res.json();
@@ -71,8 +73,9 @@ export default function EditProfilePage() {
       return;
     }
 
-    mutate({ ...user!, name: data.name, bio: data.bio, website: data.website, avatar: data.avatar });
-    router.push(`/profile/${user!.username}`);
+    const newUsername = data.username ?? user!.username;
+    mutate({ ...user!, name: data.name, bio: data.bio, website: data.website, avatar: data.avatar, username: newUsername });
+    router.push(`/profile/${newUsername}`);
   }
 
   return (
@@ -162,10 +165,19 @@ export default function EditProfilePage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-200 px-4 py-3.5">
-          <p className="text-xs font-semibold text-gray-400 mb-0.5">Username</p>
-          <p className="text-sm text-gray-400">@{user.username}</p>
-          <p className="text-xs text-gray-300 mt-1">Username cannot be changed</p>
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="flex items-center gap-3 px-4 py-3.5">
+            <AtSign className="w-5 h-5 text-gray-400 shrink-0" />
+            <div className="flex-1">
+              <label className="block text-xs font-semibold text-gray-400 mb-0.5">Username</label>
+              <input
+                value={username}
+                onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ""))}
+                placeholder="username"
+                className="w-full text-sm text-gray-900 outline-none bg-transparent placeholder:text-gray-300"
+              />
+            </div>
+          </div>
         </div>
 
         {error && (

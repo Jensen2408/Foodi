@@ -34,7 +34,13 @@ export async function PATCH(req: NextRequest) {
   const user = await getCurrentUser();
   if (!user?.isAdmin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { id, isAdmin } = await req.json();
+  const { id, isAdmin, username: newUsername } = await req.json();
+  if (newUsername !== undefined) {
+    const existing = await prisma.user.findUnique({ where: { username: newUsername } });
+    if (existing && existing.id !== id) return NextResponse.json({ error: "Username already taken" }, { status: 409 });
+    await prisma.user.update({ where: { id }, data: { username: newUsername } });
+    return NextResponse.json({ success: true });
+  }
   await prisma.user.update({ where: { id }, data: { isAdmin } });
   return NextResponse.json({ success: true });
 }
